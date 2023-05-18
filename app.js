@@ -16,7 +16,7 @@ const employees = [
     { "id": "4", "name": "Zein", "position": "ABC" }
 ];
 app.get('/', (req, res) => {
-    res.render('index', { employees, userName: (req.session.userName === undefined ? "" : req.session.userName) });
+    res.render('Home', { employees, userName: (req.session.userName === undefined ? "" : req.session.userName) });
 });
 app.get('/emp/:id', (req, res) => {
     let id = req.params.id;
