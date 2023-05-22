@@ -1,53 +1,37 @@
-const express = require('express');
-const session = require('express-session')
-const path = require('path')
-// express app
+import express from "express";
+import path, { dirname } from "path";
+import { fileURLToPath } from "url";
+import logger from "morgan";
+import cookieParser from "cookie-parser";
+// Import routes
+import indexRouter from "./routes/index.rout.js";
+
+// Read the current directory name
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 const app = express();
-app.use(session({ secret: 'Your_Secret_Key' }));
-// listen for requests
-app.listen(8080);
-app.set('view engine', 'ejs');
 
+// View engine setup
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
+
+// Middleware
+app.use(logger("dev"));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
-const employees = [
-    { "id": "1", "name": "Essam Eliwa", "position": "Doctor" },
-    { "id": "2", "name": "Nada Ayman", "position": "Assistant" },
-    { "id": "3", "name": "XYZ", "position": "ABC" },
-    { "id": "4", "name": "Zein", "position": "ABC" }
-];
-app.get('/', (req, res) => {
-    res.render('Home', { employees, userName: (req.session.userName === undefined ? "" : req.session.userName) });
-});
-app.get('/emp/:id', (req, res) => {
-    let id = req.params.id;
-    let emp = employees.find((val, idx, arr) => { 
-        return val.id == id });
-    res.render('emp', { emp, userName: (req.session.userName === undefined ? "" : req.session.userName) });
-});
-app.get('/profile', (req, res) => {
-    req.session.userName = req.query.un;
-    req.session.pw = req.query.pw;
-    req.session.x = 'x';
-    res.redirect('/');
-});
-app.get('/logout', (req, res) => {
-    req.session.destroy();
-    res.redirect('/');
-});
-app.get('/about', (req, res) => {
-    res.render('about', { userName: (req.session.userName === undefined ? "" : req.session.userName) });
-});
 
-app.get('/slide', (req, res) => {
-    res.render('slide', { userName: (req.session.userName === undefined ? "" : req.session.userName) });
-});
-app.get('/login', (req, res) => {
-    res.render('login', { userName: (req.session.userName === undefined ? "" : req.session.userName) });
-});
+// Routes setup
+app.use('/', indexRouter);
 
 
-// 404 page
-app.use((req, res) => {
-    res.status(404).render('404', { userName: (req.session.userName === undefined ? "" : req.session.userName) });
+// Error handling
+app.use(function(err, req, res, next) {
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.status(err.status || 500);
+  res.render('pages/error');
 });
 
+export default app;
