@@ -8,37 +8,10 @@
     <link rel="stylesheet" href="/CSS/addpropertystyle.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <script defer src="/addpropertyform.js"></script>
-    <link rel="stylesheet" href="/CSS/footer.css">
+    <script defer src="/js/addpropertyform.js"></script>
 </head>
 <body>
-   <div class="top-menu">
-        <div class="menu-item">
-            <a href="Home.html">Home</a>
-        </div>
-        <div class="menu-item">
-            <a href="aboutus.html">About Us</a>
-        </div>
-        <div class="menu-item">
-            <a href="profile.html">Services</a>
-        </div>
-        <div class="menu-item">
-            <a href="index.html">Districts</a>
-        </div>
-        <div class="menu-item">
-            <a href="properties.html">Properties</a>
-        </div>
-        <div class="menu-item">
-            <a href="contactus.html">Contact Us</a>
-        </div>
-        <div class="menu-item">
-            <a href="register.html">Register</a>
-        </div>
-        <div class="menu-item">
-            <a href="/addpropirty.html">Add Your Unit</a>
-        </div>
-    </div>
-    </header>
+
     <div class="container1">
         <div class="title">
             <h1 class="name">Sell/Rent Your Property With Us.</h1>
@@ -47,7 +20,7 @@
            <h3> <p class="mm">We would be happy to help you sell your property, please fill in the requested form below.</p></h3>
            <br>
         </div>
-        <form id="form" action="/" onsubmit="return validateinputs()">
+        <form id="form" method="post" action="/admin/addpropirty">
             <table>
                 <tr>
                     <td>
@@ -71,11 +44,11 @@
                 <br>
                 <input class="inn" type="number" name="other-number">
             </td>
-                <td>
-                    <div class="input-control">
-                <label for="e-mail">Email Adress &nbsp;</label>
+            <td>
+                <div class="input-control">
+                <label for="u_bed">Bedrooms Number &nbsp;</label>
                 <br>
-                <input class="inn" id="email" type="email" name="e-mail">
+                <input class="inn" type="number" id="bedrooms" name="u_bed">
                 <div class="error"></div>
             </div>
             </td>
@@ -119,23 +92,24 @@
             </div>
             </td>
             <td>
-                <div class="input-control">
-                <label for="pay">Payment Method  &nbsp;</label>
+                <label for="f_type">Furniture Type &nbsp;</label>
                 <br>
-                <select class="inn" name="pay" id="pay">
+                <select class="inn" name="f_type" id="">
                     <option value="">NONE</option>
-                    <option value="">Cash</option>
-                    <option value="">Instalment</option>
+                    <option value="">Modern</option>
+                    <option value="">traditional</option>
+                    <option value="">contemporary</option>
                 </select>
-                <div class="error"></div>
-            </div>
             </td>
         </tr>
         <tr>
             <td>
-                <label for="zone">Zone</label>
+                <div class="input-control">
+                <label for="garage">Number of Garages &nbsp;</label>
                 <br>
-                <input class="inn" type="text" name="zone">
+                <input class="inn" type="number" id="garage" name="garage">
+                <div class="error"></div>
+            </div>
             </td>
             <td>
                 <div class="input-control">
@@ -171,32 +145,6 @@
                 <div class="error"></div>
             </div>
             </td>
-            <td>
-                <div class="input-control">
-                <label for="u_bed">Bedrooms Number &nbsp;</label>
-                <br>
-                <input class="inn" type="number" id="bedrooms" name="u_bed">
-                <div class="error"></div>
-            </div>
-            </td>
-            <td>
-                <label for="f_type">Furniture Type &nbsp;</label>
-                <br>
-                <select class="inn" name="f_type" id="">
-                    <option value="">NONE</option>
-                    <option value="">Modern</option>
-                    <option value="">traditional</option>
-                    <option value="">contemporary</option>
-                </select>
-            </td>
-            <td>
-                <div class="input-control">
-                <label for="garage">Number of Garages &nbsp;</label>
-                <br>
-                <input class="inn" type="number" id="garage" name="garage">
-                <div class="error"></div>
-            </div>
-            </td>
         </tr>
         <tr>
             <td rowspan="2" colspan="2">
@@ -211,52 +159,4 @@
         </form>
     </div>
 </body>
-    <footer class="footer-area pt-100">
-    <div class="container">
-        <div class="row">
-
-            <div class="col-lg-3 col-sm-6">
-                <div class="single-footer-widget">
-                    <h3>Contact Us</h3>
-
-                    <div><a href="tel:0023567890" class="footer-a">Phone: 0123456789</a></div>
-
-                    <div> <a href="info@realestate.com" class="footer-a">Email : info@realestate.com</a></div>
-
-                    <div> <a href="New Cairo" class="footer-a">Address : New Cairo</a></div>
-
-                    </ul>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-sm-6">
-                <div class="single-footer-widget">
-                    <h3>Our Company</h3>
-                    <div class="footer-a"> Text about the company </div>
-                </div>
-            </div>
-
-
-            <div class="col-lg-3 col-sm-6">
-                <div class="single-footer-widget">
-                    <h3>Follow Us</h3>
-
-                    <ul class="widget-social">
-                        <li>
-                            <a href="https://www.facebook.com/" class="footer-a">Facebook</a>
-                        </li>
-                        <li>
-                            <a href="https://twitter.com/?lang=en" class="footer-a">Twitter</a>
-                        </li>
-                        <li>
-                            <a href="https://www.instagram.com/" class="footer-a">Instagram</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- End Footer Area -->
-</footer>
 </html>

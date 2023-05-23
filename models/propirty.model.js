@@ -7,16 +7,77 @@ const propirty = new mongoose.Schema(
       trim: true,
       required: true,
     },
-    price: {
+    mobilenumber: {
       type: Number,
       trim: true,
       required: true,
     },
-    description: {
+    mobilenumber2: {
       type: String,
       trim: true,
-      required: true,
+      required: false,
     },
+    email: {
+        type: String,
+        trim: true,
+        required: true,
+      },
+      servicetype: {
+        type: String,
+        trim: true,
+        required: true,
+      },
+
+      unittype: {
+        type: String,
+        trim: true,
+        required: true,
+      },
+      district: {
+        type: String,
+        trim: true,
+        required: true,
+      },
+      garages: {
+        type: Number,
+        trim: true,
+        required: true,
+      },
+      area: {
+        type: Number,
+        trim: true,
+        required: true,
+      },
+      value: {
+        type: Number,
+        trim: true,
+        required: true,
+      },
+      unumber: {
+        type: Number,
+        trim: true,
+        required: true,
+      },
+      bathrooms: {
+        type: Number,
+        trim: true,
+        required: true,
+      },
+      bedrooms: {
+        type: Number,
+        trim: true,
+        required: true,
+      },
+      furniyure: {
+        type: String,
+        trim: true,
+        required: true,
+      },
+      details: {
+        type: String,
+        trim: true,
+        required: false,
+      },
   },
   { timestamps: true }
 );

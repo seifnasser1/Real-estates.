@@ -1,7 +1,6 @@
 const form= document.getElementById('form');
 const uname=document.getElementById('name');
 const mo_number=document.getElementById('mo-number');
-const email=document.getElementById('email');
 const area=document.getElementById('area');
 const u_number=document.getElementById('u_number');
 const u_value=document.getElementById('u_value');
@@ -11,7 +10,6 @@ const garage=document.getElementById('garage');
 const service=document.getElementById('service');
 const u_type=document.getElementById('u_type');
 const district=document.getElementById('district');
-const pay=document.getElementById('pay');
 
 form.addEventListener('submit',e =>{
     e.preventDefault();
@@ -35,7 +33,6 @@ inputControl.classList.remove('success');
 const validateinputs=()=>{
 const namevalue = uname.value.trim();
 const mo_numbervalue= mo_number.value.trim();
-const emailvalue=email.value.trim();
 const areavalue=area.value.trim();
 const u_valuevalue=u_value.value.trim();
 const u_numbervalue=u_number.value.trim();
@@ -51,49 +48,45 @@ setsuccess(uname);
 if(mo_numbervalue==='')
 {
     seterror(mo_number,'Mobile number is required');
+}else if(mo_numbervalue<=0){
+    seterror(mo_number,'invalid mobile number');
 }
 else{
     setsuccess(mo_number);
 }
-if(emailvalue === '')
+if(u_valuevalue=== ''||u_valuevalue<=0)
 {
-    seterror(email,'email is required');
-}else{
-    setsuccess(email);
-}
-if(u_valuevalue=== '')
-{
-    seterror(u_value,'Unit Value is required');
+    seterror(u_value,'Unit Value is invalid');
 }else{
     setsuccess(u_value);
 }
-if(u_numbervalue === '')
+if(u_numbervalue === ''||u_numbervalue<=0)
 {
-    seterror(u_number,'Unit Number is required');
+    seterror(u_number,'Unit Number is invalid');
 }else{
     setsuccess(u_number);
 }
-if(areavalue === '')
+if(areavalue === ''||areavalue<=0)
 {
-    seterror(area,'Area is required');
+    seterror(area,'Area is invalid');
 }else{
     setsuccess(area);
 }
-if(bedroomsvalue === '')
+if(bedroomsvalue === ''||bedroomsvalue<=0)
 {
-    seterror(bedrooms,'Number fo Bedrooms is required');
+    seterror(bedrooms,'Number fo Bedrooms is invalid');
 }else{
     setsuccess(bedrooms);
 }
-if(pathroomsvalue === '')
+if(pathroomsvalue === ''||pathroomsvalue<=0)
 {
-    seterror(pathrooms,'Number of Pathrooms is required');
+    seterror(pathrooms,'Number of Pathrooms is invalid');
 }else{
     setsuccess(pathrooms);
 }
-if(garagevalue === '')
+if(garagevalue <=0)
 {
-    seterror(garage,'Number of Garages is required');
+    seterror(garage,'Number of Garages is invalid');
 }else{
     setsuccess(garage);
 }
