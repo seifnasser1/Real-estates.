@@ -5,6 +5,9 @@ import logger from "morgan";
 import cookieParser from "cookie-parser";
 // Import routes
 import indexRouter from "./routes/index.rout.js";
+import userrouter from "./routes/user.rout.js";
+import adminrouter from "./routes/admin.rout.js";
+
 
 // Read the current directory name
 const __filename = fileURLToPath(import.meta.url);
@@ -24,7 +27,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes setup
 app.use('/', indexRouter);
-
+app.use('/user',userrouter);
+app.use('/admin',adminrouter);
 
 // Error handling
 app.use(function(err, req, res, next) {
@@ -32,6 +36,11 @@ app.use(function(err, req, res, next) {
   res.locals.error = req.app.get('env') === 'development' ? err : {};
   res.status(err.status || 500);
   res.render('pages/error');
+});
+
+// 404 page
+app.use((req, res) => {
+  res.status(404).render('pages/404');
 });
 
 export default app;
