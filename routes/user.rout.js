@@ -7,5 +7,8 @@ router.get('/', function(req, res, next) {
   console.log('index.js: GET /');
   res.render('pages/Home');
 });
-
+router.get('/properties', function(req, res, next) {
+  console.log('index.js: GET /');
+  res.render('pages/properties');
+});
 export default router;
