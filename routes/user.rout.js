@@ -20,4 +20,6 @@ router.get('/propirty/:id', (req, res) => {
 });
 
 
+
+
 export default router ;
