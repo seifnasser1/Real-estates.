@@ -18,4 +18,6 @@ router.get('/propirty/:id', (req, res) => {
       console.log(err);
     });
 });
-export default router;
+
+
+export default router ;
