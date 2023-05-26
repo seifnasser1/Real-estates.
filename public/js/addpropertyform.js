@@ -1,6 +1,6 @@
 const form= document.getElementById('form');
 const uname=document.getElementById('name');
-const mo_number=document.getElementById('mo-number');
+const mo_number=document.getElementById('mo_number');
 const area=document.getElementById('area');
 const u_number=document.getElementById('u_number');
 const u_value=document.getElementById('u_value');
@@ -12,7 +12,7 @@ const u_type=document.getElementById('u_type');
 const district=document.getElementById('district');
 
 form.addEventListener('submit',e =>{
-    e.preventDefault();
+    //e.preventDefault();
     
     validateinputs();
 });

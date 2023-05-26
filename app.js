@@ -2,6 +2,7 @@ import express from "express";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
 import logger from "morgan";
+import fileUpload from "express-fileupload";
 import cookieParser from "cookie-parser";
 // Import routes
 import indexRouter from "./routes/index.rout.js";
@@ -20,6 +21,7 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 // Middleware
+app.use(fileUpload());
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

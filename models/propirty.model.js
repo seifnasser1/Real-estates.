@@ -24,19 +24,16 @@ const propirty = new mongoose.Schema(
       },
       servicetype: {
         type: String,
-        trim: true,
-        required: true,
+        required: false,
       },
 
       unittype: {
         type: String,
-        trim: true,
-        required: true,
+        required: false,
       },
       district: {
         type: String,
-        trim: true,
-        required: true,
+        required: false,
       },
       garages: {
         type: Number,
@@ -68,15 +65,19 @@ const propirty = new mongoose.Schema(
         trim: true,
         required: true,
       },
-      furniyure: {
+      furniture: {
         type: String,
-        trim: true,
-        required: true,
+        required: false,
       },
       details: {
         type: String,
         trim: true,
         required: false,
+      },
+      Image: {
+        type: String,
+        trim: true,
+        required: true
       },
   },
   { timestamps: true }
