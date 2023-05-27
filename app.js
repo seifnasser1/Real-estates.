@@ -43,4 +43,10 @@ app.use((req, res) => {
   res.status(404).render('pages/404');
 });
 
+////////////////////////
+// app.get('/chat.ejs', (req, res) => {
+//   res.render('chat');
+// });
+
+////////////////////////////
 export default app;

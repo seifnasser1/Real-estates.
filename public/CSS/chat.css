@@ -9,7 +9,7 @@
     font-family:'Times New Roman';
     box-sizing: border-box;
 }
-body{
+bodyz{
      height: 100vh; /*vh represents the viewport-percentage length unit based on the browser default viewport size */
     background-color: #e6f5ff;
     display: flex;
@@ -17,7 +17,7 @@ body{
     align-items: center;
 
 }
-.container{
+.containerz{
     width: 450px;
     height: 80vh;
     display: flex;
@@ -25,12 +25,12 @@ body{
     box-shadow: 2px 2px 2px beige;
 background-color: beige;
 }
-.header h1{
+.headerz h1{
     color: black;
     padding: 10px;
-    background-color: #0000FF;
+    background-color: #9ba353;
 }
-.body{
+.bodyz{
     flex:1;
     color: black;
     background-color: beige
@@ -40,7 +40,7 @@ background-color: beige;
 form{
 background-color: #0000FF;
 }
-.message{
+.messagez{
     background-color: #0000FF;
     padding: 10px;
     color: white;
@@ -53,7 +53,7 @@ background-color: #0000FF;
     background-color: white;
     color: black;
 }
-.footer {
+.footerz {
     display: flex;
 }
  input{
@@ -78,3 +78,23 @@ background-color: #0000FF;
     transition: 0.2s ease;
 
 }
+.chat-circle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    border-radius: 50%;
+    background-color: #007bff;
+    color: #fff;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .chat-circle i {
+    font-size: 24px;
+  }
+
+

@@ -10,3 +10,14 @@ function sendMsg(){
     return false;
     
 }
+
+function openForm() {
+    console.log("hi here")
+    document.getElementById("myForm").style.display = "block";
+    console.log("hi here")
+  }
+  
+  function closeForm() {
+    document.getElementById("myForm").style.display = "none";
+
+  }
