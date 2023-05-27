@@ -20,6 +20,17 @@ router.get('/propirty/:id', (req, res) => {
 });
 
 
-
+router.get('/viewAll', (req, res) => {
+  
+  Propirty.find()
+  .then(result => {
+    res.render('pages/viewall', { Propirty: result});
+  })
+  .catch(err => {
+    console.log(err);
+  });
+  
+  
+});
 
 export default router ;
