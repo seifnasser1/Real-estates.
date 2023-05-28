@@ -20,11 +20,11 @@ router.get('/propirty/:id', (req, res) => {
 });
 
 
-router.get('/viewAll', (req, res) => {
+router.get('/propirty', (req, res) => {
   
   Propirty.find()
   .then(result => {
-    res.render('pages/viewall', { Propirty: result});
+    res.render('pages/All', { Propirty: result});
   })
   .catch(err => {
     console.log(err);
