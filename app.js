@@ -31,12 +31,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Routes setup
+//ROUTES 
 app.use('/', indexRouter);
 app.use('/user',userrouter);
 app.use('/admin',adminrouter);
 
-// Error handling
+// ERROR HANDLING
 app.use(function(err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
