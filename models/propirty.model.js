@@ -68,7 +68,7 @@ const propirty = new mongoose.Schema(
         trim: true,
         required: true,
       },
-      furniyure: {
+      furniture: {
         type: String,
         trim: true,
         required: true,
@@ -77,6 +77,11 @@ const propirty = new mongoose.Schema(
         type: String,
         trim: true,
         required: false,
+      },
+      Image: {
+        type: String,
+        trim: true,
+        required: true
       },
   },
   { timestamps: true }

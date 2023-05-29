@@ -20,7 +20,7 @@
            <h3> <p class="mm">We would be happy to help you sell your property, please fill in the requested form below.</p></h3>
            <br>
         </div>
-        <form id="form" method="post" action="/admin/addpropirty">
+        <form id="form" method="post" action="/admin/addpropirty" enctype="multipart/form-data">
             <table>
                 <tr>
                     <td>
@@ -35,14 +35,14 @@
                 <div class="input-control">
                 <label for="mobile-number">Mobile Number &nbsp;</label>
                 <br>
-                <input class="inn" id="mo-number" type="number" name="mobile-number">
+                <input class="inn" id="mo-number" type="number" name="mobile_number">
                 <div class="error"></div>
             </div>
             </td>
             <td>
                 <label for="other-number">Other Mobile Number</label>
                 <br>
-                <input class="inn" type="number" name="other-number">
+                <input class="inn" type="number" name="other_number">
             </td>
             <td>
                 <div class="input-control">
@@ -58,10 +58,10 @@
                 <div class="input-control">
                 <label for="servise">Service Type &nbsp;</label>
                 <br>
-                <select class="inn" name="servise" id="Service">
-                    <option value="1">NONE</option>
-                    <option value="">Rent</option>
-                    <option value="">Sell</option>
+                <select class="inn" name="servise">
+                    <option value="">NONE</option>
+                    <option value="Rent">Rent</option>
+                    <option value="Sell">Sell</option>
                 </select>
                 <div class="error"></div>
             </div>
@@ -70,10 +70,10 @@
                 <div class="input-control">
                 <label for="type">Unit Type &nbsp;</label>
                 <br>
-                <select class="inn" name="type" id="u_type">
+                <select class="inn" name="type">
                     <option value="">NONE</option>
-                    <option value="">Appartment</option>
-                    <option value="">Villa</option>
+                    <option value="Appartment">Appartment</option>
+                    <option value="Villa">Villa</option>
                 </select>
                 <div class="error"></div>
             </div>
@@ -82,11 +82,11 @@
                 <div class="input-control">
                 <label for="district">District  &nbsp;</label>
                 <br>
-                <select class="inn" name="district" id="district">
+                <select class="inn" name="district">
                     <option value="">NONE</option>
-                    <option value="">Maadi</option>
-                    <option value="">6th-of-october</option>
-                    <option value="">Helwan</option>
+                    <option value="Maadi">Maadi</option>
+                    <option value="6th-of-october">6th-of-october</option>
+                    <option value="Helwan">Helwan</option>
                 </select>
                 <div class="error"></div>
             </div>
@@ -94,11 +94,11 @@
             <td>
                 <label for="f_type">Furniture Type &nbsp;</label>
                 <br>
-                <select class="inn" name="f_type" id="">
+                <select class="inn" name="f_type">
                     <option value="">NONE</option>
-                    <option value="">Modern</option>
-                    <option value="">traditional</option>
-                    <option value="">contemporary</option>
+                    <option value="Modern">Modern</option>
+                    <option value="traditional">traditional</option>
+                    <option value="contemporary">contemporary</option>
                 </select>
             </td>
         </tr>
@@ -144,6 +144,14 @@
                 <input class="inn" type="number" id="pathrooms"name="u_path">
                 <div class="error"></div>
             </div>
+            </td>
+            <td>
+                <div class="input-control">
+                    <label for="img">Appartment image &nbsp;</label>
+                    <br>
+                    <input class="inn" type="file" id="img"name="img">
+                    <div class="error"></div>
+                </div>
             </td>
         </tr>
         <tr>

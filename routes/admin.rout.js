@@ -11,9 +11,9 @@ router.get('/', function(req, res, next) {
   res.render('pages/adminHeader');
 });
 
-router.post('/addprop', function(req, res, next) {
+router.get('/adding', function(req, res, next) {
     console.log('index.js: GET /');
     res.render('pages/addpropirty');
   });
-router.get('/addpropirty',addprop);
+router.post('/addpropirty',addprop);
 export default router;

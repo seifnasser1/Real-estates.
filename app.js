@@ -2,12 +2,16 @@ import express from "express";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
 import logger from "morgan";
+
+
+import fileUpload from "express-fileupload";
 import cookieParser from "cookie-parser";
+
 // Import routes
 import indexRouter from "./routes/index.rout.js";
 import userrouter from "./routes/user.rout.js";
 import adminrouter from "./routes/admin.rout.js";
-//hi
+
 
 // Read the current directory name
 const __filename = fileURLToPath(import.meta.url);
@@ -20,6 +24,8 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 // Middleware
+
+app.use(fileUpload());
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -43,10 +49,4 @@ app.use((req, res) => {
   res.status(404).render('pages/404');
 });
 
-////////////////////////
-// app.get('/chat.ejs', (req, res) => {
-//   res.render('chat');
-// });
-
-////////////////////////////
 export default app;
