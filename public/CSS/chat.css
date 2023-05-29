@@ -97,4 +97,8 @@ background-color: #0000FF;
     font-size: 24px;
   }
 
-
+ .chat {
+    position: fixed;
+    align-items: center;
+    right: 0;
+ }

@@ -1,3 +1,12 @@
+function openForm() {
+  console.log("hi here")
+  if(document.getElementById("myForm").style.display=="none")
+  document.getElementById("myForm").style.display = "block";
+  else
+  document.getElementById("myForm").style.display = "none";
+ 
+}
+
 function sendMsg(){
     
     let msg=document.getElementById('chatInput').value;
@@ -5,19 +14,18 @@ function sendMsg(){
     var b=document.getElementById('chatBody');
     var a = document.createElement("p");
     a.innerHTML = msg; 
-    a.className = "message user_message";
+    a.className = "messagez user_message";
     b.appendChild(a);
     return false;
     
 }
 
-function openForm() {
-    console.log("hi here")
-    document.getElementById("myForm").style.display = "block";
-    console.log("hi here")
-  }
+
   
   function closeForm() {
     document.getElementById("myForm").style.display = "none";
 
   }
+ 
+  
+  
