@@ -1,6 +1,10 @@
 import { Router } from 'express';
 import Propirty from '../models/propirty.model.js';
-
+import {
+  signup,
+  validation,
+  login,
+} from "../controllers/user.controller.js";
 const router = Router();
 
 /* GET home page. */
@@ -19,7 +23,9 @@ router.get('/propirty/:id', (req, res) => {
     });
 });
 
-
+router.get('/register',(req, res) =>{
+  res.render('pages/register',{ errors: [] });
+})
 router.get('/propirty', (req, res) => {
   
   Propirty.find()
@@ -32,5 +38,6 @@ router.get('/propirty', (req, res) => {
   
   
 });
-
+router.post('/signup-action',validation,signup);
+router.post('/login-action',login);
 export default router ;
