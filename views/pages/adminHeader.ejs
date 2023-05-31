@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <title>Admin Dashboard</title>
@@ -8,6 +8,7 @@
   <!-- Font Awesome Cdn Link -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 </head>
+
 <body>
   <header class="header">
     <div class="logo">
@@ -58,48 +59,40 @@
             <thead>
               <tr>
                 <th>#</th>
-                <th>First Name</th>
-                <th>Last Name</th>
+                <th>UserName</th>
+                <th>Password</th>
                 <th>Email</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>1</td>
-                <td>Seif</td>
-                <td>Nasser</td>
-                <td>Seif@miu</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Mostafa</td>
-                <td>Mohamed</td>
-                <td>Mostafa@miu</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Toka</td>
-                <td>Saeed</td>
-                <td>Toka@miu</td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>Aya</td>
-                <td>Magdy</td>
-                <td>Aya@miu</td>
-              </tr>
-              <tr>
-                <td>5</td>
-                <td>Monad</td>
-                <td>Khaled</td>
-                <td>Monad@miu</td>
-              </tr>
-              <tr>
-                <td>6</td>
-                <td>Zainab</td>
-                <td>Rafea</td>
-                <td>Zainab@miu</td>
-              </tr>
+              <% if (Users.length> 0){%>
+                <% var count=1 %>
+                  <% Users.foreach(Client=>{%>
+                    <% if (count>= 6 ){%>
+                      <% if (Client.type=='client' ){%>
+                        <tr>
+                          <td>
+                            <%=count%>
+                          </td>
+                          <td>
+                            <%=Client.username%>
+                          </td>
+                          <td>
+                            <%=Client.password%>
+                          </td>
+                          <td>
+                            <%=Client.email%>
+                          </td>
+                        </tr>
+                        <% count++%>
+                        <% } else { %>
+                          <p>No Users found </p>
+                          <% }%>
+                            <% }%>
+                              <% })%>
+                                <% } else { %>
+                                  <p>No Users found </p>
+                                  <% }%>
             </tbody>
           </table>
         </div>
@@ -142,19 +135,19 @@
                 <td> </td>
                 <td> </td>
                 <td> </td>
-              </tr> 
+              </tr>
               <tr>
                 <td>5</td>
                 <td> </td>
                 <td> </td>
                 <td> </td>
-              </tr> 
+              </tr>
               <tr>
                 <td>6</td>
                 <td> </td>
                 <td> </td>
                 <td> </td>
-              </tr> 
+              </tr>
             </tbody>
           </table>
         </div>
@@ -163,14 +156,14 @@
 
     <div class="sidebar">
       <h4>Top Sales</h4>
-      
+
       <div class="balance">
         <div class="info">
           <h5>Villa Zayed</h5>
           <span></i>30,000.00 EGP</span>
         </div>
       </div>
-      
+
       <div class="balance">
         <div class="info">
           <h5>Villa New Cairo</h5>
@@ -202,4 +195,5 @@
     </div>
   </div>
 </body>
+
 </html>

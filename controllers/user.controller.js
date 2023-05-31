@@ -70,9 +70,17 @@ const signup = async (req, res) => {
 const login =async (req, res, next) => {
 
 };
+const getalluser = async(req, res, next) =>{
 
+User.find().then(result=>{
+  console.log(result);
+  res.render('pages/adminHeaader',{Users:result});
+})
+
+}
 export { 
     signup,
     validation,
     login,
+    getalluser,
 };
