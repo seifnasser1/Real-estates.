@@ -48,5 +48,10 @@ const addprop = async (req, res, next) => {
    });
    
   };
-
-  export { addprop};
+const Search= async (req, res, next) => {
+  
+}
+  export { 
+    addprop,
+    Search,
+};

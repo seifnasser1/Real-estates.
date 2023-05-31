@@ -30,6 +30,7 @@
     <!-- Add a background color and large text to the whole page -->
    <center>
         <br>
+        <form method="post" action="user/search">
         <div class="searchprop">
             <br>
             <h2><b>Search Properties</b></h2>
@@ -37,10 +38,7 @@
             <br><br>
             <div class="row">
                 <div>
-                    <div class="input-field">
-                        <label for="from">Location:</label>
-                        <input type="text" id="from-place" placeholder="Any" />
-                    </div>
+                
                 </div><br>
                 <div>
                     <section>
@@ -53,8 +51,9 @@
                         <label for="class">Property Type:</label>
                         <select>
                             <option value="" disabled selected>Any</option>
-                            <option value="1">Building</option>
-                            <option value="2">Office</option>
+                            <option value="villa">Villa</option>
+                            <option value="Appartment">Appartment</option>
+                            <option value="Office">Office</option>
                         </select>
                     </section>
                 </div><br>
@@ -96,24 +95,29 @@
 
                             <select>
                                 <option value="" disabled selected>Any</option>
-                                <option value="1">New Cairo</option>
-                                <option value="2">Nasr City</option>
-                                <option value="3">October</option>
+                                <option value="Maadi">Maadi</option>
+                                <option value="Helwan">Helwan</option>
+                                <option value="6th-of-october">6th of October</option>
+                                <option value="new-cairo">New Cairo</option>
+                                <option value="nasr-city">Nasr City</option>
+                                <option value="giza">Giza</option>
+                                <option value="el-nozha">El Nozha</option>
                             </select>
 
                             <label for="class">Parking spots:</label>
                             <select>
                                 <option value="" disabled selected>Any</option>
-                                <option value="1">Yes</option>
-                                <option value="2">No</option>
+                                <option value="1">1</option>
+                                <option value="2">+2</option>
                             </select>
                         </section>
                     </div>
                 </div>
             </div>
             <br>
-            <button class="button button1" type="button"><b>Search</b></button>
+            <button class="button button1" type="submit"><b>Search</b></button>
         </div>
+    </form>
     </center>
     <br>
     <div class="containerkbeer">

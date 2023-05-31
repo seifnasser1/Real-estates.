@@ -5,6 +5,9 @@ import {
   validation,
   login,
 } from "../controllers/user.controller.js";
+import {
+  Search,
+} from "../controllers/propirty.controller.js";
 const router = Router();
 
 /* GET home page. */
@@ -35,9 +38,8 @@ router.get('/propirty', (req, res) => {
   .catch(err => {
     console.log(err);
   });
-  
-  
 });
+router.post('/search',Search);
 router.post('/signup-action',validation,signup);
 router.post('/login-action',login);
 export default router ;
