@@ -9,7 +9,6 @@ const propirty = new mongoose.Schema(
     },
     mobilenumber: {
       type: Number,
-      trim: true,
       required: true,
     },
     mobilenumber2: {

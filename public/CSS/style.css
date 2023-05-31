@@ -106,8 +106,17 @@ form .signup-form .title:before {
 
 form .form-content .input-boxes {
     margin-top: 30px;
+    width: 350px;
 }
-
+.error-box{
+    width: 380px;
+    padding: 5px;
+    border-radius:8px;
+    border: solid 5px;
+    background-color:#F15A59;
+    border-color: red;
+    color: white;
+}
 form .form-content .input-box {
     display: flex;
     align-items: center;

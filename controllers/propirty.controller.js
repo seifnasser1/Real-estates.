@@ -1,6 +1,5 @@
 import Propirty from '../models/propirty.model.js';
 import __dirname from '../app.js'
-import path from '../app.js'
 
 import fileUpload from "express-fileupload";
 
