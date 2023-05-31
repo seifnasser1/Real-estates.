@@ -11,7 +11,7 @@
     width: 70%;
   }
   
-  .search-box button {
+  /* .search-box button {
     background-color: #4CAF50;
     color: white;
     padding: 10px 20px;
@@ -19,4 +19,7 @@
     border-radius: 0 5px 5px 0;
     cursor: pointer;
     transition: background-color 0.3s ease;
+  } */
+  .searchicon{
+    width: 2cm;
   }
