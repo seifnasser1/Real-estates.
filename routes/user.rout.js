@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import Propirty from '../models/propirty.model.js';
+import User from '../models/user.model.js';
 import {
   signup,
   validation,
@@ -38,6 +39,17 @@ router.get('/propirty', (req, res) => {
   .catch(err => {
     console.log(err);
   });
+});
+router.get('/:id',(req, res) => {
+  var query = { "_id": req.params.id };
+  User.find(query)
+    .then(result => {
+      console.log(result[0]);
+      res.render('pages/profile', { User: result[0]});
+    })
+    .catch(err => {
+      console.log(err);
+    });
 });
 router.post('/search',Search);
 router.post('/signup-action',validation,signup);

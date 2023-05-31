@@ -53,6 +53,7 @@ const signup = async (req, res) => {
         email: req.body.email,
         password: hashedPassword,
         type:req.body.type,
+        photo:"profile.jpg",
       });
 
       await newUser.save();
@@ -74,8 +75,10 @@ const getalluser = async(req, res, next) =>{
 
 User.find().then(result=>{
   console.log(result);
-  res.render('pages/adminHeaader',{Users:result});
-})
+  res.render('pages/adminHeader',{Users:result});
+}).catch(err => {
+    console.log(err);
+  });
 
 }
 export { 

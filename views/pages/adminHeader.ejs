@@ -30,11 +30,11 @@
       <div class="side_navbar">
         <span>Main Menu</span>
         <a href="#" class="active">Profile</a>
-        <a href="#">Rents</a>
-        <a href="#">Units</a>
-        <a href="#">Users</a>
+        <a href="adminProp.html">Rents</a>
+        <a href="adminUnits.html">Units</a>
+        <a href="adminUsers.html">Users</a>
         <a href="#">Messages</a>
-        <a href="3">Weekly Summary</a>
+        <a href="adminweeklysummary.html">Weekly Summary</a>
         <a href="#">Top Properties</a>
 
       </div>
@@ -52,7 +52,7 @@
         <div class="list1">
           <div class="row">
             <h4>Users</h4>
-            <a href="#">See all</a>
+            <a href="adminUsers.html">See all</a>
           </div>
           <table>
             <thead>
@@ -64,6 +64,32 @@
               </tr>
             </thead>
             <tbody>
+              <% if (Users.length> 0){%>
+                <% var count=1; %>
+                  <% Users.forEach(Client=>{%>
+                      <% if (Client.type=='client' ){%>
+                        <tr>
+                          <td>
+                            <%=count%>
+                          </td>
+                          <td>
+                            <%=Client.username%>
+                          </td>
+                          <td>
+                            <%=Client.password%>
+                          </td>
+                          <td>
+                            <%=Client.email%>
+                          </td>
+                        </tr>
+                        <% count++;%>
+                        <% } else { %>
+                          <p>No Users found </p>
+                          <% }%>
+                              <% })%>
+              <% } else { %>
+                <p>No Users found </p>
+               <% }%>
             </tbody>
           </table>
         </div>
