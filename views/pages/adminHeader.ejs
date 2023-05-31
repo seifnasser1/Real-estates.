@@ -32,7 +32,7 @@
         <a href="#" class="active">Profile</a>
         <a href="adminProp.html">Rents</a>
         <a href="adminUnits.html">Units</a>
-        <a href="adminUsers.html">Users</a>
+        <a href="/admin/viewusers">Users</a>
         <a href="#">Messages</a>
         <a href="adminweeklysummary.html">Weekly Summary</a>
         <a href="#">Top Properties</a>
@@ -52,14 +52,13 @@
         <div class="list1">
           <div class="row">
             <h4>Users</h4>
-            <a href="adminUsers.html">See all</a>
+            <a href="adminUsers.ejs">See all</a>
           </div>
           <table>
             <thead>
               <tr>
-                <th>#</th>
+                <th>#User No.</th>
                 <th>UserName</th>
-                <th>Password</th>
                 <th>Email</th>
               </tr>
             </thead>
@@ -74,9 +73,6 @@
                           </td>
                           <td>
                             <%=Client.username%>
-                          </td>
-                          <td>
-                            <%=Client.password%>
                           </td>
                           <td>
                             <%=Client.email%>
@@ -97,7 +93,7 @@
         <div class="list2">
           <div class="row">
             <h4>Admin</h4>
-            <!-- <a href="#">See all</a> -->
+            <a href="AdminUsers.ejs">See all</a>
           </div>
           <table>
             <thead>

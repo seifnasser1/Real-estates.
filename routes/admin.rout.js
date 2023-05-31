@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import User from '../models/user.model.js';
 import {
   addprop,
 } from "../controllers/propirty.controller.js";
@@ -14,5 +15,12 @@ router.get('/adding', function (req, res, next) {
   console.log('index.js: GET /');
   res.render('pages/addpropirty');
 });
+router.get('/viewusers', function (req, res, next) {
+  User.find().then(result=>{
+    console.log(result);
+    res.render('pages/AdminUsers',{Users:result});
+  })
+});
+
 router.post('/addpropirty', addprop);
 export default router;
