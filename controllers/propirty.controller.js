@@ -49,9 +49,28 @@ const addprop = async (req, res, next) => {
    
   };
 const Search= async (req, res, next) => {
-  
+  if(req.body.Price == 1)
+  {
+    
+  }
+  if(req.body.Bathrooms == 1)
+  {
+    const Bathroom = [1,2];
+  }
+  else if (req.body.Bathrooms == 2)
+  {
+    const Bathroom = [3,4,5,6,7,8];
+  }else{
+    const Bathroom = [1,2,3,4,5,6,7,8];
+  }
+  var query = {servicetype:req.body.Status, unittype:req.body.Type, district:req.body.Area}
+  console.log(query);
+  Propirty.find(query).then(result=>{
+    console.log(result);
+    res.render('pages/All',{Propirty:result});
+  }).catch(err =>(console.log(err)));
 }
-  export { 
+  export {
     addprop,
     Search,
 };
