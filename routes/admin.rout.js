@@ -16,4 +16,4 @@ router.get('/adding', function(req, res, next) {
     res.render('pages/addpropirty');
   });
 router.post('/addpropirty',addprop);
-export default router;
+export default router;// to move all this codes in this file to app.js  and then import the routes in app.js

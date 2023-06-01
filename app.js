@@ -8,8 +8,7 @@ import cookieParser from "cookie-parser";
 import indexRouter from "./routes/index.rout.js";
 import userrouter from "./routes/user.rout.js";
 import adminrouter from "./routes/admin.rout.js";
-//hi
-//hiiiiitt
+
 
 // Read the current directory name
 const __filename = fileURLToPath(import.meta.url);

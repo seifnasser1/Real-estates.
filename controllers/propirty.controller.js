@@ -14,7 +14,7 @@ const addprop = async (req, res, next) => {
      return res.status(400).send('No files were uploaded.');
    }
    imgFile = req.files.img;
-   uploadPath = 'C:/Users/M.ROBOT/Desktop/Real-estatess/public/img/' + req.body.name +'.jpg';
+   uploadPath = '../public/img/' + req.body.name +'.jpg';
    // Use the mv() method to place the file somewhere on your server
    imgFile.mv(uploadPath, function (err) {
      if (err)

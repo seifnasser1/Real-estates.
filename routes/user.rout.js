@@ -33,4 +33,5 @@ router.get('/propirty', (req, res) => {
   
 });
 
+
 export default router ;
