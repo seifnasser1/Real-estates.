@@ -40,10 +40,10 @@ router.get('/propirty', (req, res) => {
     console.log(err);
   });
 });
-<<<<<<< HEAD
 
 
-=======
+
+
 router.get('/:id',(req, res) => {
   var query = { "_id": req.params.id };
   User.find(query)
@@ -58,5 +58,4 @@ router.get('/:id',(req, res) => {
 router.post('/search',Search);
 router.post('/signup-action',validation,signup);
 router.post('/login-action',login);
->>>>>>> 6d6c423ef56f6343e46bba2a0bf38c9e3a8ca631
 export default router ;
