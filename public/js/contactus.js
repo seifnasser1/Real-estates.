@@ -49,7 +49,7 @@
 // let phv=false;
 // let emailv=false;
 // let mesv=false;
- 
+
 // if(namein.value !==""){
 //    namev=true;
 // }
@@ -70,46 +70,46 @@
 
 //}
 function validate() {
-   let namein = document.forms.contactForm.cname.value;
-   let phin = document.forms.contactForm.cphone.value;
-   let emailin = document.forms.contactForm.cmail.value;
-   let mesin = document.forms.contactForm.cmes.value;
-   //window.alert('s'+mesin+'m');
- 
-   if (namein == "") {
+  let namein = document.forms.contactForm.cname.value;
+  let phin = document.forms.contactForm.cphone.value;
+  let emailin = document.forms.contactForm.cmail.value;
+  let mesin = document.forms.contactForm.cmes.value;
+  //window.alert('s'+mesin+'m');
+
+  if (namein == "") {
     document.getElementById("label1").style.visibility = 'visible';
-   }
-   else{
+  }
+  else {
     document.getElementById("label1").style.visibility = 'hidden';
-   }
-   if (phin == "") {
+  }
+  if (phin == "") {
     document.getElementById("label2").style.visibility = 'visible';
-   }
-   else{
+  }
+  else {
     document.getElementById("label2").style.visibility = 'hidden';
-   }
-   if (emailin == "") {
+  }
+  if (emailin == "") {
     document.getElementById("label3").style.visibility = 'visible';
-   }
-   else{
+  }
+  else {
     document.getElementById("label3").style.visibility = 'hidden';
-   }
-   if (mesin == "") {
- 
+  }
+  if (mesin == "") {
+
     document.getElementById("label5").style.visibility = 'visible';
-   }
-   else{
+  }
+  else {
     document.getElementById("label5").style.visibility = 'hidden';
-   }
-   if(phin.length!=11 && phin.length!=""){
+  }
+  if (phin.length != 11 && phin.length != "") {
     document.getElementById("label6").style.visibility = 'visible';
-   }
-   else{
+  }
+  else {
     document.getElementById("label6").style.visibility = 'hidden';
-   }
- 
-  if(namein == ""||phin == ""||emailin == ""||mesin == ""||phin.length!=11){
+  }
+
+  if (namein == "" || phin == "" || emailin == "" || mesin == "" || phin.length != 11) {
     return false;
   }
-  
- }
+
+}

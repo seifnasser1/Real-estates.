@@ -52,8 +52,8 @@ const signup = async (req, res) => {
         username: req.body.username,
         email: req.body.email,
         password: hashedPassword,
-        type:req.body.type,
-        photo:"profile.jpg",
+        type: req.body.type,
+        photo: "profile.jpg",
       });
 
       await newUser.save();
@@ -68,22 +68,22 @@ const signup = async (req, res) => {
 };
 
 
-const login =async (req, res, next) => {
+const login = async (req, res, next) => {
 
 };
-const getalluser = async(req, res, next) =>{
+const getalluser = async (req, res, next) => {
 
-User.find().then(result=>{
-  console.log(result);
-  res.render('pages/adminHeader',{Users:result});
-}).catch(err => {
+  User.find().then(result => {
+    console.log(result);
+    res.render('pages/adminHeader', { Users: result });
+  }).catch(err => {
     console.log(err);
   });
 
 }
-export { 
-    signup,
-    validation,
-    login,
-    getalluser,
+export {
+  signup,
+  validation,
+  login,
+  getalluser,
 };

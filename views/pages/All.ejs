@@ -9,65 +9,75 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <%- include("../partials/header") %>
-<body>
-    <div class="containerkbeer">
-        <div class="pr">
-            <h1 class="font">Recently Added Properties</h1>
-            <img src="/img/header_center.webp" alt="..">
-            <p class="info">Recently Added Properties at Blue Rock Real Estate Marketing & Investment Egypt</p>
-            <br>
-            <select name="properties">
-                <option value="Units">Units</option>
-                <option value="Villas">Villas</option>
-            </select>
 
-        </div>
+    <body>
+        <div class="containerkbeer">
+            <div class="pr">
+                <h1 class="font">Recently Added Properties</h1>
+                <img src="/img/header_center.webp" alt="..">
+                <p class="info">Recently Added Properties at Blue Rock Real Estate Marketing & Investment Egypt</p>
+                <br>
+                <select name="properties">
+                    <option value="Units">Units</option>
+                    <option value="Villas">Villas</option>
+                </select>
 
-
-        
-        <div class="container">
-            <% if (Propirty.length> 0) { %>
-                <% Propirty.forEach(prop=> { %>
-            <div class="house">
-                <a href="/user/propirty/<%=prop.id%>" class="imm">
-                    <div class="fade"></div>
-                    <img src="/img/<%=prop.Image%>" alt="can't load image">
-                    <h2 class="price"><%=prop.value%> EGP</h2>
-                    <p class="sale"><%=prop.servicetype%></p>
-                    <div class="forsalebar"></div>
-                </a>
-                <div class="title">
-                    <h3><%=prop.name%></h3>
-                    <p class="p"><i class="fa fa-map-marker icon"> <%=prop.district%></i></p>
-                </div>
-                <table class="details ">
-                    <tr>
-                        <td class="Center">
-                            <i class="fa fa-bed"></i>
-                            <%=prop.bedrooms%> Bedrooms
-                        </td>
-                        <td class="Center">
-                            <i class="fa fa-tint"></i>
-                            <%=prop.bathrooms%> Baths
-                        </td>
-                        <td class="Center">
-                            <i class="fa fa-expand"></i>
-                            <%=prop.area%>m
-                            <sup>2</sup>
-                        </td>
-                    </tr>
-                </table>
             </div>
-            <% }) %>
-            <% } else { %>
-                <p>There are no properties to display...</p>
-                <% } %>
+
+
+
+            <div class="container">
+                <% if (Propirty.length> 0) { %>
+                    <% Propirty.forEach(prop=> { %>
+                        <div class="house">
+                            <a href="/user/propirty/<%=prop.id%>" class="imm">
+                                <div class="fade"></div>
+                                <img src="/img/<%=prop.Image%>" alt="can't load image">
+                                <h2 class="price">
+                                    <%=prop.value%> EGP
+                                </h2>
+                                <p class="sale">
+                                    <%=prop.servicetype%>
+                                </p>
+                                <div class="forsalebar"></div>
+                            </a>
+                            <div class="title">
+                                <h3>
+                                    <%=prop.name%>
+                                </h3>
+                                <p class="p"><i class="fa fa-map-marker icon">
+                                        <%=prop.district%>
+                                    </i></p>
+                            </div>
+                            <table class="details ">
+                                <tr>
+                                    <td class="Center">
+                                        <i class="fa fa-bed"></i>
+                                        <%=prop.bedrooms%> Bedrooms
+                                    </td>
+                                    <td class="Center">
+                                        <i class="fa fa-tint"></i>
+                                        <%=prop.bathrooms%> Baths
+                                    </td>
+                                    <td class="Center">
+                                        <i class="fa fa-expand"></i>
+                                        <%=prop.area%>m
+                                            <sup>2</sup>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <% }) %>
+                            <% } else { %>
+                                <p>There are no properties to display...</p>
+                                <% } %>
+            </div>
+            <div class="pageswitch"></div>
+            <a href="#"></a>
         </div>
-        <div class="pageswitch"></div>
-        <a href="#"></a>
-    </div>
 
 
     </body>
     <%- include("../partials/footer") %>
+
 </html>

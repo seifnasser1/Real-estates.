@@ -51,45 +51,47 @@
             <div class="signup-form">
                 <div class="title">Sign Up</div>
                 <div class="input-boxes">
-                    <% if (errors && errors.length > 0) { %>
+                    <% if (errors && errors.length> 0) { %>
                         <div class="error-box">
-                          <% for (let i = 0; i < errors.length; i++) { %>
-                            <p><%= errors[i].msg %></p>
-                          <% } %>
+                            <% for (let i=0; i < errors.length; i++) { %>
+                                <p>
+                                    <%= errors[i].msg %>
+                                </p>
+                                <% } %>
                         </div>
-                      <% } %>
-                    <div class="input-box">
-                        <i class="fas fa-user"></i>
-                        <input type="text" name="username" placeholder="Enter your username">
-                    </div>
-                    <div class="input-box">
-                        <i class="fas fa-lock"></i>
-                        <input type="password" name="password" placeholder="Enter your password">
-                    </div>
-                    <div class="input-box">
-                        <i class="fas fa-lock"></i>
-                        <input type="password" name="confirmPassword" placeholder="Enter your password">
-                    </div>
-                    <div class="input-box">
-                        <i class="fas fa-envelope"></i>
-                        <input type="email" name="email" placeholder="Enter your email">
-                        <input type="hidden" name="type" value="client">
-                    </div>
-                    <div class="button input-box">
-                        <input type="submit" value="Submit">
-                    </div>
-                    <br>
-                    <br>
-                    <div class="text"> Have already account?
-                        <br>
-                        <br>
-                        <label for="flip">Login Now </label>
-                    </div>
+                        <% } %>
+                            <div class="input-box">
+                                <i class="fas fa-user"></i>
+                                <input type="text" name="username" placeholder="Enter your username">
+                            </div>
+                            <div class="input-box">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" name="password" placeholder="Enter your password">
+                            </div>
+                            <div class="input-box">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" name="confirmPassword" placeholder="Enter your password">
+                            </div>
+                            <div class="input-box">
+                                <i class="fas fa-envelope"></i>
+                                <input type="email" name="email" placeholder="Enter your email">
+                                <input type="hidden" name="type" value="client">
+                            </div>
+                            <div class="button input-box">
+                                <input type="submit" value="Submit">
+                            </div>
+                            <br>
+                            <br>
+                            <div class="text"> Have already account?
+                                <br>
+                                <br>
+                                <label for="flip">Login Now </label>
+                            </div>
                 </div>
             </div>
         </form>
     </div>
-    
+
     </div>
 </body>
 
