@@ -1,6 +1,5 @@
 import Propirty from '../models/propirty.model.js';
 import __dirname from '../app.js'
-import path from '../app.js'
 
 import fileUpload from "express-fileupload";
 
@@ -14,7 +13,11 @@ const addprop = async (req, res, next) => {
      return res.status(400).send('No files were uploaded.');
    }
    imgFile = req.files.img;
+<<<<<<< HEAD
    uploadPath = '../public/img/' + req.body.name +'.jpg';
+=======
+   uploadPath = './public/img/' + req.body.name +'.jpg';
+>>>>>>> 6d6c423ef56f6343e46bba2a0bf38c9e3a8ca631
    // Use the mv() method to place the file somewhere on your server
    imgFile.mv(uploadPath, function (err) {
      if (err)
@@ -49,5 +52,29 @@ const addprop = async (req, res, next) => {
    });
    
   };
-
-  export { addprop};
+const Search= async (req, res, next) => {
+  if(req.body.Price == 1)
+  {
+    
+  }
+  if(req.body.Bathrooms == 1)
+  {
+    const Bathroom = [1,2];
+  }
+  else if (req.body.Bathrooms == 2)
+  {
+    const Bathroom = [3,4,5,6,7,8];
+  }else{
+    const Bathroom = [1,2,3,4,5,6,7,8];
+  }
+  var query = {servicetype:req.body.Status, unittype:req.body.Type, district:req.body.Area}
+  console.log(query);
+  Propirty.find(query).then(result=>{
+    console.log(result);
+    res.render('pages/All',{Propirty:result});
+  }).catch(err =>(console.log(err)));
+}
+  export {
+    addprop,
+    Search,
+};

@@ -1,31 +1,43 @@
 
+
+
+
+
+
+<!------------------------------------------------
+-->
 <!DOCTYPE html>
 <html>
-    <head>
-<title> Chat </title>
-<link rel="stylesheet" href="/CSS/chat.css">
-<script type = "text/javascript" src="/chat.js">
-    
-</script>
-    </head>
-    <body>
-<div class="container">
-    <div class="header">
-        <h1>WebChat</h1>
+<head>
+    <title>Chat</title>
+    <link rel="stylesheet" href="/CSS/chat.css">
+    <script defer src="/js/chat.js"></script>
+</head>
+<body>
+    <!-- Button that triggers the chat box -->
+    <button class="chat-circle" onclick="openForm()">Chat</button>
+
+    <!-- Chat box element (hidden by default) -->
+    <div class="chat" id="myForm" style="display:none;">
+        <div class="containerz">
+            <div class="headerz">
+                <h1>WebChat</h1>
+            </div>
+            <div class="bodyz">
+                <div id="chatBody">
+                    <p class="messagez">hello</p>
+                    <p id="gh" class="messagez user_message">Hi</p>
+                </div>            
+            </div>
+            <div class="footerz">
+                <!-- <form> -->
+                    <input type="text" id="chatInput">
+                    <button>
+                        <img class="sendicon" src="img/download.png" alt="send icon" onclick="sendMsg()">
+                    </button>
+                <!-- </form> -->
+            </div>
+        </div>
     </div>
-    <div class="body">
-        <div id="chatBody">
-            <p class="message">hello</p>
-        <p id="gh" class="message user_message">Hi</p>
-    </div>
-        
-    </div>
-    <div class="footer">
-            <input type="text" id="chatInput">
-          <button>
-                <img class="sendicon" src="/public/img/download.png" alt="send icon" onclick="sendMsg()">
-            </button>
-    </div>
-</div>
-    </body>
+</body>
 </html>

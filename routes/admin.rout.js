@@ -1,14 +1,25 @@
 import { Router } from 'express';
+import User from '../models/user.model.js';
 import {
-    addprop,
-  } from "../controllers/propirty.controller.js";
-  
+  addprop,
+} from "../controllers/propirty.controller.js";
+import {
+  getalluser,
+} from "../controllers/user.controller.js";
 const router = Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', getalluser);
+
+router.get('/adding', function (req, res, next) {
   console.log('index.js: GET /');
-  res.render('pages/adminHeader');
+  res.render('pages/addpropirty');
+});
+router.get('/viewusers', function (req, res, next) {
+  User.find().then(result=>{
+    console.log(result);
+    res.render('pages/AdminUsers',{Users:result});
+  })
 });
 
 router.get('/adding', function(req, res, next) {
@@ -16,4 +27,4 @@ router.get('/adding', function(req, res, next) {
     res.render('pages/addpropirty');
   });
 router.post('/addpropirty',addprop);
-export default router;// to move all this codes in this file to app.js  and then import the routes in app.js
+export default router;

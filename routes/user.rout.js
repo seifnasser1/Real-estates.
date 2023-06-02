@@ -1,6 +1,14 @@
 import { Router } from 'express';
 import Propirty from '../models/propirty.model.js';
-
+import User from '../models/user.model.js';
+import {
+  signup,
+  validation,
+  login,
+} from "../controllers/user.controller.js";
+import {
+  Search,
+} from "../controllers/propirty.controller.js";
 const router = Router();
 
 /* GET home page. */
@@ -19,7 +27,9 @@ router.get('/propirty/:id', (req, res) => {
     });
 });
 
-
+router.get('/register',(req, res) =>{
+  res.render('pages/register',{ errors: [] });
+})
 router.get('/propirty', (req, res) => {
   
   Propirty.find()
@@ -29,9 +39,24 @@ router.get('/propirty', (req, res) => {
   .catch(err => {
     console.log(err);
   });
-  
-  
 });
+<<<<<<< HEAD
 
 
+=======
+router.get('/:id',(req, res) => {
+  var query = { "_id": req.params.id };
+  User.find(query)
+    .then(result => {
+      console.log(result[0]);
+      res.render('pages/profile', { User: result[0]});
+    })
+    .catch(err => {
+      console.log(err);
+    });
+});
+router.post('/search',Search);
+router.post('/signup-action',validation,signup);
+router.post('/login-action',login);
+>>>>>>> 6d6c423ef56f6343e46bba2a0bf38c9e3a8ca631
 export default router ;
