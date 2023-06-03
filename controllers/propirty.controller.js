@@ -41,7 +41,8 @@ const addprop = async (req, res, next) => {
     });
     propirty.save()
       .then(result => {
-        res.render('pages/adminHeader');
+        console.log('unit added succesfully');
+        res.redirect('/admin');
       })
       .catch(err => {
         console.log(err);

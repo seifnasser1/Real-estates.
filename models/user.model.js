@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
+import Propirty from "./propirty.model.js"
 
 const SALT_WORK_FACTOR = 10;
 
@@ -28,6 +29,10 @@ const user = new mongoose.Schema(
       trim: true,
       required: false,
     },
+    wishlist:{
+      type:[Propirty.schema],
+      required: false,
+    }
   },
   { timestamps: true }
 );

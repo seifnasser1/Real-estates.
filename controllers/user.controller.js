@@ -43,10 +43,14 @@ const signup = async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
     const existingUser = await User.findOne({ username: req.body.username });
+    const existingemail = await User.findOne({ email: req.body.email });
 
     if (existingUser) {
-      console.log("Email already exists");
-      res.send("Email already exists");
+      console.log("username already exists");
+      res.send("username already exists");
+    }else if(existingemail) {
+      console.log("email already exists");
+      res.send("email already exists");
     } else {
       const newUser = new User({
         username: req.body.username,
@@ -66,7 +70,6 @@ const signup = async (req, res) => {
     res.send("An error occurred");
   }
 };
-
 
 const login = async (req, res, next) => {
 
