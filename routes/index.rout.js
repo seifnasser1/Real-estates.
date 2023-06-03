@@ -13,4 +13,8 @@ router.get('/aboutus', function(req, res, next) {
   res.render('pages/aboutus');
 });
 
+router.get('/contactus', function(req, res, next) {
+  console.log('index.js: GET /');
+  res.render('pages/contactus');
+});
 export default router;

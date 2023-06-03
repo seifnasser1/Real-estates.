@@ -1,6 +1,9 @@
 import { Router } from 'express';
 import Propirty from '../models/propirty.model.js';
 import {
+ sendMes
+} from "../controllers/chat.controller.js";
+import {
   signup,
   validation,
   login,
@@ -27,7 +30,6 @@ router.get('/register',(req, res) =>{
   res.render('pages/register',{ errors: [] });
 })
 router.get('/propirty', (req, res) => {
-  
   Propirty.find()
   .then(result => {
     res.render('pages/All', { Propirty: result});
@@ -40,4 +42,6 @@ router.get('/propirty', (req, res) => {
 });
 router.post('/signup-action',validation,signup);
 router.post('/login-action',login);
+router.post('/send-message',sendMes);
+
 export default router ;
