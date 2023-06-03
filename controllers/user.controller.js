@@ -81,9 +81,21 @@ const getalluser = async (req, res, next) => {
   });
 
 }
+const getallusers = async (req, res, next) => {
+
+  User.find().then(result => {
+    console.log(result);
+    res.render('pages/adminUser', { Users: result });
+  }).catch(err => {
+    console.log(err);
+  });
+
+}
+
 export {
   signup,
   validation,
   login,
   getalluser,
+  getallusers,
 };
