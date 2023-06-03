@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <title>Admin Dashboard</title>
@@ -7,6 +8,7 @@
   <!-- Font Awesome Cdn Link -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 </head>
+
 <body>
   <header class="header">
     <div class="logo">
@@ -25,19 +27,7 @@
     </div>
   </header>
   <div class="container">
-    <nav>
-      <div class="side_navbar">
-        <span>Main Menu</span>
-        <a href="adminHeader.html" class="active">Profile</a>
-        <a href="adminProp.html">Rents</a>
-        <a href="adminUnits.html">Units</a>
-        <a href="adminUsers.html">Users</a>
-        <a href="#">Messages</a>
-        <a href="adminweeklysummary.html">Weekly Summary</a>
-        <a href="#">Top Properties</a>
-
-      </div>
-    </nav>
+    <%- include("../partials/adminnavbar") %>
 
     <div class="main-body">
       <h2>Users</h2>
@@ -55,62 +45,42 @@
             <thead>
               <tr>
                 <th>#</th>
-                <th>First Name</th>
-                <th>Last Name</th>
+                <th>Username</th>
                 <th>Email</th>
                 <th>Edit</th>
                 <th>Delete</th>
+                <th>Make Admin</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>1</td>
-                <td>Seif</td>
-                <td>Nasser</td>
-                <td>Seif@miu</td>
-                <td><button>Edit User</button></td>
-                <td><button>Delete User</button></td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Mostafa</td>
-                <td>Mohamed</td>
-                <td>Mostafa@miu</td>
-                <td><button>Edit User</button></td>
-                <td><button>Delete User</button></td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Toka</td>
-                <td>Saeed</td>
-                <td>Toka@miu</td>
-                <td><button>Edit User</button></td>
-                <td><button>Delete User</button></td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>Aya</td>
-                <td>Magdy</td>
-                <td>Aya@miu</td>
-                <td><button>Edit User</button></td>
-                <td><button>Delete User</button></td>
-              </tr>
-              <tr>
-                <td>5</td>
-                <td>Monad</td>
-                <td>Khaled</td>
-                <td>Monad@miu</td>
-                <td><button>Edit User</button></td>
-                <td><button>Delete User</button></td>
-              </tr>
-              <tr>
-                <td>6</td>
-                <td>Zainab</td>
-                <td>Rafea</td>
-                <td>Zainab@miu</td>
-                <td><button>Edit User</button></td>
-                <td><button>Delete User</button></td>
-              </tr>
+              <% if (Users.length> 0){%>
+                <% var count=1; %>
+                  <% Users.forEach(Client=>{%>
+                    <% if (Client.type=='client' ){%>
+                      <tr>
+                        <td>
+                          <%=count%>
+                        </td>
+                        <td>
+                          <a href="/user/<%=Client.id%>">
+                            <%=Client.username%>
+                          </a>
+                        </td>
+                        <td>
+                          <%=Client.email%>
+                        </td>
+                      <% count++;%>
+                        <% } else { %>
+                          <p>No Users found </p>
+                          <% }%>
+                            <% })%>
+                              <% } else { %>
+                                <p>No Users found </p>
+                                <% }%>
+                                  <td><button>Edit User</button></td>
+                                  <td><button>Delete User</button></td>
+                                  <td><button>Yes admin</button></td>
+                                  </tr>
             </tbody>
           </table>
         </div>
@@ -213,6 +183,5 @@
     </div> -->
   </div>
 </body>
+
 </html>
-
-

@@ -34,11 +34,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //ROUTES 
 app.use('/', indexRouter);
-app.use('/user',userrouter);
-app.use('/admin',adminrouter);
+app.use('/user', userrouter);
+app.use('/admin', adminrouter);
 
 // ERROR HANDLING
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
   res.status(err.status || 500);

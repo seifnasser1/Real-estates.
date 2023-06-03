@@ -3,8 +3,8 @@
 
 function openForm() {
   console.log("hi here")
-  if(document.getElementById("myForm").style.display=="none")
-  document.getElementById("myForm").style.display = "block";
+  if (document.getElementById("myForm").style.display == "none")
+    document.getElementById("myForm").style.display = "block";
   else
   document.getElementById("myForm").style.display = "none";
  

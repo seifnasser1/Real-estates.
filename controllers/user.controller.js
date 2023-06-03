@@ -43,16 +43,21 @@ const signup = async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
     const existingUser = await User.findOne({ username: req.body.username });
+    const existingemail = await User.findOne({ email: req.body.email });
 
     if (existingUser) {
-      console.log("Email already exists");
-      res.send("Email already exists");
+      console.log("username already exists");
+      res.send("username already exists");
+    }else if(existingemail) {
+      console.log("email already exists");
+      res.send("email already exists");
     } else {
       const newUser = new User({
         username: req.body.username,
         email: req.body.email,
         password: hashedPassword,
-        type:req.body.type,
+        type: req.body.type,
+        photo: "profile.jpg",
       });
 
       await newUser.save();
@@ -66,13 +71,34 @@ const signup = async (req, res) => {
   }
 };
 
-
-const login =async (req, res, next) => {
+const login = async (req, res, next) => {
 
 };
+const getalluser = async (req, res, next) => {
 
-export { 
-    signup,
-    validation,
-    login,
+  User.find().then(result => {
+    console.log(result);
+    res.render('pages/adminHeader', { Users: result });
+  }).catch(err => {
+    console.log(err);
+  });
+
+}
+const getallusers = async (req, res, next) => {
+
+  User.find().then(result => {
+    console.log(result);
+    res.render('pages/adminUser', { Users: result });
+  }).catch(err => {
+    console.log(err);
+  });
+
+}
+
+export {
+  signup,
+  validation,
+  login,
+  getalluser,
+  getallusers,
 };

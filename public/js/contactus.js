@@ -21,35 +21,35 @@ function validate() {
    }
    else{
     document.getElementById("label2").style.visibility = 'hidden';
-   }
-   if (emailin == "") {
+  }
+  if (emailin == "") {
     document.getElementById("label3").style.visibility = 'visible';
     flag+=1;
 
    }
    else{
     document.getElementById("label3").style.visibility = 'hidden';
-   }
-   if (mesin == "") {
- 
+  }
+  if (mesin == "") {
+
     document.getElementById("label5").style.visibility = 'visible';
     flag+=1;
 
    }
    else{
     document.getElementById("label5").style.visibility = 'hidden';
-   }
-   if(phin.length!=11 && phin.length!=""){
+  }
+  if (phin.length != 11 && phin.length != "") {
     document.getElementById("label6").style.visibility = 'visible';
     flag+=1;
 
    }
    else{
     document.getElementById("label6").style.visibility = 'hidden';
-   }
- 
-  if(namein == ""||phin == ""||emailin == ""||mesin == ""||phin.length!=11){
+  }
+
+  if (namein == "" || phin == "" || emailin == "" || mesin == "" || phin.length != 11) {
     return false;
   }
-  
- }
+
+}

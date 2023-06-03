@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,74 +13,93 @@
         function slider() {
             var images = document.getElementsByClassName("mySlides");
             for (var i = 0; i < images.length; i++) {
-                images[i].style.display = "none";  
+                images[i].style.display = "none";
             }
-            
-            if (myIndex > images.length-1) {
+
+            if (myIndex > images.length - 1) {
                 myIndex = 0;
-            }    
-            images[myIndex].style.display = "block";  
+            }
+            images[myIndex].style.display = "block";
             myIndex++;
             setTimeout(slider, 2000); // Change image every 2 seconds
         }
         setTimeout(slider, 1000);
     </script>
 </head>
+
 <body>
     <%- include("../partials/header") %>
-    <div class="container1">
-        <% console.log(Propirty); %>
-        <div class="title">
-            <div class="name">
-                <h1><%= Propirty.name %></h1>
-                <p><i class="fa fa-map-marker icon"></i> <%= Propirty.district %></p>
+        <div class="container1">
+            <% console.log(Propirty); %>
+                <div class="title">
+                    <div class="name">
+                        <h1>
+                            <%= Propirty.name %>
+                        </h1>
+                        <p><i class="fa fa-map-marker icon"></i>
+                            <%= Propirty.district %>
+                        </p>
 
-            </div>
-            <div class="price"><%= Propirty.value %> EGP</div>
+                    </div>
+                    <div class="price">
+                        <%= Propirty.value %> EGP
+                    </div>
+                </div>
+                <hr>
+                <div>
+                    <p class="featured">Featured</p>
+                    <p class="sale">
+                        <%= Propirty.servicetype %>
+                    </p>
+                    <p class="type">Property type: <%= Propirty.unittype %>
+                    </p>
+                </div>
+                <table class="details">
+                    <tr>
+                        <td>
+                            <i class="fa fa-bed"></i>
+                            <span>
+                                <%= Propirty.bedrooms %>
+                            </span>
+                            Bedrooms
+                        </td>
+                        <td>
+                            <i class="fa fa-tint"></i>
+                            <span>
+                                <%= Propirty.bathrooms %>
+                            </span>
+                            Baths
+                        </td>
+                        <td>
+                            <i class="fa fa-expand"></i>
+                            <span>
+                                <%= Propirty.area %>
+                            </span>
+                            M.
+                            <sub>2</sub>
+                        </td>
+                        <td>
+                            <i class="fa fa-car"></i>
+                            <span>
+                                <%= Propirty.garages %>
+                            </span>
+                            Garage
+                        </td>
+                    </tr>
+                </table>
+                <div class="photo">
+                    <img class="mySlides" src="/img/<%= Propirty.Image %>" style="width:100%">
+                </div>
         </div>
-        <hr>
-        <div>
-           <p class="featured">Featured</p>
-           <p class="sale"><%= Propirty.servicetype %></p>
-           <p class="type">Property type: <%= Propirty.unittype %></p>
-        </div>
-        <table class="details">
-            <tr>
-                <td>
-                    <i class="fa fa-bed"></i>
-                    <span> <%= Propirty.bedrooms %></span>
-                     Bedrooms
-                </td>
-                <td>
-                    <i class="fa fa-tint"></i>
-                    <span> <%= Propirty.bathrooms %></span>
-                     Baths
-                </td>
-                <td>
-                    <i class="fa fa-expand"></i>
-                    <span> <%= Propirty.area %></span>
-                     M.
-                    <sub>2</sub>
-                </td>
-                <td>
-                    <i class="fa fa-car"></i>
-                    <span><%= Propirty.garages %></span>
-                     Garage
-                </td>
-            </tr>
-        </table>
-        <div class="photo">
-			<img class="mySlides" src="/img/<%= Propirty.Image %>" style="width:100%">
-		</div>
-    </div>
-    <div class="container1">
-        <h3 class="description">Unit Description</h3>
-        <div class="shape">.</div>
-        <p class="content">
-            <%= Propirty.details %>
-        </p>
+        <div class="container1">
+            <h3 class="description">Unit Description</h3>
+            <div class="shape">.</div>
+            <p class="content">
+                <%= Propirty.details %>
+            </p>
 
-    </div>
+        </div>
 </body>
 <%- include("../partials/footer") %>
+
 </html>

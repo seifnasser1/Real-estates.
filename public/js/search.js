@@ -22,9 +22,9 @@ var url = "mongodb+srv://mostafa2104516:98782363@cluster0.fn8yy9v.mongodb.net/sa
 
 function openFormfind() {
   console.log("hi here")
-  if(document.getElementById("myFormfind").style.display=="none")
-  document.getElementById("myFormfind").style.display = "block";
+  if (document.getElementById("myFormfind").style.display == "none")
+    document.getElementById("myFormfind").style.display = "block";
   else
-  document.getElementById("myFormfind").style.display = "none";
- 
+    document.getElementById("myFormfind").style.display = "none";
+
 }
