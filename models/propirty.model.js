@@ -13,7 +13,6 @@ const propirty = new mongoose.Schema(
     },
     mobilenumber2: {
       type: String,
-      trim: true,
       required: false,
     },
     email: {

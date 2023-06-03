@@ -11,11 +11,7 @@ import {
 } from "../controllers/propirty.controller.js";
 const router = Router();
 
-/* GET home page. */
-router.get('/', function (req, res, next) {
-  console.log('index.js: GET /');
-  res.render('pages/Home');
-});
+
 router.get('/propirty/:id', (req, res) => {
   var query = { "_id": req.params.id };
   Propirty.find(query)
@@ -40,7 +36,6 @@ router.get('/propirty', (req, res) => {
       console.log(err);
     });
 });
-
 
 
 
