@@ -4,7 +4,7 @@ body{
     *:focus{
         outline:none;
     }
-    .box{
+    .Box{
         box-sizing:border-box;
         width:360px;
         height:600px;
