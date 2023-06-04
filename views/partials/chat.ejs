@@ -7,6 +7,8 @@
     <title>Chat</title>
     <link rel="stylesheet" href="/CSS/chat.css">
     <script defer src="/js/chat.js"></script>
+    <!-- <input type="hidden" name="_csrf" value="  %= csrfToken %>"> -->
+
 </head>
 
 <body>
@@ -21,21 +23,23 @@
             </div>
             <div class="bodyz">
                 <div id="chatBody">
-                    <p class="messagez">hello</p>
-                    <p id="gh" class="messagez user_message">Hi</p>
+                    <!-- <p class="messagez">hello</p>
+                    <p id="gh" class="messagez user_message">Hi</p> -->
+                    <!-- <p id="gh" class="messagez user_message" type="input"></p> -->
+
                 </div>
             </div>
             <div class="footerz">
                 <!-- <form> -->
                     <!-- id="chatInput"  -->
 
-<form action="/user/send-message" method="post" onclick="sendMsg()">
+<form action="/user/send-message" method="post"  >
 
 
 
-                    <input type="text" name="content">
+                    <input type="text" name="content" id="chatInput">
                     <button type="submit">
-                        <img class="sendicon" src="img/download.png" alt="send icon">
+                        <img class="sendicon" src="img/download.png" alt="send icon" onclick="sendMsg()">
                     </button>
                 </form>
                 <!-- </form> -->

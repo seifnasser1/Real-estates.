@@ -1,3 +1,4 @@
+import { Result } from 'express-validator';
 import Message from '../models/message.model.js';
 
 
@@ -67,17 +68,17 @@ const sendMes = async (req, res, next) => {
     
     console.log(req.body);
       const message = new Message({
-    //   user: req.body,
+       user: req.body,
        content: req.body.content,
-      // receiver: req.body.receiver,
+       receiver: req.body.receiver,
       
       });
       message.save()
+
+    
         .catch(err => {
           console.log(err);
         });
-  
-    
    };
  
    export { sendMes};
