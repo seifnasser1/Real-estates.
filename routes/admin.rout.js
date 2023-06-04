@@ -8,8 +8,17 @@ import {
 } from "../controllers/user.controller.js";
 const router = Router();
 
+router.use((req, res, next) => {
+  if (req.session.user !== undefined && req.session.user.Type === 'admin') {
+      next();
+  }
+  else {
+      res.render('pages/err', { err: 'You are not an Admin',user: (req.session.user === undefined ? "" : req.session.user) })
+  }
+});
+
 /* GET home page. */
-router.get('/', getalluser);
+router.get ('/', getalluser);
 router.get('/deleteuser/:id',(req,res,next)=>{
   User.findByIdAndDelete(req.params.id)
     .then(result => {
