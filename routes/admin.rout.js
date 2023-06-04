@@ -10,7 +10,15 @@ const router = Router();
 
 /* GET home page. */
 router.get('/', getalluser);
-
+router.get('/deleteuser/:id',(req,res,next)=>{
+  User.findByIdAndDelete(req.params.id)
+    .then(result => {
+        res.redirect('/admin/viewusers');
+      })
+    .catch(err => {
+      console.log(err);
+    });
+});
 router.get('/adding', function (req, res, next) {
   console.log('index.js: GET /');
   res.render('pages/addpropirty',{user: (req.session.user === undefined ? "" : req.session.user)});

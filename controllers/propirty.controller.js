@@ -1,6 +1,6 @@
 import Propirty from '../models/propirty.model.js';
 import __dirname from '../app.js'
-
+import wishlist from '../models/wishlist.model.js';
 import fileUpload from "express-fileupload";
 
 
@@ -38,7 +38,8 @@ const addprop = async (req, res, next) => {
       furniture: req.body.f_type,
       details: req.body.details,
       Image: req.body.name + '.jpg',
-    });
+      adminid:req.session.user.id,
+        });
     propirty.save()
       .then(result => {
         console.log('unit added succesfully');
@@ -69,7 +70,29 @@ const Search = async (req, res, next) => {
     res.render('pages/All', { Propirty: result,user: (req.session.user === undefined ? "" : req.session.user) });
   }).catch(err => (console.log(err)));
 }
+
+const addwishlist= async (req, res, next) => {
+  const exsistingwishlist=await wishlist.findOne({"username":req.session.user.id , "property": req.body.Propirty});
+  var found;
+  if(exsistingwishlist){
+    wishlist.findByIdAndDelete(exsistingwishlist._id);
+    res.redirect('/user/propirty/:id',{user: (req.session.user === undefined ? "" : req.session.user) });
+  }
+  else{
+    const wish = new wishlist({
+      username:req.session.user.id,
+      property:req.body.Propirty,
+    })
+    console.log(wish);
+    wish.save().then(result=>{
+      res.redirect('/user/propirty/:id',{user: (req.session.user === undefined ? "" : req.session.user) });
+    }).catch(err => (console.log(err)));
+  }
+}
+
+
 export {
   addprop,
   Search,
+  addwishlist,
 };

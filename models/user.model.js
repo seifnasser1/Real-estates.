@@ -29,10 +29,6 @@ const user = new mongoose.Schema(
       trim: true,
       required: false,
     },
-    wishlist:{
-      type:[Propirty.schema],
-      required: false,
-    }
   },
   { timestamps: true }
 );

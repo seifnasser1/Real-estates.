@@ -69,6 +69,10 @@
                         <td>
                           <%=Client.email%>
                         </td>
+                        <td><a href="/user/edituser/<%=Client.id%>"><button>Edit User</button></a></td>
+                                  <td><a href="/admin/deleteuser/<%=Client.id%>"><button>Delete User</button></a></td>
+                                  <td><a href="/admin/makeadmin/<%=Client.id%>"><button>Yes admin</button></a></td>
+                                  </tr>
                       <% count++;%>
                         <% } else { %>
                           <p>No Users found </p>
@@ -77,10 +81,6 @@
                               <% } else { %>
                                 <p>No Users found </p>
                                 <% }%>
-                                  <td><button>Edit User</button></td>
-                                  <td><button>Delete User</button></td>
-                                  <td><button>Yes admin</button></td>
-                                  </tr>
             </tbody>
           </table>
         </div>

@@ -11,6 +11,7 @@ import {
 } from "../controllers/user.controller.js";
 import {
   Search,
+  addwishlist,
 } from "../controllers/propirty.controller.js";
 const router = Router();
 
@@ -42,7 +43,6 @@ router.get('/propirty', (req, res) => {
 router.get('/distrect',(req,res)=>{
   res.render('pages/index',{ user: (req.session.user === undefined ? "" : req.session.user)});
 })
-
 router.get('/:id',(req, res) => {
   var query = { "_id": req.params.id };
   User.find(query)
@@ -58,4 +58,5 @@ router.post('/search', Search);
 router.post('/signup-action', validation, signup);
 router.post('/login-action', login);
 router.post('/send-message',sendMes);
+router.post('/addtowishlist',addwishlist);
 export default router;
