@@ -24,7 +24,7 @@ saveUninitialized:'false';
 
 
 const mongoose=require('mongoose')
-const Propirty=require(/models/propirty.models.js)
+const Propirty=require("../models/propirty.models.js")
 mongoose.connect('mongodb://localhost/nameofdb', {useNewUrlParser: true, useUnifiedTopology:true })
 const db=mongoose.connection
 db.once('open',asyn()=>{
@@ -45,8 +45,6 @@ Promise.all([
 
 app.get('/users',paginatedResults(Propirty),(req,res)=>{
     
-
-
     res.json( res.paginatedResults)
 })
 function paginatedResults(model){

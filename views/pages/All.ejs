@@ -7,74 +7,128 @@
     <title>Properties</title>
     <link rel="stylesheet" href="/CSS/properties.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="/CSS/pagination.css">
 </head>
 <%- include("../partials/header") %>
 
-    <body>
-        <div class="containerkbeer">
-            <div class="pr">
-                <h1 class="font">Recently Added Properties</h1>
-                <img src="/img/header_center.webp" alt="..">
-                <p class="info">Recently Added Properties at Blue Rock Real Estate Marketing & Investment Egypt</p>
-                <br>
-                <select name="properties">
-                    <option value="Units">Units</option>
-                    <option value="Villas">Villas</option>
-                </select>
+<body>
+    <div class="containerkbeer">
+        <div class="pr">
+            <h1 class="font">Recently Added Properties</h1>
+            <img src="/img/header_center.webp" alt="..">
+            <p class="info">Recently Added Properties at Blue Rock Real Estate Marketing & Investment Egypt</p>
+            <br>
+                <!--<select name="properties">
+                <option value="Units">Units</option>
+         <option value="Villas">Villas</option>
+                </select>-->
 
-            </div>
+        </div>
 
 
-
-            <div class="container">
-                <% if (Propirty.length> 0) { %>
-                    <% Propirty.forEach(prop=> { %>
-                        <div class="house">
-                            <a href="/user/propirty/<%=prop.id%>" class="imm">
-                                <div class="fade"></div>
-                                <img src="/img/<%=prop.Image%>" alt="can't load image">
+        
+        <div class="container">
+            <% if (Propirty.length> 0) { %>
+                <% Propirty.forEach(prop=> { %>
+            <div class="house">
+                <a href="/user/propirty/<%=prop.id%>" class="imm">
+                    <div class="fade"></div>
+                    <img src="/img/<%=prop.Image%>" alt="can't load image">
                                 <h2 class="price">
                                     <%=prop.value%> EGP
                                 </h2>
                                 <p class="sale">
                                     <%=prop.servicetype%>
                                 </p>
-                                <div class="forsalebar"></div>
-                            </a>
-                            <div class="title">
+                    <div class="forsalebar"></div>
+                </a>
+                <div class="title">
                                 <h3>
                                     <%=prop.name%>
                                 </h3>
                                 <p class="p"><i class="fa fa-map-marker icon">
                                         <%=prop.district%>
                                     </i></p>
-                            </div>
-                            <table class="details ">
-                                <tr>
-                                    <td class="Center">
-                                        <i class="fa fa-bed"></i>
-                                        <%=prop.bedrooms%> Bedrooms
-                                    </td>
-                                    <td class="Center">
-                                        <i class="fa fa-tint"></i>
-                                        <%=prop.bathrooms%> Baths
-                                    </td>
-                                    <td class="Center">
-                                        <i class="fa fa-expand"></i>
-                                        <%=prop.area%>m
-                                            <sup>2</sup>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                        <% }) %>
-                            <% } else { %>
-                                <p>There are no properties to display...</p>
-                                <% } %>
+                </div>
+                <table class="details ">
+                    <tr>
+                        <td class="Center">
+                            <i class="fa fa-bed"></i>
+                            <%=prop.bedrooms%> Bedrooms
+                        </td>
+                        <td class="Center">
+                            <i class="fa fa-tint"></i>
+                            <%=prop.bathrooms%> Baths
+                        </td>
+                        <td class="Center">
+                            <i class="fa fa-expand"></i>
+                            <%=prop.area%>m
+                            <sup>2</sup>
+                        </td>
+                    </tr>
+                </table>
             </div>
-            <div class="pageswitch"></div>
-            <a href="#"></a>
+            <% }) %>
+            <% } else { %>
+                <p>There are no properties to display...</p>
+                <% } %>
         </div>
+        <div class="pageswitch"></div>
+        <a href="#"></a>
+    </div>
+<!--
+    pagination
+-->
+<div class="pagination">
+     <button class =btn1 onclick="backBtn()"> <img src="/img/arrowofpagination.png"> prev</button>
+    <ul>
+        <li class="link active" value="1" onclick="activeLink()">1</li>
+        <li class="link" value="2" onclick="activeLink()">2</li>
+        <li class="link" value="3" onclick="activeLink()">3</li>
+        <li class="link" value="4" onclick="activeLink()">4</li>
+        <li class="link" value="5" onclick="activeLink()">5</li>
+        <li class="link" value="6" onclick="activeLink()">6</li>
+    </ul>
+    <button class =btn2 onclick="nextBtn()"> <img src="/img/arrowofpagination.png" >next</button>
+
+
+
+</div>
+<script>
+    let link=document.getElementsByClassName("link");
+    let currentValue=l;
+    function activeLink(){
+        for(l of link){
+            l.classList.remove("active");
+    
+        }
+        event.target.classList.add("active");
+        currentValue=event.target.value; 
+    }
+     function backBtn(){
+        if(currentValue>1){
+            for(l of link){
+                l.classList.remove("active");
+            }  
+            currentValue--; 
+            link[currentValue-1].classList.add("active");
+        }
+    
+     }
+    
+     function nextBtn(){
+        if(currentValue<6){
+            for(l of link){
+                l.classList.remove("active");
+            }  
+            currentValue++; 
+            link[currentValue-1].classList.add("active");
+        }
+    
+     }
+    
+    
+    </script>
 
 
     </body>
