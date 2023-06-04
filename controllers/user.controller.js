@@ -45,9 +45,12 @@ const signup = async (req, res) => {
     const existingUser = await User.findOne({ username: req.body.username });
     const existingemail = await User.findOne({ email: req.body.email });
 
-    if (existingUser) {
+    if (existingemail) {
       console.log("Email already exists");
       res.send("Email already exists");
+    }else if(existingUser){
+      console.log("username already exists");
+      res.send("username already exists");
     } else {
       const newUser = new User({
         username: req.body.username,
@@ -73,7 +76,7 @@ const signup = async (req, res) => {
 };
 
 const logvalidation = [
-  body("logusername").notEmpty().withMessage("Username is required"),
+ body("logusername").notEmpty().withMessage("Username is required"),
   body("logpassword").notEmpty().withMessage("password is required"),
 
 ];
