@@ -76,7 +76,7 @@ const addwishlist= async (req, res, next) => {
   var found;
   if(exsistingwishlist){
     wishlist.findByIdAndDelete(exsistingwishlist._id);
-    res.redirect('/user/propirty/:id',{user: (req.session.user === undefined ? "" : req.session.user) });
+    res.redirect('/',{user: (req.session.user === undefined ? "" : req.session.user) });
   }
   else{
     const wish = new wishlist({
@@ -85,7 +85,7 @@ const addwishlist= async (req, res, next) => {
     })
     console.log(wish);
     wish.save().then(result=>{
-      res.redirect('/user/propirty/:id',{user: (req.session.user === undefined ? "" : req.session.user) });
+      res.redirect('/',{user: (req.session.user === undefined ? "" : req.session.user) });
     }).catch(err => (console.log(err)));
   }
 }
