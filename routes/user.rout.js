@@ -4,6 +4,7 @@ import User from '../models/user.model.js';
 import {
   signup,
   validation,
+  logvalidation,
   login,
 } from "../controllers/user.controller.js";
 import {
@@ -52,5 +53,5 @@ router.get('/:id', (req, res) => {
 });
 router.post('/search', Search);
 router.post('/signup-action', validation, signup);
-router.post('/login-action', login);
+router.post('/login-action',logvalidation, login);
 export default router;

@@ -67,8 +67,21 @@ const signup = async (req, res) => {
   }
 };
 
+const logvalidation = [
+  body("logusername").notEmpty().withMessage("Username is required"),
+  body("logpassword").notEmpty().withMessage("password is required"),
 
+];
 const login = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    res.render("pages/register", {
+      title: "Signup page - Validation Failed",
+      errors: errors.array(),
+    });
+    return;
+  }
+
 
 };
 const getalluser = async (req, res, next) => {
@@ -95,6 +108,7 @@ const getallusers = async (req, res, next) => {
 export {
   signup,
   validation,
+  logvalidation,
   login,
   getalluser,
   getallusers,

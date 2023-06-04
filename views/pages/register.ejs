@@ -25,6 +25,15 @@
                 <div class="login-form">
                     <div class="title"> Login </div>
                     <div class="input-boxes">
+                        <% if (errors && errors.length> 0) { %>
+                            <div class="error-box">
+                                <% for (let i=0; i < errors.length; i++) { %>
+                                    <p>
+                                        <%= errors[i].msg %>
+                                    </p>
+                                    <% } %>
+                            </div>
+                            <% } %>
                         <div class="input-box">
                             <i class="fas fa-envelope"></i>
                             <input type="text" name="logusername" placeholder="Enter your username">
