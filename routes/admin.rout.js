@@ -13,18 +13,18 @@ router.get('/', getalluser);
 
 router.get('/adding', function (req, res, next) {
   console.log('index.js: GET /');
-  res.render('pages/addpropirty');
+  res.render('pages/addpropirty',{user: (req.session.user === undefined ? "" : req.session.user)});
 });
 router.get('/viewusers', function (req, res, next) {
   User.find().then(result => {
     console.log(result);
-    res.render('pages/AdminUsers', { Users: result });
+    res.render('pages/AdminUsers', { Users: result,user: (req.session.user === undefined ? "" : req.session.user) });
   })
 });
 
 router.get('/adding', function (req, res, next) {
   console.log('index.js: GET /');
-  res.render('pages/addpropirty');
+  res.render('pages/addpropirty',{user: (req.session.user === undefined ? "" : req.session.user)});
 });
 
 

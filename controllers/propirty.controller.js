@@ -66,7 +66,7 @@ const Search = async (req, res, next) => {
   console.log(query);
   Propirty.find(query).then(result => {
     console.log(result);
-    res.render('pages/All', { Propirty: result });
+    res.render('pages/All', { Propirty: result,user: (req.session.user === undefined ? "" : req.session.user) });
   }).catch(err => (console.log(err)));
 }
 export {

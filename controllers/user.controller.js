@@ -46,21 +46,22 @@ const signup = async (req, res) => {
     const existingemail = await User.findOne({ email: req.body.email });
 
     if (existingUser) {
-      console.log("username already exists");
-      res.send("username already exists");
-    }else if(existingemail) {
-      console.log("email already exists");
-      res.send("email already exists");
+      console.log("Email already exists");
+      res.send("Email already exists");
     } else {
       const newUser = new User({
         username: req.body.username,
         email: req.body.email,
         password: hashedPassword,
-        type: req.body.type,
-        photo: "profile.jpg",
+        type:req.body.type,
+        photo:"profile.jpg",
       });
 
-      await newUser.save();
+      await newUser.save().then(result =>{
+        req.session.user=result;
+
+      })
+
 
       console.log("User saved successfully");
       res.redirect('/');
@@ -78,7 +79,7 @@ const getalluser = async (req, res, next) => {
 
   User.find().then(result => {
     console.log(result);
-    res.render('pages/adminHeader', { Users: result });
+    res.render('pages/adminHeader', { Users: result,user: (req.session.user === undefined ? "" : req.session.user) });
   }).catch(err => {
     console.log(err);
   });
@@ -87,18 +88,18 @@ const getalluser = async (req, res, next) => {
 const getallusers = async (req, res, next) => {
 
   User.find().then(result => {
-    console.log(result);
-    res.render('pages/adminUser', { Users: result });
-  }).catch(err => {
+  console.log(result);
+    res.render('pages/adminUser', { Users: result ,user: (req.session.user === undefined ? "" : req.session.user)});
+}).catch(err => {
     console.log(err);
   });
 
 }
 
-export {
-  signup,
-  validation,
-  login,
-  getalluser,
+export { 
+    signup,
+    validation,
+    login,
+    getalluser,
   getallusers,
 };

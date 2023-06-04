@@ -18,8 +18,9 @@ const router = Router();
 router.get('/propirty/:id', (req, res) => {
   var query = { "_id": req.params.id };
   Propirty.find(query)
-    .then(result => {
-      res.render('pages/villa', { Propirty: result[0] });
+    .then(result => { 
+      console.log(req.session.user) ;
+      res.render('pages/villa', { Propirty: result[0] ,user: (req.session.user === undefined ? "" : req.session.user)});
     })
     .catch(err => {
       console.log(err);
@@ -27,7 +28,7 @@ router.get('/propirty/:id', (req, res) => {
 });
 
 router.get('/register', (req, res) => {
-  res.render('pages/register', { errors: [] });
+  res.render('pages/register', { errors: [] ,user: (req.session.user === undefined ? "" : req.session.user)});
 })
 router.get('/propirty', (req, res) => {
   Propirty.find()
