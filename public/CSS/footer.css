@@ -4,10 +4,12 @@ Footer Area CSS
 .footer-area {
     background-color: black;
 }
-.footer-a{
-    color:white;
+
+.footer-a {
+    color: white;
     text-align: left;
 }
+
 .single-footer-widget {
     margin-bottom: 30px;
 }

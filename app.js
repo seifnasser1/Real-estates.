@@ -25,7 +25,7 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 // Middleware
-//monaddd
+////monaddd   .////m
 
 app.use(fileUpload());
 app.use(logger("dev"));
@@ -36,11 +36,11 @@ app.use(session({secret:'any secret'}));
 
 //ROUTES 
 app.use('/', indexRouter);
-app.use('/user',userrouter);
-app.use('/admin',adminrouter);
+app.use('/user', userrouter);
+app.use('/admin', adminrouter);
 
 // ERROR HANDLING
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
   res.status(err.status || 500);

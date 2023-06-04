@@ -1,37 +1,44 @@
-*{
+* {
     padding: 0;
     margin: 0;
     text-decoration: none;
     list-style: none;
     box-sizing: border-box;
 }
-body{
+
+body {
     background-color: gray;
 }
-.container1{
+
+.container1 {
     margin: 20px;
     background-color: white;
     border-radius: 15px;
 }
-.name{
+
+.name {
     position: relative;
     text-align: center;
 }
-.design{
+
+.design {
     position: relative;
     margin-left: 47%;
     background-image: url(https://bluerock-eg.com/vendor/css/imgweb/header_center.webp);
-background-repeat: no-repeat;
+    background-repeat: no-repeat;
 }
-.mm{
+
+.mm {
     text-align: center;
 }
-form{
+
+form {
     margin: 15px;
     margin-left: 70px;
 }
-.inn{
-    width:  230px;
+
+.inn {
+    width: 230px;
     position: relative;
     border: 2px solid whitesmoke;
     border-radius: 4px;
@@ -39,24 +46,30 @@ form{
     font-size: 12px;
     padding: 10px;
 }
-.inn:focus{
+
+.inn:focus {
     outline: 0;
 }
-table{
+
+table {
     width: 100%;
 }
-.input-control .success input{
+
+.input-control .success input {
     border-color: #09c372;
 }
-.input-control .error input{
+
+.input-control .error input {
     border-color: #ff3860;
 }
+
 .input-control .error {
     color: #ff3860;
     font-size: 9px;
     height: 13px;
 }
-.add{
+
+.add {
     width: 50px;
     height: 30px;
     background-color: blue;
@@ -66,8 +79,9 @@ table{
     margin-left: 46%;
     margin-top: 30px;
 }
-.area{
-    width:  460px;
+
+.area {
+    width: 460px;
     height: 250px;
     position: relative;
     border: 2px solid whitesmoke;
@@ -76,9 +90,11 @@ table{
     font-size: 12px;
     padding: 10px;
 }
+
 .mySlides {
-    display:none;
+    display: none;
 }
+
 .top-menu {
     display: flex;
     justify-content: space-between;
@@ -86,16 +102,16 @@ table{
     background-color: #000;
     padding: 10px;
     color: #fff;
-  }
-  
-  .menu-item {
+}
+
+.menu-item {
     flex: 1;
     text-align: center;
-  }
-  
-  .menu-item a {
+}
+
+.menu-item a {
     display: block;
     text-decoration: none;
     color: #fff;
     padding: 10px;
-  }
+}

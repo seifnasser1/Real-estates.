@@ -8,6 +8,7 @@
   <!-- Font Awesome Cdn Link -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 </head>
+
 <body>
   <header class="header">
     <div class="logo">
@@ -26,19 +27,7 @@
     </div>
   </header>
   <div class="container">
-    <nav>
-      <div class="side_navbar">
-        <span>Main Menu</span>
-        <a href="#" class="active">Profile</a>
-        <a href="adminProp.html">Rents</a>
-        <a href="adminUnits.html">Units</a>
-        <a href="/admin/viewusers">Users</a>
-        <a href="#">Messages</a>
-        <a href="adminweeklysummary.html">Weekly Summary</a>
-        <a href="#">Top Properties</a>
-
-      </div>
-    </nav>
+    <%- include("../partials/adminnavbar") %>
 
     <div class="main-body">
       <h2>Dashboard</h2>
@@ -66,26 +55,26 @@
               <% if (Users.length> 0){%>
                 <% var count=1; %>
                   <% Users.forEach(Client=>{%>
-                      <% if (Client.type=='client' ){%>
-                        <tr>
-                          <td>
-                            <%=count%>
-                          </td>
-                          <td>
-                            <%=Client.username%>
-                          </td>
-                          <td>
-                            <%=Client.email%>
-                          </td>
-                        </tr>
-                        <% count++;%>
+                    <% if (Client.type=='client' ){%>
+                      <tr>
+                        <td>
+                          <%=count%>
+                        </td>
+                        <td>
+                        <a href="/user/<%=Client.id%>"><%=Client.username%></a>
+                        </td>
+                        <td>
+                          <%=Client.email%>
+                        </td>
+                      </tr>
+                      <% count++;%>
                         <% } else { %>
                           <p>No Users found </p>
                           <% }%>
-                              <% })%>
-              <% } else { %>
-                <p>No Users found </p>
-               <% }%>
+                            <% })%>
+                              <% } else { %>
+                                <p>No Users found </p>
+                                <% }%>
             </tbody>
           </table>
         </div>
