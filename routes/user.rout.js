@@ -39,7 +39,9 @@ router.get('/propirty', (req, res) => {
     console.log(err);
   });
 });
-
+router.get('/distrect',(req,res)=>{
+  res.render('pages/index',{ user: (req.session.user === undefined ? "" : req.session.user)});
+})
 
 router.get('/:id',(req, res) => {
   var query = { "_id": req.params.id };
