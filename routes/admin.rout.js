@@ -47,6 +47,5 @@ router.get('/adding', function (req, res, next) {
 
 
 router.post('/addpropirty', addprop);
-
 router.get('/viewusers', getallusers);
 export default router;

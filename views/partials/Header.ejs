@@ -28,9 +28,18 @@
       <div class="menu-item">
         <a href="/contactus">Contact Us</a>
       </div>
+      <%if(user==""){%>
       <div class="menu-item">
         <a href="/user/register">Register</a>
       </div>
+    <%} else{%>
+      <div class="menu-item">
+        <a href="/user/<%=user.id%>">view profile</a>
+      </div>
+      <div class="menu-item">
+        <a href="/user/logout">logout</a>
+      </div>
+   <% }%>
       <!-- // -->
       <div class="menu-item">
         <%- include("../partials/search") %>
