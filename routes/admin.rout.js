@@ -8,6 +8,7 @@ import {
 } from "../controllers/user.controller.js";
 const router = Router();
 
+//to check if admin 
 router.use((req, res, next) => {
   if (req.session.user !== undefined && req.session.user.Type === 'admin') {
       next();
