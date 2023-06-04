@@ -39,6 +39,9 @@ ul li{
     font-weight: 500;
     line-height: 45px;
     cursor: pointer;
+    background-position: 0 -45px;
+    transition:background-postion 0.5s;
+
 
 }
 .btn1, .btn2{
@@ -64,5 +67,13 @@ ul li{
     width: 24px;
     margin-left: 15px;
     transform: rotate(180deg);
+
+}
+ul li.active{
+    color:#fff;
+    background-image: linear-gradient(red,red);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+
 
 }
