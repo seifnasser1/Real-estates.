@@ -20,6 +20,7 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
   } */
-.searchicon {
-  width: 2cm;
-}
+  .searchicon{
+    width: 25px;
+    height: 25px;
+  }

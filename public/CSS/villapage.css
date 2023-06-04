@@ -146,3 +146,20 @@ table {
     color: #fff;
     padding: 10px;
 }
+.mySlides{
+    height: 650px;
+}
+.btn{
+    background: transparent;
+    border: none;
+    font-size: 88px;
+    outline: none;
+    display: flex;
+    float: right;
+    margin-top: -2%;
+    margin-right: 4%;
+}
+.like{
+    width: 50px;
+    height: 50px;
+}

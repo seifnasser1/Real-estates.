@@ -9,6 +9,11 @@ import mongoose from "mongoose";
 import { createServer } from "http";
 import dotenv from "dotenv";
 
+
+//dotenv is a popular package for loading environment variables from a .env file into a Node.js application.
+// This can be useful for keeping sensitive information (such as API keys) out of version control and easily 
+//configurable on different environments (such as development, staging, and production). 
+
 dotenv.config();
 
 // Get port from environment variable or default to 8000
@@ -62,3 +67,30 @@ function onListening() {
   const { port } = server.address();
   console.log(`Listening on Port ${port}`);
 }
+
+
+////////////server.js////////////////////////////////
+// const io=require('socket.io') (server,{
+//   pingTimeout:60000, //This sets the maximum time (in milliseconds) 
+//                    //that the server will wait for a client to respond to a "ping" message before considering the connection lost. 
+// cors:{
+//   origin:"localhost:3000",
+// },
+// })
+// io.on("connection",(socket)=>{
+//   console.log("connected to socket.io");
+
+//   socket.on('setup',(userData)=>{
+//     socket.join(userData._id);
+//     console.log(userData._id);
+//     socket.emit("connected");
+ 
+//   });
+ 
+//This sets up Cross-Origin Resource Sharing (CORS) options for the Socket.IO server,
+// allowing clients from specific origins to connect to the server.
+//origin:"localhost:3000",
+//This specifies the allowed origin(s) for client requests. In this case, requests from the localhost:3000 origin are allowed.
+
+
+//});

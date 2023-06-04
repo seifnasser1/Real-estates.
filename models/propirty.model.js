@@ -81,6 +81,7 @@ const propirty = new mongoose.Schema(
       trim: true,
       required: true
     },
+    adminid:String,
   },
   { timestamps: true }
 );

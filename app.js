@@ -2,6 +2,7 @@ import express from "express";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
 import logger from "morgan";
+import session from "express-session";
 
 
 import fileUpload from "express-fileupload";
@@ -24,13 +25,14 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 // Middleware
-//monaddd
+////monaddd   .////m
 
 app.use(fileUpload());
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({secret:'any secret'}));
 
 //ROUTES 
 app.use('/', indexRouter);
@@ -47,7 +49,7 @@ app.use(function (err, req, res, next) {
 
 // 404 page
 app.use((req, res) => {
-  res.status(404).render('pages/404');
+  res.status(404).render('pages/404',{ user: (req.session.user === undefined ? "" : req.session.user)});
 });
 
 export default app;
