@@ -25,50 +25,53 @@
 
         </div>
 
-
         
+        <%var start=currentValue*6%>
         <div class="container">
             <% if (Propirty.length> 0) { %>
-                <% Propirty.forEach(prop=> { %>
+                <%var t=0%>
+                <% for(var i=start;i<Propirty.length;i++) { %>
+                    <%if(t<6){%>
             <div class="house">
-                <a href="/user/propirty/<%=prop.id%>" class="imm">
+                <a href="/user/propirty/<%=Propirty[i].id%>" class="imm">
                     <div class="fade"></div>
-                    <img src="/img/<%=prop.Image%>" alt="can't load image">
+                    <img src="/img/<%=Propirty[i].Image%>" alt="can't load image">
                                 <h2 class="price">
-                                    <%=prop.value%> EGP
+                                    <%=Propirty[i].value%> EGP
                                 </h2>
                                 <p class="sale">
-                                    <%=prop.servicetype%>
+                                    <%=Propirty[i].servicetype%>
                                 </p>
                     <div class="forsalebar"></div>
                 </a>
                 <div class="title">
                                 <h3>
-                                    <%=prop.name%>
+                                    <%=Propirty[i].name%>
                                 </h3>
                                 <p class="p"><i class="fa fa-map-marker icon">
-                                        <%=prop.district%>
+                                        <%=Propirty[i].district%>
                                     </i></p>
                 </div>
                 <table class="details ">
                     <tr>
                         <td class="Center">
                             <i class="fa fa-bed"></i>
-                            <%=prop.bedrooms%> Bedrooms
+                            <%=Propirty[i].bedrooms%> Bedrooms
                         </td>
                         <td class="Center">
                             <i class="fa fa-tint"></i>
-                            <%=prop.bathrooms%> Baths
+                            <%=Propirty[i].bathrooms%> Baths
                         </td>
                         <td class="Center">
                             <i class="fa fa-expand"></i>
-                            <%=prop.area%>m
+                            <%=Propirty[i].area%>m
                             <sup>2</sup>
                         </td>
                     </tr>
                 </table>
             </div>
-            <% }) %>
+            <% t++ }%>
+            <% } %>
             <% } else { %>
                 <p>There are no properties to display...</p>
                 <% } %>
@@ -80,23 +83,25 @@
     pagination
 -->
 <div class="pagination">
-     <button class =btn1 onclick="backBtn()"> <img src="/img/arrowofpagination.png"> prev</button>
+     <button class ="btn1" onclick="backBtn()"> <img src="/img/arrowofpagination.png"> prev</button>
     <ul>
-        <li class="link active" value="1" onclick="activeLink()">1</li>
+        <%for(var i=0;i<count;i++){%>
+            <li class="link " value="<%=i%>" onclick="activeLink()"><%=i+1%></li>
+        <%}%>
+        <!--<li class="link active" value="1" onclick="activeLink()">1</li>
         <li class="link" value="2" onclick="activeLink()">2</li>
         <li class="link" value="3" onclick="activeLink()">3</li>
         <li class="link" value="4" onclick="activeLink()">4</li>
         <li class="link" value="5" onclick="activeLink()">5</li>
-        <li class="link" value="6" onclick="activeLink()">6</li>
+        <li class="link" value="6" onclick="activeLink()">6</li>-->
     </ul>
-    <button class =btn2 onclick="nextBtn()"> <img src="/img/arrowofpagination.png" >next</button>
+    <button class ="btn2" onclick="nextBtn()"> <img src="/img/arrowofpagination.png" >next</button>
 
 
 
 </div>
 <script>
     let link=document.getElementsByClassName("link");
-    let currentValue=l;
     function activeLink(){
         for(l of link){
             l.classList.remove("active");
@@ -104,8 +109,10 @@
         }
         event.target.classList.add("active");
         currentValue=event.target.value; 
+        consloe.log(currentValue);
     }
      function backBtn(){
+        console.log(currentValue);
         if(currentValue>1){
             for(l of link){
                 l.classList.remove("active");
@@ -113,11 +120,12 @@
             currentValue--; 
             link[currentValue-1].classList.add("active");
         }
-    
+       
      }
     
      function nextBtn(){
-        if(currentValue<6){
+        console.log(currentValue);
+        if(currentValue<count-1){
             for(l of link){
                 l.classList.remove("active");
             }  

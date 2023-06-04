@@ -35,7 +35,9 @@ router.get('/register', (req, res) => {
 router.get('/propirty', (req, res) => {
   Propirty.find()
   .then(result => {
-    res.render('pages/All', { Propirty: result,  user: (req.session.user === undefined ? "" : req.session.user)});
+    var c=(parseInt(result.length/6))+(result.length%6);
+    var h=0;
+    res.render('pages/All', { Propirty: result,count:c,currentValue:h,  user: (req.session.user === undefined ? "" : req.session.user)});
   })
   .catch(err => {
     console.log(err);
