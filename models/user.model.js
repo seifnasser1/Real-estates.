@@ -33,26 +33,26 @@ const user = new mongoose.Schema(
   { timestamps: true }
 );
 
-user.pre("save", function (next) {
-  const user = this;
+// user.pre("save", function (next) {
+//   const user = this;
 
-  // Only hash the password if it has been modified (or is new)
-  if (!user.isModified('password')) return next();
+//   // Only hash the password if it has been modified (or is new)
+//   if (!user.isModified('password')) return next();
 
-  // Generate a salt
-  bcrypt.genSalt(SALT_WORK_FACTOR, function (err, salt) {
-    if (err) return next(err);
+//   // Generate a salt
+//   bcrypt.genSalt(SALT_WORK_FACTOR, function (err, salt) {
+//     if (err) return next(err);
 
-    // Hash the password using the generated salt
-    bcrypt.hash(user.password, salt, function (err, hash) {
-      if (err) return next(err);
+//     // Hash the password using the generated salt
+//     bcrypt.hash(user.password, salt, function (err, hash) {
+//       if (err) return next(err);
 
-      // Override the cleartext password with the hashed one
-      user.password = hash;
-      next();
-    });
-  });
-});
+//       // Override the cleartext password with the hashed one
+//       user.password = hash;
+//       next();
+//     });
+//   });
+// });
 
 
 // cb: This is a callback function that will be invoked with the comparison result. 

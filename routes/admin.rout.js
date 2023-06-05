@@ -9,14 +9,14 @@ import {
 const router = Router();
 
 //to check if admin 
-router.use((req, res, next) => {
-  if (req.session.user !== undefined && req.session.user.Type === 'admin') {
-      next();
-  }
-  else {
-      res.render('pages/err', { err: 'You are not an Admin',user: (req.session.user === undefined ? "" : req.session.user) })
-  }
-});
+// router.use((req, res, next) => {
+//   if (req.session.user !== undefined && req.session.user.Type === 'admin') {
+//       next();
+//   }
+//   else {
+//       res.render('pages/err', { err: 'You are not an Admin',user: (req.session.user === undefined ? "" : req.session.user) })
+//   }
+// });
 
 /* GET home page. */
 router.get ('/', getalluser);
@@ -40,6 +40,13 @@ router.get('/viewusers', function (req, res, next) {
   })
 });
 
+router.get('/chats', function (req, res, next) {
+  User.find().then(result => {
+    console.log(result);
+    res.render('pages/adminChat', { Users: result,user: (req.session.user === undefined ? "" : req.session.user) });
+  })
+});
+
 router.get('/adding', function (req, res, next) {
   console.log('index.js: GET /');
   res.render('pages/addpropirty',{user: (req.session.user === undefined ? "" : req.session.user)});
@@ -47,6 +54,5 @@ router.get('/adding', function (req, res, next) {
 
 
 router.post('/addpropirty', addprop);
-
 router.get('/viewusers', getallusers);
 export default router;

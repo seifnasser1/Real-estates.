@@ -4,10 +4,11 @@ import User from '../models/user.model.js';
 import {
  sendMes
 } from "../controllers/chat.controller.js";
+
 import {
   signup,
   validation,
-  logvalidation,
+  //logvalidation,
   login,
 } from "../controllers/user.controller.js";
 import {
@@ -58,9 +59,13 @@ router.get('/:id',(req, res) => {
       console.log(err);
     });
 });
+router.get('/logout',(req,res)=>{
+  req.session.destroy();
+  res.redirect('/');
+})
 router.post('/search', Search);
 router.post('/signup-action', validation, signup);
-router.post('/login-action',logvalidation, login);
+router.post('/login-action', login);
 router.post('/send-message',sendMes);
 router.post('/addtowishlist',addwishlist);
 router.get('/search',navsearch);

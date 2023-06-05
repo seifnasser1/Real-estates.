@@ -45,9 +45,12 @@ const signup = async (req, res) => {
     const existingUser = await User.findOne({ username: req.body.username });
     const existingemail = await User.findOne({ email: req.body.email });
 
-    if (existingUser) {
+    if (existingemail) {
       console.log("Email already exists");
       res.send("Email already exists");
+    }else if(existingUser){
+      console.log("username already exists");
+      res.send("username already exists");
     } else {
       const newUser = new User({
         username: req.body.username,
@@ -72,21 +75,37 @@ const signup = async (req, res) => {
   }
 };
 
-const logvalidation = [
-  body("logusername").notEmpty().withMessage("Username is required"),
-  body("logpassword").notEmpty().withMessage("password is required"),
+// const logvalidation = [
+//  body("logusername").notEmpty().withMessage("Username is required"),
+//   body("logpassword").notEmpty().withMessage("password is required"),
 
-];
+// ];
 const login = async (req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    res.render("pages/register", {
-      title: "Signup page - Validation Failed",
-      errors: errors.array(),
-    });
-    return;
+  // const errors = validationResult(req);
+  // if (!errors.isEmpty()) {
+  //   res.render("pages/register", {
+  //     title: "Signup page - Validation Failed",
+  //     errors: errors.array(),
+  //   });
+  //   return;
+  // }
+  const existinguser = await User.findOne({ username: req.body.logusername });
+  if(existinguser){
+    const hashePassword =await bcrypt.hash(req.body.logpassword, saltRounds);
+    console.log(existinguser.password)
+    console.log(hashePassword)
+    if(hashePassword){
+      req.session.user=existinguser;
+      console.log("User loged in successfully");
+      res.redirect('/');
+    }else{
+      console.log("password is not correct");
+      res.send("password is not correct");
+    }
+  }else{
+    console.log("username does not exists");
+     res.send("username does not exists");
   }
-
 
 };
 const getalluser = async (req, res, next) => {
@@ -113,7 +132,7 @@ const getallusers = async (req, res, next) => {
 export {
   signup,
   validation,
-  logvalidation,
+  //logvalidation,
   login,
   getalluser,
   getallusers,
