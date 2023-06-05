@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <%console.log(User)%>
+    <%- include("../partials/localization") %>
         <div class="member-container">
             <a href="/"><div class="arr back"><div></div></div></a>
             <img src="/img/<%=User.photo%>" alt="photo">
@@ -20,36 +20,50 @@
         </div>
         <h2 class="m">Wish List</h2>
         <div class="favorite">
-            <div class="house">
-                <a href="#" class="imm">
-                    <div class="fade"></div>
-                    <img src="img/villa-for-sale-taj-city-new-cairo-1675172044_2.webp" alt="can't load image">
-                    <h2 class="price">27,000,000 EGP</h2>
-                    <p class="sale">For Sale</p>
-                    <div class="bar"></div>
-                </a>
-                <div class="title">
-                    <h3>Villa For Sale - Taj city New Cairo</h3>
-                    <p class="p"><i class="fa fa-map-marker icon"> Taj City</i></p>
-                </div>
-                <table class="details ">
-                    <tr>
-                        <td class="Center">
-                            <i class="fa fa-bed"></i>
-                            4 Bedrooms
-                        </td>
-                        <td class="Center">
-                            <i class="fa fa-tint"></i>
-                            4 Baths
-                        </td>
-                        <td class="Center">
-                            <i class="fa fa-expand"></i>
-                            550m
-                            <sup>2</sup>
-                        </td>
-                    </tr>
-                </table>
-            </div>
+            <% if(wish >0){%>
+                <% wish.forEach(w=>{%>
+                    <div class="house">
+                        <a href="/user/propirty/<%=w.id%>" class="imm">
+                            <div class="fade"></div>
+                            <img src="/img/<%=w.Image%>" alt="can't load image">
+                                        <h2 class="price">
+                                            <%=w.value%> EGP
+                                        </h2>
+                                        <p class="sale">
+                                            <%=w.servicetype%>
+                                        </p>
+                            <div class="forsalebar"></div>
+                        </a>
+                        <div class="title">
+                                        <h3>
+                                            <%=w.name%>
+                                        </h3>
+                                        <p class="p"><i class="fa fa-map-marker icon">
+                                                <%=w.district%>
+                                            </i></p>
+                        </div>
+                        <table class="details ">
+                            <tr>
+                                <td class="Center">
+                                    <i class="fa fa-bed"></i>
+                                    <%=w.bedrooms%> Bedrooms
+                                </td>
+                                <td class="Center">
+                                    <i class="fa fa-tint"></i>
+                                    <%=w.bathrooms%> Baths
+                                </td>
+                                <td class="Center">
+                                    <i class="fa fa-expand"></i>
+                                    <%=w.area%>m
+                                    <sup>2</sup>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+            <%})%>
+            <%} else{%>
+                <p>you have nothing in the wishlist</p>
+                <%}%>
         </div>
 </body>
 

@@ -8,7 +8,7 @@ const propirty = new mongoose.Schema(
       required: true,
     },
     mobilenumber: {
-      type: Number,
+      type: String,
       required: true,
     },
     mobilenumber2: {
@@ -37,32 +37,32 @@ const propirty = new mongoose.Schema(
       required: true,
     },
     garages: {
-      type: Number,
+      type: String,
       trim: true,
       required: true,
     },
     area: {
-      type: Number,
+      type: String,
       trim: true,
       required: true,
     },
     value: {
-      type: Number,
+      type: String,
       trim: true,
       required: true,
     },
     unumber: {
-      type: Number,
+      type: String,
       trim: true,
       required: true,
     },
     bathrooms: {
-      type: Number,
+      type: String,
       trim: true,
       required: true,
     },
     bedrooms: {
-      type: Number,
+      type: String,
       trim: true,
       required: true,
     },

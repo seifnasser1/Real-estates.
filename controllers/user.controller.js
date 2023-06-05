@@ -1,6 +1,6 @@
 import User from '../models/user.model.js';
 import { body, validationResult } from "express-validator";
-import bcrypt from "bcrypt";
+import bcrypt from "bcrypt"; //importing bcrypt package 
 
 // matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/):
 // At least one lowercase letter ((?=.*[a-z])).
@@ -39,9 +39,8 @@ const signup = async (req, res) => {
     });
     return;
   }
-
   try {
-    const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
+    const hashedPassword = await bcrypt.hash(req.body.password,saltRounds);
     const existingUser = await User.findOne({ username: req.body.username });
     const existingemail = await User.findOne({ email: req.body.email });
 

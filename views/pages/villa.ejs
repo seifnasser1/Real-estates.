@@ -3,6 +3,7 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,8 +32,8 @@
 <body>
     
     <%- include("../partials/header") %>
+    <%- include("../partials/localization") %>
         <div class="container1">
-            <% console.log(Propirty); %>
                 <div class="title">
                     <div class="name">
                         <h1>
@@ -93,8 +94,12 @@
                     <img class="mySlides" src="/img/<%= Propirty.Image %>" style="width:100%">
                 </div>
         </div>
-        <form method="post" action="/user/addtowishlist">
+        <form method="post" action="/user/addtowishlist/<%=Propirty.id%>">
+            <% if(v==1){%>
             <button id="like" class="btn"><img class="like" src="/img/emptyheart.png"></button>
+            <%} else {%>
+                <button id="like" class="btn"><img class="like" src="/img/fullheart.jpg"></button>
+                <%}%>
         </form>
         <div class="container1">
             <h3 class="description">Unit Description</h3>

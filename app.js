@@ -12,6 +12,8 @@ import cookieParser from "cookie-parser";
 import indexRouter from "./routes/index.rout.js";
 import userrouter from "./routes/user.rout.js";
 import adminrouter from "./routes/admin.rout.js";
+import registerRouter from "./routes/register.rout.js";
+
 
 
 // Read the current directory name
@@ -39,7 +41,7 @@ app.use('/', indexRouter);
 app.use('/user', userrouter);
 app.use('/admin', adminrouter);
 
-// ERROR HANDLING
+// Error Handling
 app.use(function (err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -51,7 +53,7 @@ app.use(function (err, req, res, next) {
 app.use((req, res) => {
   res.status(404).render('pages/404',{ user: (req.session.user === undefined ? "" : req.session.user)});
 });
-
+app.use('/register', registerRouter);
 export default app;
 
 //const MongoClient = require('mongodb').MongoClient;

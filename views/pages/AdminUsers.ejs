@@ -10,6 +10,7 @@
 </head>
 
 <body>
+  <%- include("../partials/localization") %>
   <header class="header">
     <div class="logo">
       <a href="#">The Company</a>
@@ -39,7 +40,9 @@
         <div class="list1">
           <div class="row">
             <h4>Users</h4>
-            <button href="#">Add Users</button>
+            <div class="row">
+              <a href="/register">Add Users</a>
+            </div>
           </div>
           <table>
             <thead>
@@ -71,7 +74,11 @@
                         </td>
                         <td><a href="/user/edituser/<%=Client.id%>"><button>Edit User</button></a></td>
                                   <td><a href="/admin/deleteuser/<%=Client.id%>"><button>Delete User</button></a></td>
-                                  <td><a href="/admin/makeadmin/<%=Client.id%>"><button>Yes admin</button></a></td>
+                                  <td>
+                                    <form action="/admin/makeadmin/<%=Client.id%>" method="POST">
+                                      <button type="submit">Make Admin</button>
+                                    </form>
+                                  </td>                                                                    
                                   </tr>
                       <% count++;%>
                         <% } else { %>
