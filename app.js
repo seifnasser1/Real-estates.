@@ -53,3 +53,28 @@ app.use((req, res) => {
 });
 
 export default app;
+
+//const MongoClient = require('mongodb').MongoClient;
+
+// Replace <username>, <password>, and <clustername> with your own credentials
+// const uri = `mongodb+srv://<username>:<password>@<clustername>.mongodb.net/test?retryWrites=true&w=majority`;
+
+// const client = new MongoClient(uri, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+//   serverSelectionTimeoutMS: 5000 // Increase the timeout value (in milliseconds)
+// });
+
+// async function connect() {
+//   try {
+//     await client.connect();
+//     console.log('Connected to MongoDB!');
+//   } catch (err) {
+//     console.error(err);
+//   }
+// }
+
+// module.exports = { 
+//   connect: connect,
+//   client: client
+// }; 
