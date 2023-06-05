@@ -12,7 +12,6 @@ import cookieParser from "cookie-parser";
 import indexRouter from "./routes/index.rout.js";
 import userrouter from "./routes/user.rout.js";
 import adminrouter from "./routes/admin.rout.js";
-import registerRouter from "./routes/register.rout.js";
 
 
 
@@ -53,7 +52,6 @@ app.use(function (err, req, res, next) {
 app.use((req, res) => {
   res.status(404).render('pages/404',{ user: (req.session.user === undefined ? "" : req.session.user)});
 });
-app.use('/register', registerRouter);
 export default app;
 
 //const MongoClient = require('mongodb').MongoClient;
