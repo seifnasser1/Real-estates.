@@ -29,14 +29,17 @@ message.save()
   console.log(err1);
 });
    };
-   //2adima
+   //2adima displaying chat
  const messages= async (req,res,next)=>{
   const query={"_id":req.params.id}
   Propirty.findOne(query).then(res=>{
-  const query1={"sender":req.session._id,"receiver":res.adminid};
-  const query2={"sender":res.adminid,"receiver":req.session._id};
-  const sendedmes= Message.find(query1);
-  const receivmes= Message.find(query2);
+    console.log(req.session.user._id)
+    console.log(res.adminid)
+  const query1={"sender":req.session.user._id,"receiver":res.adminid};
+  /////const query2={"sender":res.adminid,"receiver":req.session.user._id};
+  ////const sendedmes= 
+  Message.findOne(query1).then(res=>{console.log(res)});
+  //////const receivmes= Message.find(query2);
 });
  }
    export { 

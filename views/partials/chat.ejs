@@ -13,7 +13,7 @@
 
 <body>
     <!-- Button that triggers the chat box -->
-    <button class="chat-circle" onclick="openForm()">Chat</button>
+    <button href="user/getMessages/" class="chat-circle" onclick="openForm()">Chat</button>
 
     <!-- Chat box element (hidden by default) -->
     <div class="chat" id="myForm" style="display:none;">
@@ -26,7 +26,9 @@
                     <!-- <p class="messagez">hello</p>
                     <p id="gh" class="messagez user_message">Hi</p> -->
                     <!-- <p id="gh" class="messagez user_message" type="input"></p> -->
-
+                    <% for(var i=0;i<Messages.length;i++) { %>
+                    <p class="messagez user_message">  <%= Messages[i].conte nt %></p>
+                    <% } %>
                 </div>
             </div>
             <div class="footerz">

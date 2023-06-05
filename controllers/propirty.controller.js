@@ -2,8 +2,10 @@ import Propirty from '../models/propirty.model.js';
 import __dirname from '../app.js'
 import wishlist from '../models/wishlist.model.js';
 import User from '../models/user.model.js';
+import Message from '../models/message.model.js';
 import fileUpload from "express-fileupload";
 import { login } from './user.controller.js';
+import { messages } from './chat.controller.js';
 
 const profilewishlist= (req, res,next) => {
   var query = { "_id": req.params.id };
@@ -53,7 +55,15 @@ const viewproperty= async (req, res,next) => {
   Propirty.find(query)
     .then(result => { 
       console.log(value);
-      res.render('pages/villa', { Propirty: result[0],v:value ,user: (req.session.user === undefined ? "" : req.session.user)});
+     
+      var villa = result[0];
+      const query1={"sender":req.session.user._id,"receiver":result[0].adminid};
+      Message.find(query1).then(result=>{
+        console.log(res)
+      res.render('pages/villa', { Propirty: villa,Messages:result,v:value ,user: (req.session.user === undefined ? "" : req.session.user)});
+      console.log("hi")
+    });
+      
     })
     .catch(err => {
       console.log(err);

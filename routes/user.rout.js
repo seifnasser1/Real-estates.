@@ -27,6 +27,7 @@ router.get('/register', (req, res) => {
 })
 router.get('/propirty', (req, res) => {
   Propirty.find()
+
   .then(result => {
     var c=(parseInt(result.length/6))+(result.length%6);
     var h=0;
@@ -51,7 +52,8 @@ router.post('/addtowishlist/:id',addwishlist);
 router.get('/search',navsearch);
 router.post('/checkUN',checkUN);
 router.post('/checkEmail', checkEmail);
-router.get('/propirty/:id',messages,viewproperty);
+//router.get('/propirty/:id',messages,viewproperty);
+router.get('/getMessages',messages);
 router.get('/propirty/:id',viewproperty);
 router.get('/:id',profilewishlist);
 
