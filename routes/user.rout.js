@@ -10,11 +10,16 @@ import {
   validation,
   //logvalidation,
   login,
+  checkUN,
+  checkEmail,
 } from "../controllers/user.controller.js";
 import {
   Search,
   addwishlist,
   navsearch,
+  
+
+
 } from "../controllers/propirty.controller.js";
 const router = Router();
 
@@ -69,4 +74,6 @@ router.post('/login-action', login);
 router.post('/send-message',sendMes);
 router.post('/addtowishlist',addwishlist);
 router.get('/search',navsearch);
+router.post('/checkUN',checkUN);
+router.post('/checkEmail', checkEmail);
 export default router;

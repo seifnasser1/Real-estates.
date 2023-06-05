@@ -128,7 +128,37 @@ const getallusers = async (req, res, next) => {
   });
 
 }
-
+//ajax
+const checkUN = (req, res) => {
+  var query = { username: req.body.username };
+  User.find(query)
+      .then(result => {
+          if (result.length > 0) {
+              res.send('taken');
+          }
+          else {
+              res.send('available');
+          }
+      })
+      .catch(err => {
+          console.log(err);
+      });
+};
+const checkEmail = (req, res) => {
+  var query = { email: req.body.email };
+  User.find(query)
+      .then(result => {
+          if (result.length > 0) {
+              res.send('taken');
+          }
+          else {
+              res.send('available');
+          }
+      })
+      .catch(err => {
+          console.log(err);
+      });
+};
 export {
   signup,
   validation,
@@ -136,4 +166,7 @@ export {
   login,
   getalluser,
   getallusers,
+  checkUN,
+  checkEmail
+
 };
