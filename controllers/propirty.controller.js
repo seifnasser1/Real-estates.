@@ -115,37 +115,116 @@ const addprop = async (req, res, next) => {
   });
 
 };
+const Search = async (req, res, next) => {
+  console.log(req.body);
+  const { Status, Type, Area, Price, Bedrooms, Bathrooms, Parks } = req.body;
+  // price
+
+  const query = {};
+
+  if (Status) query.servicetype = Status;
+  if (Type) query.unittype = Type;
+  if (Area) query.area = Area;
+  if (Price) {
+    const price = parseInt(Price);
+    if (price === 1)
+    query.value = {
+      $gte: 1000000,
+    };
+  else if (price === 2)
+    query.value = {
+      $gte: 500000,
+      $lt: 1000000,
+    };
+  else
+    query.value = {
+      $lt: 500000,
+    };
+  }
+  if (Bedrooms) {
+    const bedrooms = parseInt(Bedrooms);
+    if (bedrooms === 1) query.bedrooms = 1;
+    else query.bedrooms = { $gte: 2 };
+  }
+  if (Bathrooms) {
+    const bathrooms = parseInt(Bathrooms);
+    if (bathrooms === 1) query.bathrooms = 1;
+    else query.bathrooms = { $gte: 2 };
+  }
+  if (Parks) {
+    const parks = parseInt(Parks);
+    if (parks === 1) query.parks = 1;
+    else query.parks = { $gte: 2 };
+  }
+
+  Propirty.find(query)
+    .then((result) => {
+      console.log(result);
+      res.render("pages/All", {
+        propirty: result,
+        user: req.session.user === undefined ? "" : req.session.user,
+      });
+    })
+    .catch((err) => console.log(err));
+};
 
 //navsearch
-const navsearch = async(req,res,next)=>{
-  const{searchtext}=req.query.searchtext;
-  const query ={$or :[{"type":{$regex:searchtext}},{"name":{$regex:searchtext}},{"servicetype":{$regex:searchtext}},{"unittype":{$regex:searchtext}},{"district":{$regex:searchtext}},{"garages":{$regex:searchtext}},{"area":{$regex:searchtext}},{"value":{$regex:searchtext}},{"unumber":{$regex:searchtext}},{"bathrooms":{$regex:searchtext}},{"bedrooms":{$regex:searchtext}},{"furniture":{$regex:searchtext}},{"details":{$regex:searchtext}}]};
-  Propirty.find(query).then(result =>{
-    res.render('pages/All',{Propirty:result,user: (req.session.user === undefined ? "" : req.session.user)});
-  }).catch(err => (console.log(err)));
-
-}
-const addwishlist= async (req, res, next) => {
-  const exsistingwishlist=await wishlist.findOne({"userid":req.session.user._id,"propertyid":req.params.id});
-  if(exsistingwishlist){
-    console.log(exsistingwishlist.id);
-    wishlist.findByIdAndDelete(exsistingwishlist.id).then(result=>{
-          res.redirect('/');
-    }).catch(err => {
-      console.log(err);
-    });
-  }
-  else{
-    const wish = new wishlist({
-      userid:req.session.user._id,
-      propertyid:req.params.id,
+const navsearch = async (req, res, next) => {
+  const { searchtext } = req.query;
+  console.log(searchtext);
+  const regex = new RegExp(`.*${(searchtext || "").toLowerCase()}.*`, "ig");
+  console.log(regex);
+  const query = {
+    $or: [
+      { type: regex },
+      { name: regex },
+      { servicetype: regex },
+      { unittype: regex },
+      { district: regex },
+      { area: regex },
+      { furniture: regex },
+      { details: regex },
+    ],
+  };
+  Propirty.find(query)
+    .then((result) => {
+      console.log("HELLo");
+      res.render("pages/All", {
+        propirty: result,
+        user: req.session.user === undefined ? "" : req.session.user,
+      });
     })
-    wish.save().then(result=>{
-      res.redirect('/');
-    }).catch(err => (console.log(err)));
+    .catch((err) => console.log(err));
+};
+
+const addwishlist = async (req, res, next) => {
+  const exsistingwishlist = await wishlist.findOne({
+    username: req.session.user.id,
+    property: req.body.Propirty,
+  });
+  var found;
+  if (exsistingwishlist) {
+    wishlist.findByIdAndDelete(exsistingwishlist._id);
+    res.redirect("/", {
+      user: req.session.user === undefined ? "" : req.session.user,
+    });
+  } else {
+    const wish = new wishlist({
+      username: req.session.user.id,
+      property: req.body.Propirty,
+    });
+    console.log(wish);
+    wish.save().then((result) => {
+      res.redirect("/", { user: req.session.user === undefined ? "" : req.session.user });
+      })
+      .catch((err) => console.log(err));
   }
 }
-
+const viewprop= async (req,res,next)=>{
+  Propirty.find().then(result=>{
+    res.render('pages/adminUnits',{properties:result,user: (req.session.user === undefined ? "" : req.session.user)})
+  })
+}
 
 export {
   addprop,
@@ -153,4 +232,5 @@ export {
   navsearch,
   viewproperty,
   profilewishlist,
+  viewprop,
 };

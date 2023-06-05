@@ -2,7 +2,7 @@ import { Router } from 'express';
 import User from '../models/user.model.js';
 import { addprop } from "../controllers/propirty.controller.js";
 import { getalluser, getallusers, makeAdmin } from "../controllers/user.controller.js";
-
+import { viewprop } from "../controllers/propirty.controller.js";
 const router = Router();
 
 // router.use((req, res, next) => {
@@ -69,9 +69,11 @@ router.get('/chats', function (req, res, next) {
 router.get('/register', (req, res) => {
   res.redirect('/register');
 });
-
+router.get('/Top',(req,res)=>{
+  res.render('pages/TopProperties', { user: (req.session.user === undefined ? "" : req.session.user) });
+})
 router.post('/addpropirty', addprop);
-
+router.get('/prop',viewprop);
 router.get('/viewusers', getallusers);
 
 export default router;

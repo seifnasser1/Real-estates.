@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Admin Dashboard</title>
-  <link rel="stylesheet" href="CSS/styleAdmin.css" />
+  <link rel="stylesheet" href="/CSS/styleAdmin.css" />
   <link rel="stylesheet" href="/CSS/properties.css">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
@@ -29,18 +29,8 @@
     </div>
   </header>
   <div class="container">
-    <nav>
-      <div class="side_navbar">
-        <span>Main Menu</span>
-        <a href="/admin/header" class="active">Home</a>
-        <a href="/admin/rents">Rents</a>
-        <a href="/admin/adding">Units</a>
-        <a href="/admin/viewusers">Users</a>
-        <a href="/admin/adminweeklysummary">Weekly Summary</a>
-        <a href="#">Top Properties</a>
-        <a href="/admin/chats">Chats</a>
-      </div>
-    </nav>
+    <%- include("../partials/localization") %>
+    <%- include("../partials/adminnavbar") %>
     <div class="main-body">
 
       <h2>Top Properties</h2>
@@ -52,9 +42,9 @@
           <table>
             <div class="container">
               <div class="house">
-                <a href="/user/propirty/<%=Propirty[i].id%>" class="imm">
+                <a href="/user/propirty/<%=//Propirty[i].id%>" class="imm">
                   <div class="fade"></div>
-                  <img src="img/madinty.jpg" alt="can't load image">
+                  <img src="/img/madinty.jpg" alt="can't load image">
                   <center>
                     <h2 class="price">
                       Villa
