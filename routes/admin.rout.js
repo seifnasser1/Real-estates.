@@ -52,7 +52,7 @@ router.get('/adding', function (req, res, next) {
   res.render('pages/addpropirty',{user: (req.session.user === undefined ? "" : req.session.user)});
 });
 router.get('/register', (req, res) => {
-  res.render('register', { user: (req.session.user === undefined ? "" : req.session.user) });
+  res.redirect('/register');
 });
 
 
