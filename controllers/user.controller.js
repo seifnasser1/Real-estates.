@@ -39,9 +39,8 @@ const signup = async (req, res) => {
     });
     return;
   }
-
   try {
-    const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
+    const hashedPassword = await bcrypt.hash(req.body.password,saltRounds);
     const existingUser = await User.findOne({ username: req.body.username });
     const existingemail = await User.findOne({ email: req.body.email });
 
