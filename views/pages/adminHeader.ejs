@@ -11,159 +11,158 @@
 
 <body>
   <%- include("../partials/localization") %>
-  <header class="header">
-    <div class="logo">
-      <a href="#">The Company</a>
-      <div class="search_box">
-        <input type="text" placeholder="Search">
-        <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
-      </div>
-    </div>
-
-    <div class="header-icons">
-      <div class="account">
-        <!-- <img src="./mostafa.jpg" alt=" image "> -->
-        <h4>Admin</h4>
-      </div>
-    </div>
-  </header>
-  <div class="container">
-    <%- include("../partials/adminnavbar") %>
-
-    <div class="main-body">
-      <h2>Dashboard</h2>
-      <div class="promo_card">
-        <h1>Welcome Seif Nasser </h1>
-        <span>This is the Admin Dashboard</span>
-        <!-- <button>Learn More</button> -->
+    <header class="header">
+      <div class="logo">
+        <a href="#">The Company</a>
+        <div class="search_box">
+          <input type="text" placeholder="Search">
+          <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
+        </div>
       </div>
 
-      <div class="history_lists">
-        <div class="list1">
-          <div class="row">
-            <h4>Users</h4>
-            <a href="adminUsers.ejs">See all</a>
+      <div class="header-icons">
+        <div class="account">
+          <!-- <img src="./mostafa.jpg" alt=" image "> -->
+          <h4>Admin</h4>
+        </div>
+      </div>
+    </header>
+    <div class="container">
+      <%- include("../partials/adminnavbar") %>
+
+        <div class="main-body">
+          <h2>Dashboard</h2>
+          <div class="promo_card">
+            <h1>Welcome Seif Nasser </h1>
+            <span>This is the Admin Dashboard</span>
+            <!-- <button>Learn More</button> -->
           </div>
-          <table>
-            <thead>
-              <tr>
-                <th>#User No.</th>
-                <th>UserName</th>
-                <th>Email</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% if (Users.length> 0){%>
-                <% var count=1; %>
-                  <% Users.forEach(Client=>{%>
-                    <% if (Client.type=='client' ){%>
-                      <tr>
-                        <td>
-                          <%=count%>
-                        </td>
-                        <td>
-                        <a href="/user/<%=Client.id%>"><%=Client.username%></a>
-                        </td>
-                        <td>
-                          <%=Client.email%>
-                        </td>
-                      </tr>
-                      <% count++;%>
-                        <% } else { %>
-                          <p>No Users found </p>
-                          <% }%>
-                            <% })%>
-                              <% } else { %>
-                                <p>No Users found </p>
-                                <% }%>
-            </tbody>
-          </table>
-        </div>
 
-        <div class="list2">
-          <div class="row">
-            <h4>Admin</h4>
-            <a href="AdminUsers.ejs">See all</a>
+          <div class="history_lists">
+            <div class="list1">
+              <div class="row">
+                <h4>Users</h4>
+                <a href="/admin/viewusers">See all</a>
+              </div>
+              <table>
+                <thead>
+                  <tr>
+                    <th>#User No.</th>
+                    <th>UserName</th>
+                    <th>Email</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% if (Users.length> 0){%>
+                    <% var count=1; %>
+                      <% Users.forEach(Client=>{%>
+                        <% if (Client.type=='client' ){%>
+                          <tr>
+                            <td>
+                              <%=count%>
+                            </td>
+                            <td>
+                              <a href="/user/<%=Client.id%>">
+                                <%=Client.username%>
+                              </a>
+                            </td>
+                            <td>
+                              <%=Client.email%>
+                            </td>
+                          </tr>
+                          <% count++;%>
+                            <% } %>
+                                <% })%>
+                                  <% } else { %>
+                                    <p>No Users found </p>
+                                    <% }%>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="list2">
+              <div class="row">
+                <h4>Admin</h4>
+                <a href="/admin/viewadmins">See all</a>
+              </div>
+              <table>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% if (Users.length> 0){%>
+                    <% var count=1; %>
+                      <% Users.forEach(Client=>{%>
+                        <% if (Client.type=='admin' ){%>
+                          <tr>
+                            <td>
+                              <%=count%>
+                            </td>
+                            <td>
+                              <a href="/user/<%=Client.id%>">
+                                <%=Client.username%>
+                              </a>
+                            </td>
+                            <td>
+                              <%=Client.email%>
+                            </td>
+                          </tr>
+                          <% count++;%>
+                            <% } %>
+                                <% })%>
+                                  <% } else { %>
+                                    <p>No admins found </p>
+                                    <% }%>
+                </tbody>
+              </table>
+            </div>
           </div>
-          <table>
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Username</th>
-                <th>Email</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% if (Users.length> 0){%>
-                <% var count=1; %>
-                  <% Users.forEach(Client=>{%>
-                    <% if (Client.type=='client' ){%>
-                      <tr>
-                        <td>
-                          <%=count%>
-                        </td>
-                        <td>
-                        <a href="/user/<%=Client.id%>"><%=Client.username%></a>
-                        </td>
-                        <td>
-                          <%=Client.email%>
-                        </td>
-                      </tr>
-                      <% count++;%>
-                        <% } else { %>
-                          <p>No Users found </p>
-                          <% }%>
-                            <% })%>
-                              <% } else { %>
-                                <p>No Users found </p>
-                                <% }%>
-            </tbody>
-            </tbody>
-          </table>
         </div>
-      </div>
+
+        <div class="sidebar">
+          <h4>Top Sales</h4>
+
+          <div class="balance">
+            <div class="info">
+              <h5>Villa Zayed</h5>
+              <span></i>30,000.00 EGP</span>
+            </div>
+          </div>
+
+          <div class="balance">
+            <div class="info">
+              <h5>Villa New Cairo</h5>
+              <span></i>25,000.00 EGP</span>
+            </div>
+          </div>
+
+          <div class="balance">
+            <div class="info">
+              <h5>Villa New Cairo</h5>
+              <span></i>20,000.00 EGP</span>
+            </div>
+          </div>
+
+          <div class="balance">
+            <div class="info">
+              <h5>Villa October</h5>
+              <span></i>18,000.00</span>
+            </div>
+          </div>
+
+          <div class="balance">
+            <div class="info">
+              <h5>Villa New Cairo</h5>
+              <span></i>15,000.00 EGP </span>
+            </div>
+          </div>
+
+        </div>
     </div>
-
-    <div class="sidebar">
-      <h4>Top Sales</h4>
-
-      <div class="balance">
-        <div class="info">
-          <h5>Villa Zayed</h5>
-          <span></i>30,000.00 EGP</span>
-        </div>
-      </div>
-
-      <div class="balance">
-        <div class="info">
-          <h5>Villa New Cairo</h5>
-          <span></i>25,000.00 EGP</span>
-        </div>
-      </div>
-
-      <div class="balance">
-        <div class="info">
-          <h5>Villa New Cairo</h5>
-          <span></i>20,000.00 EGP</span>
-        </div>
-      </div>
-
-      <div class="balance">
-        <div class="info">
-          <h5>Villa October</h5>
-          <span></i>18,000.00</span>
-        </div>
-      </div>
-
-      <div class="balance">
-        <div class="info">
-          <h5>Villa New Cairo</h5>
-          <span></i>15,000.00 EGP </span>
-        </div>
-      </div>
-
-    </div>
-  </div>
 </body>
 
 </html>

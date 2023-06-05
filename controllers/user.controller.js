@@ -12,6 +12,33 @@ import bcrypt from "bcrypt"; //importing bcrypt package
 // Validate signup form
 
 const saltRounds = 10;
+// Function to make a user an admin
+export const makeAdmin = async (req, res) => {
+  const userId = req.params.id;
+
+  try {
+    // Find the user by ID
+    const user = await User.findById(userId);
+
+    if (!user) {
+      console.log('User not found');
+      res.send('User not found');
+      return;
+    }
+
+    // Update the user's role to "admin"
+    user.type = 'admin';
+
+    // Save the updated user
+    await user.save();
+
+    console.log('User is now an admin');
+    res.redirect('/admin/viewusers');
+  } catch (error) {
+    console.log(error);
+    res.send('An error occurred');
+  }
+};
 
 const validation = [
   body("username").notEmpty().withMessage("Username is required"),
