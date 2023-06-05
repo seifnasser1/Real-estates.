@@ -39,12 +39,6 @@ router.get('/viewadmins', (req, res) => {
   })
 });
 
-router.get('/header', function (req, res, next) {
-  User.find().then(result => {
-    console.log(result);
-    res.render('pages/AdminHeader', { Users: result, user: (req.session.user === undefined ? "" : req.session.user) });
-  });
-});
 
 router.post("/makeadmin/:id", makeAdmin);
 router.post('/makeuser/:id',(req,res,next)=>{

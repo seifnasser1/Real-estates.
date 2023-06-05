@@ -31,6 +31,20 @@ const profilewishlist= async (req, res,next) => {
       console.log(err);
     });
 };
+
+const getTopSalesProperties = async (req, res) => {
+  const Property = require('/models/propirty.model');
+  try {
+    // Fetch properties from the database
+    const properties = await Property.find().sort({ value: -1 }).limit(5);
+
+    res.render('admin-dashboard', { properties }); // Pass the properties to the template
+  } catch (error) {
+    console.log(error);
+    res.status(500).send('Server Error');
+  }
+};
+
 const viewproperty= async (req, res,next) => {
   var query = { "_id": req.params.id };
   var value;
