@@ -12,14 +12,13 @@
     <img class="searchicon" src="img/searchicon.jpg" alt="search icon"> </button>
 
 <body>
-
+<form action="/user/search" method="get">
     <div class="search-box" id="myFormfind" style="display:none;">
-        <input type="text" placeholder="Search...">
-        <button>
+        <input type="text" name="searchtext" placeholder="Search...">
+        <button type="submit">
             search
-            onclick="searchz()"
         </button>
-
+</form>
     </div>
 
 

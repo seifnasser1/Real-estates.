@@ -13,6 +13,7 @@ import {
 import {
   Search,
   addwishlist,
+  navsearch,
 } from "../controllers/propirty.controller.js";
 const router = Router();
 
@@ -62,4 +63,5 @@ router.post('/signup-action', validation, signup);
 router.post('/login-action',logvalidation, login);
 router.post('/send-message',sendMes);
 router.post('/addtowishlist',addwishlist);
+router.get('/search',navsearch);
 export default router;

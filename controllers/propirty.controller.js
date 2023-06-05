@@ -2,6 +2,7 @@ import Propirty from '../models/propirty.model.js';
 import __dirname from '../app.js'
 import wishlist from '../models/wishlist.model.js';
 import fileUpload from "express-fileupload";
+import { login } from './user.controller.js';
 
 
 
@@ -70,7 +71,15 @@ const Search = async (req, res, next) => {
     res.render('pages/All', { Propirty: result,user: (req.session.user === undefined ? "" : req.session.user) });
   }).catch(err => (console.log(err)));
 }
+//navsearch
+const navsearch = async(req,res,next)=>{
+  const{searchtext}=req.query.searchtext;
+  const query ={$or :[{"type":{$regex:searchtext}},{"name":{$regex:searchtext}},{"servicetype":{$regex:searchtext}},{"unittype":{$regex:searchtext}},{"district":{$regex:searchtext}},{"garages":{$regex:searchtext}},{"area":{$regex:searchtext}},{"value":{$regex:searchtext}},{"unumber":{$regex:searchtext}},{"bathrooms":{$regex:searchtext}},{"bedrooms":{$regex:searchtext}},{"furniture":{$regex:searchtext}},{"details":{$regex:searchtext}}]};
+  Propirty.find(query).then(result =>{
+    res.render('pages/All',{Propirty:result,user: (req.session.user === undefined ? "" : req.session.user)});
+  }).catch(err => (console.log(err)));
 
+}
 const addwishlist= async (req, res, next) => {
   const exsistingwishlist=await wishlist.findOne({"username":req.session.user.id , "property": req.body.Propirty});
   var found;
@@ -95,4 +104,5 @@ export {
   addprop,
   Search,
   addwishlist,
+  navsearch,
 };
