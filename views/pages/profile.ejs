@@ -16,12 +16,13 @@
             <h1>
                 <%=User.username%>
             </h1>
-            <input type="button" value="Edit profile" class="button">
+            <input type="submit" value="Edit profile" class="button">
         </div>
         <h2 class="m">Wish List</h2>
         <div class="favorite">
-            <% if(wish >0){%>
-                <% wish.forEach(w=>{%>
+            <%console.log(wish);%>
+            <% if(wish){%>
+                <% wish.forEach((w)=>{%>
                     <div class="house">
                         <a href="/user/propirty/<%=w.id%>" class="imm">
                             <div class="fade"></div>

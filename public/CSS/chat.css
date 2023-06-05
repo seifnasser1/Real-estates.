@@ -10,11 +10,11 @@
 }
 
 bodyz {
-    height: 100vh;
+    height: 80vh;
     /*vh represents the viewport-percentage length unit based on the browser default viewport size */
     background-color: #e6f5ff;
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
 
 }
@@ -31,7 +31,7 @@ bodyz {
 .headerz h1 {
     color: black;
     padding: 10px;
-    background-color: #9ba353;
+    background-color: #ffffff;
 }
 
 .bodyz {
@@ -60,14 +60,16 @@ bodyz {
     display: flex;
 }
 
-input {
-    flex: 1;
+.inputz {
+    flex: 6;
     height: 40px;
+    width: 8cm;
     border: none;
     outline: none;
     padding-left: 5px;
     font-size: 16 px;
-    background-color: #00b7f1;
+    background-color: #86c5d8;
+    
 }
 
 button {

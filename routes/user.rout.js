@@ -1,7 +1,8 @@
 import { Router } from 'express';
 import Propirty from '../models/propirty.model.js';
 import {
- sendMes
+ sendMes,
+ messages,
 } from "../controllers/chat.controller.js";
 
 import {
@@ -9,6 +10,8 @@ import {
   validation,
   //logvalidation,
   login,
+  checkUN,
+  checkEmail,
 } from "../controllers/user.controller.js";
 import {
   addwishlist,
@@ -43,9 +46,15 @@ router.get('/logout',(req,res,next)=>{
 })
 router.post('/signup-action', validation, signup);
 router.post('/login-action', login);
-router.post('/send-message',sendMes);
+router.post('/send-message/:id',sendMes);
 router.post('/addtowishlist/:id',addwishlist);
 router.get('/search',navsearch);
+router.post('/checkUN',checkUN);
+router.post('/checkEmail', checkEmail);
+router.get('/propirty/:id',messages,viewproperty);
 router.get('/propirty/:id',viewproperty);
 router.get('/:id',profilewishlist);
+
 export default router;
+
+

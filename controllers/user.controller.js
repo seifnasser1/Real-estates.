@@ -1,4 +1,5 @@
 import User from '../models/user.model.js';
+import Propirty from '../models/propirty.model.js';
 import { body, validationResult } from "express-validator";
 import bcrypt from "bcrypt"; //importing bcrypt package 
 
@@ -12,6 +13,33 @@ import bcrypt from "bcrypt"; //importing bcrypt package
 // Validate signup form
 
 const saltRounds = 10;
+// Function to make a user an admin
+export const makeAdmin = async (req, res) => {
+  const userId = req.params.id;
+
+  try {
+    // Find the user by ID
+    const user = await User.findById(userId);
+
+    if (!user) {
+      console.log('User not found');
+      res.send('User not found');
+      return;
+    }
+
+    // Update the user's role to "admin"
+    user.type = 'admin';
+
+    // Save the updated user
+    await user.save();
+
+    console.log('User is now an admin');
+    res.redirect('/admin/viewusers');
+  } catch (error) {
+    console.log(error);
+    res.send('An error occurred');
+  }
+};
 
 const validation = [
   body("username").notEmpty().withMessage("Username is required"),
@@ -95,8 +123,12 @@ const login = async (req, res, next) => {
     console.log(hashePassword)
     if(hashePassword){
       req.session.user=existinguser;
+      if(req.session.user.type=='admin'){
+       res.redirect('/admin');
+      }else{
       console.log("User loged in successfully");
       res.redirect('/');
+      }
     }else{
       console.log("password is not correct");
       res.send("password is not correct");
@@ -108,10 +140,10 @@ const login = async (req, res, next) => {
 
 };
 const getalluser = async (req, res, next) => {
-
+  const properties = await Propirty.find().sort({ value: -1 }).limit(5);
   User.find().then(result => {
     console.log(result);
-    res.render('pages/adminHeader', { Users: result,user: (req.session.user === undefined ? "" : req.session.user) });
+    res.render('pages/adminHeader', { Users: result,Propirty :properties,user: (req.session.user === undefined ? "" : req.session.user) });
   }).catch(err => {
     console.log(err);
   });
@@ -127,7 +159,37 @@ const getallusers = async (req, res, next) => {
   });
 
 }
-
+//ajax
+const checkUN = (req, res) => {
+  var query = { username: req.body.username };
+  User.find(query)
+      .then(result => {
+          if (result.length > 0) {
+              res.send('taken');
+          }
+          else {
+              res.send('available');
+          }
+      })
+      .catch(err => {
+          console.log(err);
+      });
+};
+const checkEmail = (req, res) => {
+  var query = { email: req.body.email };
+  User.find(query)
+      .then(result => {
+          if (result.length > 0) {
+              res.send('taken');
+          }
+          else {
+              res.send('available');
+          }
+      })
+      .catch(err => {
+          console.log(err);
+      });
+};
 export {
   signup,
   validation,
@@ -135,4 +197,7 @@ export {
   login,
   getalluser,
   getallusers,
+  checkUN,
+  checkEmail
+
 };

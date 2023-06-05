@@ -1,85 +1,46 @@
 import { Result } from 'express-validator';
 import Message from '../models/message.model.js';
-
-
-//const asyncHandler=require("express-async-handler");
-//const Message=require('../models/chat')
-
-
-// const sendMes =asyncHandler(async(req, res)=>{
-//     const content =req.body.content;
-//     const  chatId =req.body.chatId;
-
-//     if(!content||! chatId){
-//         console.log("Invalid data passed into request");
-// return res.sendStatues(400);
-//     } 
-//     var newmes ={
-//         sender:req.User._id,
-//         content:content,
-//         chatt: chatId
-//     };
-//     try{
-// var mes=await Message.create(newmes);
-
-// mes=await mes.populate("sender");
-//  mes=await mes.populate("chatt" );
-// //  mes=await User.populate(mes,{
-// //     path:"chat.users",
-// //     select:"name pic email",
-// // });
-
-// await Chatt.findByIdAndUpdate(req.body.chatId,{
-//     latestMes:mes,
-// });
-// res.json(mes);
-
-// }
-// catch(error){
-// res.statues(400);
-// throw new Error(error,mes);
-// }
-// });
-
-// const allmes =asyncHandler(async(req,res)=>{
-// try{
-//     const mess=await Message.find({chat:req.params.chatId})
-//     .populate("sender", "name pic email")
-//     .populate("chatt");
-
-//     res.json(mess);
-// }
-// catch(error){
-//     res.statues(400);
-//     throw new Error(error,mes);  
-// }
-// })
+import Propirty from '../models/propirty.model.js';
 
 
 const sendMes = async (req, res, next) => {
+    const query={"_id":req.params.id}
+Propirty.findOne(query).then(result=>{
+  const content =req.body.content;
     
-    const content =req.body.content;
-    
-        if(!content){
-            console.log("Invalid data passed into request");
-            return res.sendStatues(400);
-        } 
-   
-    
-    console.log(req.body);
-      const message = new Message({
-       user: req.body,
-       content: req.body.content,
-       receiver: req.body.receiver,
-      
-      });
-      message.save()
+  if(!content){
+      console.log("Invalid data passed into request");
+      return res.sendStatues(400);
+  }
+console.log(req.body);
+const message = new Message({
+  sender: req.session.user._id,
+ content: req.body.content,
+ receiver: result.adminid,
+//
+});
+message.save()
 
-    
-        .catch(err => {
-          console.log(err);
-        });
+
+  .catch(err => {
+    console.log(err);
+  });
+}) .catch(err1 => {
+  console.log(err1);
+});
    };
- 
-   export { sendMes};
+   //2adima
+ const messages= async (req,res,next)=>{
+  const query={"_id":req.params.id}
+  Propirty.findOne(query).then(res=>{
+  const query1={"sender":req.session._id,"receiver":res.adminid};
+  const query2={"sender":res.adminid,"receiver":req.session._id};
+  const sendedmes= Message.find(query1);
+  const receivmes= Message.find(query2);
+});
+ }
+   export { 
+    sendMes,
+    messages,
+  };
 //module.exports={sendMes};
