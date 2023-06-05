@@ -1,5 +1,5 @@
 import User from '../models/user.model.js';
-import { body, ValidationResult } from "express-validator";
+import { body, validationResult } from "express-validator";
 import bcrypt from "bcrypt"; //importing bcrypt package 
 
 // matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/):
@@ -31,7 +31,7 @@ const validation = [
 ];
 
 const signup = async (req, res) => {
-  const errors = ValidationResult(req);
+  const errors = validationResult(req);
   if (!errors.isEmpty()) {
     res.render("pages/register", {
       title: "Signup page - Validation Failed",
