@@ -39,7 +39,6 @@ const signup = async (req, res) => {
     });
     return;
   }
-   app.post("/register", async(req,res)=>){
   try {
     const hashedPassword = await bcrypt.hash(req.body.password,saltRounds);
     const existingUser = await User.findOne({ username: req.body.username });
