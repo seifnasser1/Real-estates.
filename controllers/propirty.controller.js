@@ -210,7 +210,11 @@ const addwishlist = async (req, res, next) => {
       .catch((err) => console.log(err));
   }
 }
-
+const viewprop= async (req,res,next)=>{
+  Propirty.find().then(result=>{
+    res.render('pages/adminUnits',{properties:result,user: (req.session.user === undefined ? "" : req.session.user)})
+  })
+}
 
 export {
   addprop,
@@ -218,4 +222,5 @@ export {
   navsearch,
   viewproperty,
   profilewishlist,
+  viewprop,
 };
