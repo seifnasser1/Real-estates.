@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import Propirty from "./propirty.model.js"
+
 const wishlistschema = new mongoose.Schema(
   {
 userid:{

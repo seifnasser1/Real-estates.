@@ -1,11 +1,54 @@
 import Propirty from '../models/propirty.model.js';
 import __dirname from '../app.js'
 import wishlist from '../models/wishlist.model.js';
+import User from '../models/user.model.js';
 import fileUpload from "express-fileupload";
 import { login } from './user.controller.js';
 
-
-
+const profilewishlist= async (req, res,next) => {
+  var query = { "_id": req.params.id };
+  const arr=[];
+  User.find(query)
+    .then(result1 => {
+  wishlist.find({"userid":req.params.id}).then(result=>{
+  console.log(result);
+  if(result.length>0){
+  for(var i=0;i<result.length;i++){
+      Propirty.findOne({"_id":result[i].propertyid}).then(res=>{
+      console.log(res);
+      arr[i]=res;
+     })
+    }
+    console.log(arr);
+  }
+  console.log(arr);
+    res.render('pages/profile', { User: result1[0],wish:arr , user: (req.session.user === undefined ? "" : req.session.user)});
+}).catch(err1 => {
+  console.log(err1);
+});
+})
+    .catch(err => {
+      console.log(err);
+    });
+};
+const viewproperty= async (req, res,next) => {
+  var query = { "_id": req.params.id };
+  var value;
+  const exsistingwishlist = await wishlist.findOne({"userid":req.session.user._id,"propertyid":req.params.id});
+  if(exsistingwishlist==null){
+    value=1;
+  }else{
+    value=2;
+  }
+  Propirty.find(query)
+    .then(result => { 
+      console.log(value);
+      res.render('pages/villa', { Propirty: result[0],v:value ,user: (req.session.user === undefined ? "" : req.session.user)});
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
 const addprop = async (req, res, next) => {
   let imgFile;
   let uploadPath;
@@ -88,4 +131,6 @@ export {
   addprop,
   addwishlist,
   navsearch,
+  viewproperty,
+  profilewishlist,
 };
