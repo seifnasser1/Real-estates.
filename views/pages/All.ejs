@@ -30,9 +30,9 @@
         <%var start=currentValue*6%>
         <div class="container">
             <% if (Propirty.length> 0) { %>
-                <%var t=0%>
+                <%//var t=0%>
                 <% for(var i=start;i<Propirty.length;i++) { %>
-                    <%if(t<6){%>
+                    <%//if(t<6){%>
             <div class="house">
                 <a href="/user/propirty/<%=Propirty[i].id%>" class="imm">
                     <div class="fade"></div>
@@ -71,7 +71,7 @@
                     </tr>
                 </table>
             </div>
-            <% t++ }%>
+            <%// t++ }%>
             <% } %>
             <% } else { %>
                 <p>There are no properties to display...</p>

@@ -81,7 +81,11 @@ const propirty = new mongoose.Schema(
       trim: true,
       required: true
     },
-    adminid:String,
+    adminid:{
+     type : String,
+     required:true,
+    },
+
   },
   { timestamps: true }
 );
