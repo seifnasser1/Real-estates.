@@ -52,25 +52,7 @@ const addprop = async (req, res, next) => {
   });
 
 };
-const Search = async (req, res, next) => {
-  if (req.body.Price == 1) {
 
-  }
-  if (req.body.Bathrooms == 1) {
-    const Bathroom = [1, 2];
-  }
-  else if (req.body.Bathrooms == 2) {
-    const Bathroom = [3, 4, 5, 6, 7, 8];
-  } else {
-    const Bathroom = [1, 2, 3, 4, 5, 6, 7, 8];
-  }
-  var query = { servicetype: req.body.Status, unittype: req.body.Type, district: req.body.Area }
-  console.log(query);
-  Propirty.find(query).then(result => {
-    console.log(result);
-    res.render('pages/All', { Propirty: result,user: (req.session.user === undefined ? "" : req.session.user) });
-  }).catch(err => (console.log(err)));
-}
 //navsearch
 const navsearch = async(req,res,next)=>{
   const{searchtext}=req.query.searchtext;
@@ -81,20 +63,22 @@ const navsearch = async(req,res,next)=>{
 
 }
 const addwishlist= async (req, res, next) => {
-  const exsistingwishlist=await wishlist.findOne({"username":req.session.user.id , "property": req.body.Propirty});
-  var found;
+  const exsistingwishlist=await wishlist.findOne({"userid":req.session.user._id,"propertyid":req.params.id});
   if(exsistingwishlist){
-    wishlist.findByIdAndDelete(exsistingwishlist._id);
-    res.redirect('/',{user: (req.session.user === undefined ? "" : req.session.user) });
+    console.log(exsistingwishlist.id);
+    wishlist.findByIdAndDelete(exsistingwishlist.id).then(result=>{
+          res.redirect('/');
+    }).catch(err => {
+      console.log(err);
+    });
   }
   else{
     const wish = new wishlist({
-      username:req.session.user.id,
-      property:req.body.Propirty,
+      userid:req.session.user._id,
+      propertyid:req.params.id,
     })
-    console.log(wish);
     wish.save().then(result=>{
-      res.redirect('/',{user: (req.session.user === undefined ? "" : req.session.user) });
+      res.redirect('/');
     }).catch(err => (console.log(err)));
   }
 }
@@ -102,7 +86,6 @@ const addwishlist= async (req, res, next) => {
 
 export {
   addprop,
-  Search,
   addwishlist,
   navsearch,
 };

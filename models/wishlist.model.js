@@ -2,14 +2,15 @@ import mongoose from "mongoose";
 import Propirty from "./propirty.model.js"
 const wishlistschema = new mongoose.Schema(
   {
-username:{
+userid:{
     type : String,
     required :true,
     trim:true,
 },
-property:{ 
-    type: Propirty.schema,
+propertyid:{ 
+    type:String,
     required :true,
+    trim:true,
 }
   },
   { timestamps: true }

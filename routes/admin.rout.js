@@ -21,6 +21,7 @@ const router = Router();
 /* GET home page. */
 router.get ('/', getalluser);
 router.get('/deleteuser/:id',(req,res,next)=>{
+  console.log(req.params.id)
   User.findByIdAndDelete(req.params.id)
     .then(result => {
         res.redirect('/admin/viewusers');
