@@ -1,5 +1,5 @@
 import User from '../models/user.model.js';
-import { body, validationResult } from "express-validator";
+import { body, ValidationResult } from "express-validator";
 import bcrypt from "bcrypt"; //importing bcrypt package 
 
 // matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/):
@@ -31,7 +31,7 @@ const validation = [
 ];
 
 const signup = async (req, res) => {
-  const errors = validationResult(req);
+  const errors = ValidationResult(req);
   if (!errors.isEmpty()) {
     res.render("pages/register", {
       title: "Signup page - Validation Failed",
@@ -39,9 +39,9 @@ const signup = async (req, res) => {
     });
     return;
   }
-
+   app.post("/register", async(req,res)=>){
   try {
-    const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
+    const hashedPassword = await bcrypt.hash(req.body.password,saltRounds);
     const existingUser = await User.findOne({ username: req.body.username });
     const existingemail = await User.findOne({ email: req.body.email });
 
