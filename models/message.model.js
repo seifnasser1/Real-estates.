@@ -6,9 +6,13 @@ const message = new mongoose.Schema(
     content:{type:String, trim:true},
     receiver:{type: mongoose.Schema.Types.ObjectId, ref: "user"}
   },
+
   { timestamps: true }
 )
 
 const Message = mongoose.model("Message", message);
 
 export default Message;
+
+//req.session.user.id
+//req.session.reciever.id
