@@ -1,4 +1,5 @@
 import User from '../models/user.model.js';
+import Propirty from '../models/propirty.model.js';
 import { body, validationResult } from "express-validator";
 import bcrypt from "bcrypt"; //importing bcrypt package 
 
@@ -139,10 +140,10 @@ const login = async (req, res, next) => {
 
 };
 const getalluser = async (req, res, next) => {
-
+  const properties = await Propirty.find().sort({ value: -1 }).limit(5);
   User.find().then(result => {
     console.log(result);
-    res.render('pages/adminHeader', { Users: result,user: (req.session.user === undefined ? "" : req.session.user) });
+    res.render('pages/adminHeader', { Users: result,Propirty :properties,user: (req.session.user === undefined ? "" : req.session.user) });
   }).catch(err => {
     console.log(err);
   });

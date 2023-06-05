@@ -72,10 +72,10 @@
                           </tr>
                           <% count++;%>
                             <% } %>
-                                <% })%>
-                                  <% } else { %>
-                                    <p>No Users found </p>
-                                    <% }%>
+                              <% })%>
+                                <% } else { %>
+                                  <p>No Users found </p>
+                                  <% }%>
                 </tbody>
               </table>
             </div>
@@ -113,10 +113,10 @@
                           </tr>
                           <% count++;%>
                             <% } %>
-                                <% })%>
-                                  <% } else { %>
-                                    <p>No admins found </p>
-                                    <% }%>
+                              <% })%>
+                                <% } else { %>
+                                  <p>No admins found </p>
+                                  <% }%>
                 </tbody>
               </table>
             </div>
@@ -125,8 +125,25 @@
 
         <div class="sidebar">
           <h4>Top Sales</h4>
+          <% Propirty.sort((a, b)=> b.value - a.value); %>
 
-          <div class="balance">
+            <% for(var i=0; i<5; i++) { %>
+              <div class="balance">
+                <div class="info">
+                  <h5>
+                    <a href="/user/propirty/<%=Propirty[i].id%>">
+                    <%= Propirty[i].name %>
+                  </a>
+                  </h5>
+                  <span>
+                    <%= Propirty[i].value %> EGP
+                  </span>
+                </div>
+              </div>
+              <% } %>
+        </div>
+
+        <!-- <div class="balance">
             <div class="info">
               <h5>Villa Zayed</h5>
               <span></i>30,000.00 EGP</span>
@@ -162,7 +179,7 @@
           </div>
 
         </div>
-    </div>
+    </div> -->
 </body>
 
 </html>
