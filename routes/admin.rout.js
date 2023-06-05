@@ -40,13 +40,18 @@ router.get('/viewusers', function (req, res, next) {
   })
 });
 
+router.get('/header', function (req, res, next) {
+  User.find().then(result => {
+    console.log(result);
+    res.render('pages/AdminHeader', { Users: result,user: (req.session.user === undefined ? "" : req.session.user) });
+  })
+});
 router.get('/chats', function (req, res, next) {
   User.find().then(result => {
     console.log(result);
     res.render('pages/adminChat', { Users: result,user: (req.session.user === undefined ? "" : req.session.user) });
   })
 });
-
 router.get('/adding', function (req, res, next) {
   console.log('index.js: GET /');
   res.render('pages/addpropirty',{user: (req.session.user === undefined ? "" : req.session.user)});
