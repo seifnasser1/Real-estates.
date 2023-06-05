@@ -33,8 +33,8 @@
     
     <%- include("../partials/header") %>
     <%- include("../partials/localization") %>
+    <%- include("../partials/chat") %>
         <div class="container1">
-            <% console.log(Propirty); %>
                 <div class="title">
                     <div class="name">
                         <h1>
@@ -95,8 +95,12 @@
                     <img class="mySlides" src="/img/<%= Propirty.Image %>" style="width:100%">
                 </div>
         </div>
-        <form method="post" action="/user/addtowishlist">
+        <form method="post" action="/user/addtowishlist/<%=Propirty.id%>">
+            <% if(v==1){%>
             <button id="like" class="btn"><img class="like" src="/img/emptyheart.png"></button>
+            <%} else {%>
+                <button id="like" class="btn"><img class="like" src="/img/fullheart.jpg"></button>
+                <%}%>
         </form>
         <div class="container1">
             <h3 class="description">Unit Description</h3>

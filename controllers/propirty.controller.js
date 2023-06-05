@@ -1,11 +1,54 @@
 import Propirty from '../models/propirty.model.js';
 import __dirname from '../app.js'
 import wishlist from '../models/wishlist.model.js';
+import User from '../models/user.model.js';
 import fileUpload from "express-fileupload";
 import { login } from './user.controller.js';
 
-
-
+const profilewishlist= async (req, res,next) => {
+  var query = { "_id": req.params.id };
+  const arr=[];
+  User.find(query)
+    .then(result1 => {
+  wishlist.find({"userid":req.params.id}).then(result=>{
+  console.log(result);
+  if(result.length>0){
+  for(var i=0;i<result.length;i++){
+      Propirty.findOne({"_id":result[i].propertyid}).then(res=>{
+      console.log(res);
+      arr[i]=res;
+     })
+    }
+    console.log(arr);
+  }
+  console.log(arr);
+    res.render('pages/profile', { User: result1[0],wish:arr , user: (req.session.user === undefined ? "" : req.session.user)});
+}).catch(err1 => {
+  console.log(err1);
+});
+})
+    .catch(err => {
+      console.log(err);
+    });
+};
+const viewproperty= async (req, res,next) => {
+  var query = { "_id": req.params.id };
+  var value;
+  const exsistingwishlist = await wishlist.findOne({"userid":req.session.user._id,"propertyid":req.params.id});
+  if(exsistingwishlist==null){
+    value=1;
+  }else{
+    value=2;
+  }
+  Propirty.find(query)
+    .then(result => { 
+      console.log(value);
+      res.render('pages/villa', { Propirty: result[0],v:value ,user: (req.session.user === undefined ? "" : req.session.user)});
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
 const addprop = async (req, res, next) => {
   let imgFile;
   let uploadPath;
@@ -21,7 +64,7 @@ const addprop = async (req, res, next) => {
     if (err)
       return res.status(500).send(err);
 
-    console.log(req.body);
+    console.log(req.session.user.id);
     const propirty = new Propirty({
       name: req.body.name,
       mobilenumber: req.body.mobile_number,
@@ -39,7 +82,7 @@ const addprop = async (req, res, next) => {
       furniture: req.body.f_type,
       details: req.body.details,
       Image: req.body.name + '.jpg',
-      adminid:req.session.user.id,
+      adminid:req.session.user._id,
         });
     propirty.save()
       .then(result => {
@@ -52,25 +95,7 @@ const addprop = async (req, res, next) => {
   });
 
 };
-const Search = async (req, res, next) => {
-  if (req.body.Price == 1) {
 
-  }
-  if (req.body.Bathrooms == 1) {
-    const Bathroom = [1, 2];
-  }
-  else if (req.body.Bathrooms == 2) {
-    const Bathroom = [3, 4, 5, 6, 7, 8];
-  } else {
-    const Bathroom = [1, 2, 3, 4, 5, 6, 7, 8];
-  }
-  var query = { servicetype: req.body.Status, unittype: req.body.Type, district: req.body.Area }
-  console.log(query);
-  Propirty.find(query).then(result => {
-    console.log(result);
-    res.render('pages/All', { Propirty: result,user: (req.session.user === undefined ? "" : req.session.user) });
-  }).catch(err => (console.log(err)));
-}
 //navsearch
 const navsearch = async(req,res,next)=>{
   const{searchtext}=req.query.searchtext;
@@ -81,20 +106,22 @@ const navsearch = async(req,res,next)=>{
 
 }
 const addwishlist= async (req, res, next) => {
-  const exsistingwishlist=await wishlist.findOne({"username":req.session.user.id , "property": req.body.Propirty});
-  var found;
+  const exsistingwishlist=await wishlist.findOne({"userid":req.session.user._id,"propertyid":req.params.id});
   if(exsistingwishlist){
-    wishlist.findByIdAndDelete(exsistingwishlist._id);
-    res.redirect('/',{user: (req.session.user === undefined ? "" : req.session.user) });
+    console.log(exsistingwishlist.id);
+    wishlist.findByIdAndDelete(exsistingwishlist.id).then(result=>{
+          res.redirect('/');
+    }).catch(err => {
+      console.log(err);
+    });
   }
   else{
     const wish = new wishlist({
-      username:req.session.user.id,
-      property:req.body.Propirty,
+      userid:req.session.user._id,
+      propertyid:req.params.id,
     })
-    console.log(wish);
     wish.save().then(result=>{
-      res.redirect('/',{user: (req.session.user === undefined ? "" : req.session.user) });
+      res.redirect('/');
     }).catch(err => (console.log(err)));
   }
 }
@@ -102,7 +129,8 @@ const addwishlist= async (req, res, next) => {
 
 export {
   addprop,
-  Search,
   addwishlist,
   navsearch,
+  viewproperty,
+  profilewishlist,
 };
