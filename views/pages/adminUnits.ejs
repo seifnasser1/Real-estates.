@@ -54,54 +54,23 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <%console.log(properties);%>
+                            <% if (properties.length> 0){%>
+                                <%count=1;%>
+                                <%properties.forEach(prop=>{%>
                             <tr>
-                                <td>1</td>
-                                <td>Waterway Appartment</td>
-                                <td>New Cairo</td>
-                                <td>9,000,000</td>
-                                <td><button>Edit</button></td>
-                                <td><button>Delete</button></td>
+                                <td><%=count%></td>
+                                <td><%=prop.name%></td>
+                                <td><%=prop.district%></td>
+                                <td><%=prop.value%></td>
+                                <td><a href="/admin/editprop/<%=prop.id%>">Edit</a></td>
+                                <td><a href="/admin/delprop/<%=prop.id%>">Delete</a></td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Sodic West</td>
-                                <td>6th-of-october</td>
-                                <td>9,500,000</td>
-                                <td><button>Edit</button></td>
-                                <td><button>Delete</button></td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Appartment</td>
-                                <td>Maadi</td>
-                                <td>7,000,000</td>
-                                <td><button>Edit</button></td>
-                                <td><button>Delete</button></td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Solo Appartment</td>
-                                <td>6th-of-october</td>
-                                <td>6,500,000</td>
-                                <td><button>Edit</button></td>
-                                <td><button>Delete</button></td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>mini Studio</td>
-                                <td>New Cairo</td>
-                                <td>4,000,000</td>
-                                <td><button>Edit</button></td>
-                                <td><button>Delete</button></td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>Zed Appartment</td>
-                                <td>Elsheikh-zayed</td>
-                                <td>12,000,000</td>
-                                <td><button>Edit</button></td>
-                                <td><button>Delete</button></td>
-                            </tr>
+                            <%count++;%>
+                            <%});%>
+                            <%}else{%>
+                                <p>there are no properties to show</p>
+                                <%}%>
                         </tbody>
                     </table>
                 </div>
