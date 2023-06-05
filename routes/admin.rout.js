@@ -69,7 +69,9 @@ router.get('/chats', function (req, res, next) {
 router.get('/register', (req, res) => {
   res.redirect('/register');
 });
-
+router.get('/Top',(req,res)=>{
+  res.render('pages/TopProperties', { user: (req.session.user === undefined ? "" : req.session.user) });
+})
 router.post('/addpropirty', addprop);
 
 router.get('/viewusers', getallusers);
