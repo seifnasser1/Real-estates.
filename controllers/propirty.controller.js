@@ -5,24 +5,20 @@ import User from '../models/user.model.js';
 import fileUpload from "express-fileupload";
 import { login } from './user.controller.js';
 
-const profilewishlist= async (req, res,next) => {
+const profilewishlist= (req, res,next) => {
   var query = { "_id": req.params.id };
   const arr=[];
   User.find(query)
     .then(result1 => {
-  wishlist.find({"userid":req.params.id}).then(result=>{
+  wishlist.find({"userid":req.params.id}).then(async result=>{
   console.log(result);
   if(result.length>0){
   for(var i=0;i<result.length;i++){
-      Propirty.findOne({"_id":result[i].propertyid}).then(res=>{
-      console.log(res);
-      arr[i]=res;
-     })
+    const prop=await Propirty.findOne({"_id":result[i].propertyid})
+      arr[i]=prop;
     }
-    console.log(arr);
   }
-  console.log(arr);
-    res.render('pages/profile', { User: result1[0],wish:arr , user: (req.session.user === undefined ? "" : req.session.user)});
+   res.render('pages/profile', { User: result1[0], wish : arr , user: (req.session.user === undefined ? "" : req.session.user)});
 }).catch(err1 => {
   console.log(err1);
 });
@@ -31,6 +27,20 @@ const profilewishlist= async (req, res,next) => {
       console.log(err);
     });
 };
+
+const getTopSalesProperties = async (req, res) => {
+  const Property = require('/models/propirty.model');
+  try {
+    // Fetch properties from the database
+    const properties = await Property.find().sort({ value: -1 }).limit(5);
+
+    res.render('admin-dashboard', { properties }); // Pass the properties to the template
+  } catch (error) {
+    console.log(error);
+    res.status(500).send('Server Error');
+  }
+};
+
 const viewproperty= async (req, res,next) => {
   var query = { "_id": req.params.id };
   var value;
@@ -69,7 +79,7 @@ const addprop = async (req, res, next) => {
       name: req.body.name,
       mobilenumber: req.body.mobile_number,
       mobilenumber2: req.body.other_number,
-      email: req.body.name,
+      email: req.session.user.email,
       servicetype: req.body.servise,
       unittype: req.body.type,
       district: req.body.district,

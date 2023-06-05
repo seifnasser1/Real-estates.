@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="CSS/styleAdmin.css" />
+  <link rel="stylesheet" href="/CSS/properties.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+</head>
+
+<body>
+
+  <header class="header">
+    <div class="logo">
+      <a href="#">The Company</a>
+      <div class="search_box">
+        <input type="text" placeholder="Search">
+        <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
+      </div>
+    </div>
+
+    <div class="header-icons">
+      <div class="account">
+        <!-- <img src="./mostafa.jpg" alt=" image "> -->
+        <h4>Admin</h4>
+      </div>
+    </div>
+  </header>
+  <div class="container">
+    <nav>
+      <div class="side_navbar">
+        <span>Main Menu</span>
+        <a href="/admin/header" class="active">Home</a>
+        <a href="/admin/rents">Rents</a>
+        <a href="/admin/adding">Units</a>
+        <a href="/admin/viewusers">Users</a>
+        <a href="/admin/adminweeklysummary">Weekly Summary</a>
+        <a href="#">Top Properties</a>
+        <a href="/admin/chats">Chats</a>
+      </div>
+    </nav>
+    <div class="main-body">
+
+      <h2>Top Properties</h2>
+      <div class="promo_card">
+        <h1>Here you can view the Top Properties</h1>
+      </div>
+      <div class="history_lists">
+        <div class="list1">
+          <table>
+            <div class="container">
+              <div class="house">
+                <a href="/user/propirty/<%=Propirty[i].id%>" class="imm">
+                  <div class="fade"></div>
+                  <img src="img/madinty.jpg" alt="can't load image">
+                  <center>
+                    <h2 class="price">
+                      Villa
+                    </h2>
+                    <div class="forsalebar"></div>
+                </a>
+                <div class="title">
+                  <h3><i class="fa fa-map-marker icon"></i>
+                    Maadi
+                  </h3>
+                  <p class="p">
+                    19000000 EGP
+                    </i>
+                  </p>
+                  </center>
+                  <tr>
+                    <td class="Center">
+                      <i class="fa fa-bed"></i>
+                      5 Bedrooms
+                    </td>
+                    <td class="Center">
+                      <i class="fa fa-tint"></i>
+                      4 Baths
+                    </td>
+                    <td class="Center">
+                      <i class="fa fa-expand"></i>
+                      350 m
+                      <sup>2</sup>
+                    </td>
+                  </tr>
+                </div>
+              </div>
+            </div>
+          </table>
+        </div>
+      </div>
+      </tbody>
+      </table>
+    </div>
+  </div>
+  </div>
+  </div>
+</body>
+
+</html>

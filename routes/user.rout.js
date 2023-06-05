@@ -10,6 +10,8 @@ import {
   validation,
   //logvalidation,
   login,
+  checkUN,
+  checkEmail,
 } from "../controllers/user.controller.js";
 import {
   addwishlist,
@@ -47,8 +49,12 @@ router.post('/login-action', login);
 router.post('/send-message/:id',sendMes);
 router.post('/addtowishlist/:id',addwishlist);
 router.get('/search',navsearch);
+router.post('/checkUN',checkUN);
+router.post('/checkEmail', checkEmail);
 router.get('/propirty/:id',messages,viewproperty);
+router.get('/propirty/:id',viewproperty);
 router.get('/:id',profilewishlist);
+
 export default router;
 
 
