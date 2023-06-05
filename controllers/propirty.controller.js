@@ -64,7 +64,7 @@ const addprop = async (req, res, next) => {
     if (err)
       return res.status(500).send(err);
 
-    console.log(req.body);
+    console.log(req.session.user.id);
     const propirty = new Propirty({
       name: req.body.name,
       mobilenumber: req.body.mobile_number,
@@ -82,7 +82,7 @@ const addprop = async (req, res, next) => {
       furniture: req.body.f_type,
       details: req.body.details,
       Image: req.body.name + '.jpg',
-      adminid:req.session.user.id,
+      adminid:req.session.user._id,
         });
     propirty.save()
       .then(result => {

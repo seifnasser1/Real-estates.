@@ -122,8 +122,12 @@ const login = async (req, res, next) => {
     console.log(hashePassword)
     if(hashePassword){
       req.session.user=existinguser;
+      if(req.session.user.type=='admin'){
+       res.redirect('/admin');
+      }else{
       console.log("User loged in successfully");
       res.redirect('/');
+      }
     }else{
       console.log("password is not correct");
       res.send("password is not correct");
