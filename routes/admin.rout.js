@@ -51,6 +51,10 @@ router.get('/adding', function (req, res, next) {
   console.log('index.js: GET /');
   res.render('pages/addpropirty',{user: (req.session.user === undefined ? "" : req.session.user)});
 });
+router.get('/register', (req, res) => {
+  res.redirect('/register');
+});
+
 
 
 router.post('/addpropirty', addprop);
