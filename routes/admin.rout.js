@@ -46,6 +46,39 @@ router.get('/header', function (req, res, next) {
     res.render('pages/AdminHeader', { Users: result,user: (req.session.user === undefined ? "" : req.session.user) });
   })
 });
+
+router.post("/admin/makeadmin/:id", (req, res) => {
+  const userId = req.params.id;
+
+  // Update the user's role to "admin" and update the name in the "Admin" table in the database
+  // Replace this code with your own logic to update the user and the "Admin" table in your database
+  User.findByIdAndUpdate(
+    userId,
+    { role: "admin" },
+    { new: true },
+    (err, user) => {
+      if (err) {
+        console.error(err);
+        res.redirect("/admin/viewusers"); // Redirect to the view users page or any other error handling
+      } else {
+        Admin.findOneAndUpdate(
+          { username: user.username },
+          { name: user.username },
+          { new: true },
+          (err, admin) => {
+            if (err) {
+              console.error(err);
+              res.redirect("/admin/viewusers"); // Redirect to the view users page or any other error handling
+            } else {
+              res.redirect("/admin/viewusers"); // Redirect to the view users page after successful update
+            }
+          }
+        );
+      }
+    }
+  );
+});
+
 router.get('/chats', function (req, res, next) {
   User.find().then(result => {
     console.log(result);
