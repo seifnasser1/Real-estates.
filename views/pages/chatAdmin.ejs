@@ -13,10 +13,10 @@
 
 <body>
     <!-- Button that triggers the chat box -->
-    <button href="user/getMessages/" class="chat-circle" onclick="openForm()">Chat</button>
+    <!-- <button href="user/getMessages/" class="chat-circle" onclick="openForm()">Chat</button> -->
 
     <!-- Chat box element (hidden by default) -->
-    <div class="chat" id="myForm" style="display:none;">
+    <div class="chat" id="myForm" style="display:block;">
         <div class="containerz">
             <div class="headerz">
                 <h1>WebChat</h1>
@@ -42,13 +42,13 @@
             <div class="footerz">
                
 
-<form action="/user/send-message/<%=Propirty.id%>" method="post"  >
+<form action="/admin/sendMsgFromAdmin/<%= Messages[0].message.sender%>" method="post"  >
 
 
                  <container>
                     <input  class="inputz" type="text" name="content" id="chatInput">
                     <button type="submit">
-                        <img class="sendicon" src="img/download.png" alt="send icon" onclick="sendMsg('user')">
+                        <img class="sendicon" src="img/download.png" alt="send icon" onclick="sendMsg('admin')">
                     </button>
                 </container>
                 </form>

@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import User from '../models/user.model.js';
-import { addprop ,deleteprop } from "../controllers/propirty.controller.js";
+import { addprop ,deleteprop,viewprop } from "../controllers/propirty.controller.js";
+import Message from '../models/message.model.js';
 import { getalluser, getallusers, makeAdmin } from "../controllers/user.controller.js";
-import { viewprop } from "../controllers/propirty.controller.js";
 const router = Router();
 
 // router.use((req, res, next) => {
@@ -59,10 +59,77 @@ router.post('/makeuser/:id',(req,res,next)=>{
           console.log(err);
       });
 })
+
+router.get('/getSingleUserChat/:id', async function (req, res, next) {
+  const query1={"sender":req.session.user._id,"receiver":req.params.id};
+  const query2={"receiver":req.session.user._id,"sender":req.params.id};
+  console.log(req.session.user._id)
+  console.log(req.params.id)
+  const clientmes=await Message.find(query2);
+  const adminmes=await Message.find(query1);
+  const allMessages =[];
+  for(let i=0;i<clientmes.length;i++){
+       allMessages.push({message:clientmes[i],type:"user"});
+  }
+  for(let i=0;i<adminmes.length;i++){
+    allMessages.push({message:adminmes[i],type:"admin"});
+}
+allMessages.sort((a,b)=>{return a.message.createdAt - b.message.createdAt})
+console.log(allMessages)
+console.log("zizi")
+res.render('pages/chatAdmin', { Messages:allMessages ,user: (req.session.user === undefined ? "" : req.session.user)});
+
+});
+
+router.post('/sendMsgFromAdmin/:id', async function(req, res, next) {
+  
+
+const content =req.body.content;
+  
+if(!content){
+    console.log("Invalid data passed into request");
+    return res.sendStatues(400);
+}
+console.log(req.body);
+const message = new Message({
+sender: req.session.user._id,
+content: req.body.content,
+receiver: req.params.id,
+//
+});
+message.save()
+
+
+.catch(err => {
+  console.log(err);
+});
+
+});
+
 router.get('/chats', function (req, res, next) {
-  User.find().then(result => {
+  const query={"receiver":req.session.user._id};
+  Message.find(query).then(async result => {
     console.log(result);
-    res.render('pages/adminChat', { Users: result, user: (req.session.user === undefined ? "" : req.session.user) });
+    const usersChats = [];
+    for(let i=0;i<result.length;i++){
+      usersChats.push(result[i].sender);
+    }
+    console.log(usersChats)
+    const usersChatsUnique = [];
+    usersChats.forEach(element => {
+      if (!usersChatsUnique.includes(element)) {
+        usersChatsUnique.push(element);
+      }
+  });
+  console.log(usersChatsUnique)
+  const Users = [];
+  for(let i=0;i<usersChatsUnique.length;i++){
+    const query1={"_id":usersChatsUnique[i]};
+    const usr=await User.findOne(query1);
+    Users.push(usr);
+  }
+  console.log(Users)
+    res.render('pages/adminChat', { Users: Users, user: (req.session.user === undefined ? "" : req.session.user) });
   });
 });
 
