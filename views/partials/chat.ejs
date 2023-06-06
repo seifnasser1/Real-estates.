@@ -23,17 +23,13 @@
             </div>
             <div class="bodyz">
                 <div id="chatBody">
-                    <!-- <p class="messagez">hello</p>
-                    <p id="gh" class="messagez user_message">Hi</p> -->
-                    <!-- <p id="gh" class="messagez user_message" type="input"></p> -->
                     <% for(var i=0;i<Messages.length;i++) { %>
                     <p class="messagez user_message">  <%= Messages[i].conte nt %></p>
                     <% } %>
                 </div>
             </div>
             <div class="footerz">
-                <!-- <form> -->
-                    <!-- id="chatInput"  -->
+               
 
 <form action="/user/send-message/<%=Propirty.id%>" method="post"  >
 
@@ -45,7 +41,7 @@
                     </button>
                 </container>
                 </form>
-                <!-- </form> -->
+           
             </div>
         </div>
     </div>

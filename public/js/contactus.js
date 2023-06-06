@@ -4,7 +4,7 @@ function validate() {
    let phin = document.forms.contactForm.cphone.value;
    let emailin = document.forms.contactForm.cmail.value;
    let mesin = document.forms.contactForm.cmes.value;
-   //window.alert('s'+mesin+'m');
+ 
 
    if (namein == "") {
     document.getElementById("label1").style.visibility = 'visible';
