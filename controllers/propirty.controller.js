@@ -46,24 +46,36 @@ const getTopSalesProperties = async (req, res) => {
 const viewproperty= async (req, res,next) => {
   var query = { "_id": req.params.id };
   var value;
+
   const exsistingwishlist = await wishlist.findOne({"userid":req.session.user._id,"propertyid":req.params.id});
+ 
   if(exsistingwishlist==null){
     value=1;
   }else{
     value=2;
   }
   Propirty.find(query)
-    .then(result => { 
+    .then(async result => { 
       console.log(value);
-     
+      console.log('hiiii')
       var villa = result[0];
       const query1={"sender":req.session.user._id,"receiver":result[0].adminid};
-      Message.find(query1).then(result=>{
-        console.log(res)
-      res.render('pages/villa', { Propirty: villa,Messages:result,v:value ,user: (req.session.user === undefined ? "" : req.session.user)});
-      console.log("hi")
-    });
-      
+      const query2={"receiver":req.session.user._id,"sender":result[0].adminid};
+      console.log(req.session.user._id)
+      console.log(result[0].adminid)
+      const clientmes=await Message.find(query1);
+      const adminmes=await Message.find(query2);
+      const allMessages =[];
+      for(let i=0;i<clientmes.length;i++){
+           allMessages.push({message:clientmes[i],type:"user"});
+      }
+      for(let i=0;i<adminmes.length;i++){
+        allMessages.push({message:adminmes[i],type:"admin"});
+   }
+   allMessages.sort((a,b)=>{return a.message.createdAt - b.message.createdAt})
+   console.log(allMessages)
+   console.log("zizi")
+    res.render('pages/villa', { Propirty: villa,Messages:allMessages,v:value ,user: (req.session.user === undefined ? "" : req.session.user)});
     })
     .catch(err => {
       console.log(err);
