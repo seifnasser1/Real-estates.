@@ -29,7 +29,7 @@ message.save()
   console.log(err1);
 });
    };
-   //2adima displaying chat
+   //displaying chat 
  const messages= async (req,res,next)=>{
   const query={"_id":req.params.id}
   Propirty.findOne(query).then(res=>{
