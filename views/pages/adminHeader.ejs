@@ -122,12 +122,12 @@
             </div>
           </div>
         </div>
-
+       
         <div class="sidebar">
           <h4>Top Sales</h4>
           <% Propirty.sort((a, b)=> b.value - a.value); %>
 
-            <% for(var i=0; i<5; i++) { %>
+            <% for(var i=0; i<Propirty.length; i++) { %>
               <div class="balance">
                 <div class="info">
                   <h5>

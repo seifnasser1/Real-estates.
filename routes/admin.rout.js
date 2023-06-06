@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import User from '../models/user.model.js';
-import { addprop } from "../controllers/propirty.controller.js";
+import { addprop ,deleteprop } from "../controllers/propirty.controller.js";
 import { getalluser, getallusers, makeAdmin } from "../controllers/user.controller.js";
 import { viewprop } from "../controllers/propirty.controller.js";
 const router = Router();
@@ -15,7 +15,7 @@ const router = Router();
 // });
 
 router.get('/', getalluser);
-
+router.get('/delprop/:id',deleteprop);
 router.get('/deleteuser/:id', (req, res, next) => {
   console.log(req.params.id)
   User.findByIdAndDelete(req.params.id)

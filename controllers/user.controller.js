@@ -134,7 +134,6 @@ const login = async (req, res, next) => {
 const getalluser = async (req, res, next) => {
   const properties = await Propirty.find().sort({ value: -1 }).limit(5);
   User.find().then(result => {
-    console.log(result);
     res.render('pages/adminHeader', { Users: result,Propirty :properties,user: (req.session.user === undefined ? "" : req.session.user) });
   }).catch(err => {
     console.log(err);

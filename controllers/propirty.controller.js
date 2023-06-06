@@ -3,9 +3,28 @@ import __dirname from '../app.js'
 import wishlist from '../models/wishlist.model.js';
 import User from '../models/user.model.js';
 import Message from '../models/message.model.js';
+import fs from 'fs';
+import path from 'path';
 import fileUpload from "express-fileupload";
 import { login } from './user.controller.js';
 import { messages } from './chat.controller.js';
+
+const deleteprop=async (req,res,next)=>{
+  const now=await Propirty.findOne({"_id":req.params.id})
+  const bee='./public/images/'+now.Image;
+  Propirty.findByIdAndDelete(req.params.id)
+    .then(result => {
+      fs.unlink(bee, (err) => {
+        if (err) {
+          throw err;
+        }
+        res.redirect('/admin/prop');
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+}
 
 const profilewishlist= (req, res,next) => {
   var query = { "_id": req.params.id };
@@ -233,4 +252,5 @@ export {
   viewproperty,
   profilewishlist,
   viewprop,
+  deleteprop,
 };
