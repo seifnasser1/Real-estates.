@@ -1,16 +1,8 @@
 import User from '../models/user.model.js';
 import Propirty from '../models/propirty.model.js';
 import { body, validationResult } from "express-validator";
-import bcrypt from "bcrypt"; //importing bcrypt package 
+import bcrypt from "bcrypt"; 
 
-// matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/):
-// At least one lowercase letter ((?=.*[a-z])).
-// At least one uppercase letter ((?=.*[A-Z])).
-// At least one digit ((?=.*\d)).
-// At least one special character ((?=.*[@$!%*?&^])).
-// Only allows specific characters [A-Za-z\d@$!%*?&^]+.
-// Testing valid pass use: S2G^lPokMKau
-// Validate signup form
 
 const saltRounds = 10;
 // Function to make a user an admin
@@ -160,7 +152,7 @@ const getallusers = async (req, res, next) => {
 
 }
 //ajax
-const checkUN = (req, res) => {
+const checkUN = async (req, res) => {
   var query = { username: req.body.username };
   User.find(query)
       .then(result => {
@@ -175,7 +167,7 @@ const checkUN = (req, res) => {
           console.log(err);
       });
 };
-const checkEmail = (req, res) => {
+const checkEmail = async (req, res) => {
   var query = { email: req.body.email };
   User.find(query)
       .then(result => {
@@ -190,6 +182,74 @@ const checkEmail = (req, res) => {
           console.log(err);
       });
 };
+const getuser=async (req, res, next) => {
+  const query={"_id":req.params.id};
+  User.findOne(query).then(result=>{
+res.render('pages/edituser',{errors: [],profile:result,user: (req.session.user === undefined ? "" : req.session.user)});
+  }) .catch(err => {
+          console.log(err);
+      });
+}
+const edit=async (req, res, next) => {
+  console.log("xxx");
+  try{
+    const userr = await User.findOne({ "_id": req.params.id });
+    let vall=userr.photo;
+    let existingemail,existingUser;
+    if(userr.email!==req.body.email)
+    {
+      existingemail = await User.findOne({ email: req.body.email });
+    }
+    if(userr.username!==req.body.username)
+    {
+      existingUser = await User.findOne({ username: req.body.username });
+    }
+    if (existingemail) {
+      console.log("Email already exists");
+      res.send("Email already exists");
+    }else if(existingUser){
+      console.log("username already exists");
+      res.send("username already exists");
+    } else {
+      let imgFile;
+  let uploadPath;
+  console.log(req.files)
+  if (req.files || Object.keys(req.files).length !== 0) {
+    imgFile = req.files.img;
+
+    uploadPath = './public/img/' + req.body.username + '.jpg';
+    // Use the mv() method to place the file somewhere on your server
+    imgFile.mv(uploadPath, function (err) {
+      if (err)
+        return res.status(500).send(err);
+      });
+      vall=req.body.username +".jpg";
+  }
+    User.findByIdAndUpdate(req.params.id, { 
+      username: req.body.username,
+      firstname:req.body.first,
+      lastname:req.body.last,
+      email:req.body.email,
+      birthdate:req.body.date,
+      gender:req.body.gender.value,
+      photo:vall,
+     }).then(result => {
+      if(req.session.user=='admin')
+      {
+        res.redirect('/admin/viewusers')
+      }else{
+      res.redirect('/')
+      }
+  })
+  .catch(err => {
+      console.log(err);
+  });
+    }
+  } catch (error) {
+    console.log(error);
+    res.send("An error occurred");
+  }
+}
 export {
   signup,
   validation,
@@ -198,6 +258,7 @@ export {
   getalluser,
   getallusers,
   checkUN,
-  checkEmail
-
+  checkEmail,
+  getuser,
+  edit,
 };

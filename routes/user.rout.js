@@ -12,6 +12,8 @@ import {
   login,
   checkUN,
   checkEmail,
+  getuser,
+  edit,
 } from "../controllers/user.controller.js";
 import {
   addwishlist,
@@ -46,6 +48,7 @@ router.get('/logout',(req,res,next)=>{
   res.redirect('/');
 })
 router.post('/signup-action', validation, signup);
+router.post('/edit/:id',validation,edit);
 router.post('/login-action', login);
 router.post('/send-message/:id',sendMes);
 router.post('/addtowishlist/:id',addwishlist);
@@ -56,7 +59,7 @@ router.post('/checkEmail', checkEmail);
 router.get('/getMessages',messages);
 router.get('/propirty/:id',viewproperty);
 router.get('/:id',profilewishlist);
-
+router.get('/edituser/:id',getuser);
 export default router;
 
 

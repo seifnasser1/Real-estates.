@@ -16,7 +16,9 @@
             <h1>
                 <%=User.username%>
             </h1>
+            <form method="get" action="/user/edituser/<%=User.id%>">
             <input type="submit" value="Edit profile" class="button">
+            </form>
         </div>
         <h2 class="m">Wish List</h2>
         <div class="favorite">

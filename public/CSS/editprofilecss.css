@@ -85,4 +85,13 @@ body{
         height: 20px;
         width: 20px;
     }
+    .error-box {
+        width: 380px;
+        padding: 5px;
+        border-radius: 8px;
+        border: solid 5px;
+        background-color: #F15A59;
+        border-color: red;
+        color: white;
+    }
     

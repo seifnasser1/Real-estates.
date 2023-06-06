@@ -9,33 +9,34 @@
         <%- include("../partials/localization") %>
         <center>
         <div class="Box">
-            <img class="profile" src=" ">
-            <input type="file" name=" " id="file" accept="image/*">
-           <label class="photo" for="file"><img class="pen" src="./pencil.png"></label>
+            <form action="/user/edit/<%=profile.id%>" method="post" enctype="multipart/form-data">
+            <img class="Profile" src="/img/<%=profile.photo%>" >
+            <input type="file" name="img" id="file">
+           <label class="photo" for="file"><img class="pen" src="/img/pencil.png"></label>
            <div class="input">
-           <input type="text" name="" placeholder="First Name">
+           <input type="text" name="first" placeholder="First Name">
         </div>
            <div class="input">
-           <input type="text" name="" placeholder="Last Name">
+           <input type="text" name="last" placeholder="Last Name">
         </div>
            <div class="input">
-           <input type="text" name="" placeholder="username">
+           <input type="text" name="username" placeholder="username">
         </div>
            <div class="input">
-           <input type="email" name="" placeholder="Email">
+           <input type="email" name="email" placeholder="Email">
         </div>
         <div class="input">
-           <input type="date" name="" placeholder="Date of birth">
+           <input type="date" name="date" placeholder="Date of birth">
         </div>
     <div>
         <label>Gender</label><br>
-        <input type="radio" name="gender"> Male 
-        <input type="radio" name="gender"> Female
+        <input type="radio" name="gender" value="male"> Male 
+        <input type="radio" name="gender" value="female"> Female
     </div>
     <a href="#"> Change password </a>
     <br>
-            <button> Done</button>
-           
+            <button type="submit"> Done</button>
+        </form>
         </div>
         </center>
     </body>

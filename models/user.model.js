@@ -6,6 +6,14 @@ const SALT_WORK_FACTOR = 10;
 
 const user = new mongoose.Schema(
   {
+    firstname :{
+      type:String,
+      required:false
+    },
+    lastname :{
+      type:String,
+      required:false,
+    },
     username: {
       type: String,
       lowercase: true,
@@ -21,6 +29,14 @@ const user = new mongoose.Schema(
       required: [true, "can't be blank"],
       match: [/\S+@\S+\.\S+/, "is invalid"],
       index: true,
+    },
+    birthdate:{
+      type:Date,
+      required:false,
+    },
+    gender:{
+      type:String,
+      required:false,
     },
     password: String,
     type: String,
