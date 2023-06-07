@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import bodyParser from'body-parser';
 import Propirty from '../models/propirty.model.js';
 import {
  sendMes,
@@ -22,7 +23,7 @@ import {
   profilewishlist,
 } from "../controllers/propirty.controller.js";
 const router = Router();
-
+router.use(bodyParser.json());
 
 router.get('/register', (req, res) => {
   res.render('pages/register', { errors: [] ,user: (req.session.user === undefined ? "" : req.session.user)});
