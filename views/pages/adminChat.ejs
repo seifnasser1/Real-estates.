@@ -1,80 +1,81 @@
+<html>
 <head>
-	<link rel="stylesheet" href="/css/chatadmin.css">
+	<!-- <link rel="stylesheet" href="/css/chatadmin.css"> -->
 	<link rel="stylesheet" href="/CSS/styleAdmin.css" />
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 </head>
 <%- include("../partials/localization") %>
-<header class="header">
-	<div class="logo">
-	  <a href="#">The Company</a>
-	  <div class="search_box">
-		<title>Chats</title>
-		<input type="text" placeholder="Search">
-		<i class="fa-sharp fa-solid fa-magnifying-glass"></i>
-	  </div>
-	</div>
-
-	<div class="header-icons">
-	  <div class="account">
-		<!-- <img src="./mostafa.jpg" alt=" image "> -->
-		<h4>Admin</h4>
-	  </div>
-	</div>
-  </header>
-  <div class="container">
-<%- include("../partials/adminnavbar") %>
-	<main class="content">
-
-		<div class="container p-0">
-
-			<div class="promo_card">
-				<h1>Messages</h1>
-				<!-- <span>This is the Admin Dashboard</span> -->
+	<header class="header">
+		<div class="logo">
+			<a href="#">The Company</a>
+			<div class="search_box">
+				<title>Chats</title>
+				<input type="text" placeholder="Search">
+				<i class="fa-sharp fa-solid fa-magnifying-glass"></i>
 			</div>
+		</div>
 
-			<div class="card">
-				<div class="row g-0">
-					<div class="col-12 col-lg-5 col-xl-3 border-right">
+		<div class="header-icons">
+			<div class="account">
+				<!-- <img src="./mostafa.jpg" alt=" image "> -->
+				<h4>Admin</h4>
+			</div>
+		</div>
+	</header>
 
-						<!-- <div class="px-4 d-none d-md-block">
-							<div class="d-flex align-items-center">
-								<div class="flex-grow-1">
-									<input type="text" class="form-control my-3" placeholder="Search...">
-								</div>
-							</div>
-						</div> -->
-						<% for(var i=0;i<Users.length;i++) { %>
-						<a href="/admin/getSingleUserChat/<%= Users[i]._id%>" class="list-group-item list-group-item-action border-0">
-							<div class="badge bg-success float-right">2</div>
-							<div class="d-flex align-items-start">
-								<!-- <img src="https://bootdey.com/img/Content/avatar/avatar2.png"
+	<body>
+		<div class="container">
+			<%- include("../partials/adminnavbar") %>
+				<main class="content">
+
+					<div class="container p-0">
+
+						<div class="promo_card">
+							<h1>Messages</h1>
+
+						</div>
+
+						<div class="card">
+							<div class="row g-0">
+								<div class="col-12 col-lg-5 col-xl-3 border-right">
+									<% for(var i=0;i<Users.length;i++) { %>
+										<a href="/admin/getSingleUserChat/<%= Users[i]._id%>"
+											class="list-group-item list-group-item-action border-0">
+											<div class="badge bg-success float-right">2</div>
+											<div class="d-flex align-items-start">
+												<!-- <img src="https://bootdey.com/img/Content/avatar/avatar2.png"
 									class="rounded-circle mr-1" alt="William Harris" width="40" height="40"> -->
-								<div class="flex-grow-1 ml-3">
-									<!--  Users[i].firstname + Users[i].lastname%> -->
-									<%= Users[i].username%>
-									<!-- <div class="small"><span class="fas fa-circle chat-online"></span> Online</div> -->
+												<div class="flex-grow-1 ml-3">
+													<!--  Users[i].firstname + Users[i].lastname%> -->
+													<%= Users[i].username%>
+														<!-- <div class="small"><span class="fas fa-circle chat-online"></span> Online</div> -->
+												</div>
+											</div>
+										</a>
+										<% } %>
+											<hr class="d-block d-lg-none mt-1 mb-0">
 								</div>
-							</div>
-						</a>
-						<% } %>
-						<hr class="d-block d-lg-none mt-1 mb-0">
-					</div>
-					<div class="col-12 col-lg-7 col-xl-9">
-						<div class="py-2 px-4 border-bottom d-none d-lg-block">
-							<div class="d-flex align-items-center py-1">
-								<div class="position-relative">
-									<img src="https://bootdey.com/img/Content/avatar/avatar3.png"
-										class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
-								</div>
-								<div class="flex-grow-1 pl-3">
-									
-								</div>
+								<div class="col-12 col-lg-7 col-xl-9">
+									<div class="py-2 px-4 border-bottom d-none d-lg-block">
+										<div class="d-flex align-items-center py-1">
+											<div class="position-relative">
+												<img src="https://bootdey.com/img/Content/avatar/avatar3.png"
+													class="rounded-circle mr-1" alt="Sharon Lessman" width="40"
+													height="40">
+											</div>
+											<div class="flex-grow-1 pl-3">
 
+											</div>
+
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-			</div>
+				</main>
 		</div>
-	</main>
+	</body>
+
+</html>
