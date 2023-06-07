@@ -1,8 +1,7 @@
 import Contactusmsg from "../models/contactus.model.js";
 import { body, validationResult } from "express-validator";
 import __dirname from "../app.js"; //
-
-//import fileUpload from "express-fileupload"; //
+const nodeMailer = require('nodemailer')
 
 const contactUsValidation = [
   body("cname").notEmpty().withMessage("Name is required"),
@@ -13,47 +12,82 @@ const contactUsValidation = [
 ];
 
 const addcontactusmsg = async (req, res) => {
-  // if (flagg > 0) {
-  //    return ;
-  //  }
-  const errors = validationResult(req);
+////////////////////////////
+require(dotenv).config()
 
-  if (!errors.isEmpty()) {
-    console.log("YP");
-    console.log(
-      errors
-        .array()
-        .map((ele) => ele.msg)
-        .join(" ")
-    );
-    res.render("pages/contactus", {
-      message: errors
-        .array()
-        .map((ele) => ele.msg)
-        .join(" - "),
-      user: req.session.user === undefined ? "" : req.session.user,
-    });
-    return res.status(400).end();
+
+const transporter = await nodeMailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.GMAIL_USER,
+    pass: process.env.PASSWORD,
   }
 
+});
+console.log(user);
+
+const EMAIL="zainabrafea03@gmail.com";
+const mailOption = {
+  // from: process.env.GMAIL_USER,
+  // to: process.env.EMAIL,
+  // subject: subject,
+  user: req.session.user._id
+
+
+
+  // html: `You got a message from
+  // Email : ${email}
+  // Name: ${name}
+  // Message: ${message}`
+  // ,
+};
+try {
+  await transporter.sendMail(mailOption);
+  return Promise.resolve("Message Sent Successfully!");
+} catch (error) {
+  return Promise.reject(error);
+}
+}
+
+  /////////////////////////////////
+  const errors = validationResult(req);
+
+  // if (!errors.isEmpty()) {
+  //   console.log("YP");
+  //   console.log(
+  //     errors
+  //       .array()
+  //       .map((ele) => ele.msg)
+  //       .join(" ")
+  //   );
+  //   res.render("pages/contactus", {
+  //     message: errors
+  //       .array()
+  //       .map((ele) => ele.msg)
+  //       .join(" - "),
+  //     user: req.session.user === undefined ? "" : req.session.user,
+  //   });
+  //   return res.status(400).end();
+  // }
+
   const contactusmsg = new Contactusmsg({
-    name: req.body.cname,
-    phno: req.body.cphone,
-    loc: req.body.cloc,
-    email: req.body.cmail,
-    ask: req.body.cmes,
+    cname: req.body.cname,
+    cphone: req.body.cphone,
+    cloc: req.body.cloc,
+    cmail: req.body.cmail,
+    cmes: req.body.cmes,
   });
 
-  contactusmsg
-    .save()
-    .then((result) => {
-      console.log(result);
-      res.redirect("/contactus");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
+  // contactusmsg
+  //   .save()
+  //   .then((result) => {
+  //     console.log(result);
+  //     res.redirect("/contactus");
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   });
+//};
 const getAllMessages = async (req, res) => {
   // also it needs pagination, in case of it get bigger
   Contactusmsg.find({})
@@ -64,5 +98,18 @@ const getAllMessages = async (req, res) => {
       console.log(error);
     });
 };
+
+// app.post('/contact', async (req, res, next) => {
+//   const { cname, cmail, cphone, cloc,cmes } = req.body;
+//   try {
+//     await sendMail(cname, cmail, cphone, cloc,cmes);
+//   }
+//   catch (error) {
+//     res.send("Message Could not be Sent");
+//   }
+//   res.send("Message Succssfully Sent!");
+// });
+
+
 
 export { addcontactusmsg, contactUsValidation, getAllMessages };

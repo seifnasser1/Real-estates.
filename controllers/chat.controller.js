@@ -7,9 +7,9 @@ const sendMes = async (req, res, next) => {
     const query={"_id":req.params.id}
 Propirty.findOne(query).then(result=>{
   const content =req.body.content;
-    
+
   if(!content){
-      console.log("Invalid data passed into request");
+      console.log("Invalid data passed into request emptymsg");
       return res.sendStatues(400);
   }
 console.log(req.body);
@@ -17,31 +17,32 @@ const message = new Message({
   sender: req.session.user._id,
  content: req.body.content,
  receiver: result.adminid,
-//
+
 });
-message.save()
+message.save()  //insert in database
 
 
   .catch(err => {
     console.log(err);
   });
-}) .catch(err1 => {
+}) 
+
+.catch(err1 => {
   console.log(err1);
 });
    };
-   //displaying chat 
+
  const messages= async (req,res,next)=>{
   const query={"_id":req.params.id}
   Propirty.findOne(query).then(res=>{
     console.log(req.session.user._id)
     console.log(res.adminid)
   const query1={"sender":req.session.user._id,"receiver":res.adminid};
-  /////const query2={"sender":res.adminid,"receiver":req.session.user._id};
-  ////const sendedmes= 
+
   Message.findOne(query1).then(res=>{console.log(res)});
-  //////const receivmes= Message.find(query2);
 });
  }
+
 const getsingleuserchat= async function (req, res, next) {
   const query1={"sender":req.session.user._id,"receiver":req.params.id};
   const query2={"receiver":req.session.user._id,"sender":req.params.id};
@@ -64,12 +65,10 @@ res.render('pages/chatAdmin', { Messages:allMessages ,user: (req.session.user ==
 };
 
 const sendMsgFromAdmin=async function(req, res, next) {
-  
-
   const content =req.body.content;
-    
+
   if(!content){
-      console.log("Invalid data passed into request");
+      console.log("Invalid data passed into request emptymsg");
       return res.sendStatues(400);
   }
   console.log(req.body);
@@ -80,12 +79,11 @@ const sendMsgFromAdmin=async function(req, res, next) {
   //
   });
   message.save()
-  
-  
+
   .catch(err => {
     console.log(err);
   });
-  
+
   };
 
   const chats=function (req, res, next) {
@@ -105,6 +103,7 @@ const sendMsgFromAdmin=async function(req, res, next) {
     });
     console.log(usersChatsUnique)
     const Users = [];
+
     for(let i=0;i<usersChatsUnique.length;i++){
       const query1={"_id":usersChatsUnique[i]};
       const usr=await User.findOne(query1);
@@ -115,7 +114,7 @@ const sendMsgFromAdmin=async function(req, res, next) {
     });
   };
 
-   export { 
+   export {
     sendMes,
     messages,
     getsingleuserchat,

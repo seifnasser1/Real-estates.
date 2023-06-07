@@ -77,4 +77,8 @@ router.post('/editproperty/:id',edit)
 router.get('/prop',viewprop);
 router.get('/viewusers', getallusers);
 
+
+router.get('/viewusers', getallusers);
+
+
 export default router;

@@ -21,26 +21,23 @@
             <div class="headerz">
                 <h1>WebChat</h1>
             </div>
-            <!--  let size=Messages.length+amessages.length;%> -->
-            <!-- let j=0,k=0;%> -->
             <div class="bodyz">
                 <div id="chatBody">
-                    <!-- console.log(Messages[j].createdAt);%> -->
-                    <!-- console.log(amessages[k].createdAt);%> -->
+
                     <% for(var i=0;i<Messages.length;i++) { %>
-                        <!-- if(Messages[j].createdAt<amessages[k].createdAt){%> -->
+
                             <%if(Messages[i].type=="user"){%>
                     <p class="messagez user_message">  <%= Messages[i].message.content %></p>
-                    <!-- j++%> -->
+
                     <%}else{%>
                         <p class="messagez">  <%= Messages[i].message.content %></p>
-                        <!-- k++;%> -->
+
                         <%}%>
                     <% } %>
                 </div>
             </div>
             <div class="footerz">
-               
+
 
 <form action="/user/send-message/<%=Propirty.id%>" method="post"  >
 
