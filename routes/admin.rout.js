@@ -1,8 +1,13 @@
 import { Router } from 'express';
 import User from '../models/user.model.js';
 import { addprop ,deleteprop,viewprop } from "../controllers/propirty.controller.js";
-import {Message,getsingleuserchat,sendMsgFromAdmin,chats} from '../models/message.model.js';
+import Message from '../models/message.model.js';
 import { getalluser, getallusers, makeAdmin } from "../controllers/user.controller.js";
+import{
+  getsingleuserchat,
+  sendMsgFromAdmin,
+  chats
+}from "../controllers/chat.controller.js"
 const router = Router();
 
 // router.use((req, res, next) => {

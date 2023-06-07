@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
-import Propirty from "./propirty.model.js"
 
 const SALT_WORK_FACTOR = 10;
 
