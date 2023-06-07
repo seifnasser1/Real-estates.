@@ -93,30 +93,43 @@
             }
             event.target.classList.add("active");
             currentValue = parseInt(event.target.value);
-            console.log(currentValue);
+            showProperties();
         }
 
         function backBtn() {
-            console.log(currentValue);
             if (currentValue > 0) {
+                currentValue--;
                 for (l of link) {
                     l.classList.remove("active");
                 }
-                currentValue--;
                 link[currentValue].classList.add("active");
+                showProperties();
             }
         }
 
         function nextBtn() {
-            console.log(currentValue);
             if (currentValue < link.length - 1) {
+                currentValue++;
                 for (l of link) {
                     l.classList.remove("active");
                 }
-                currentValue++;
                 link[currentValue].classList.add("active");
+                showProperties();
             }
         }
+
+        function showProperties() {
+            let properties = document.getElementsByClassName("house");
+            for (let i = 0; i < properties.length; i++) {
+                if (i >= currentValue * 6 && i < (currentValue + 1) * 6) {
+                    properties[i].style.display = "block";
+                } else {
+                    properties[i].style.display = "none";
+                }
+            }
+        }
+
+        showProperties();
     </script>
 
     <%- include("../partials/footer") %>
