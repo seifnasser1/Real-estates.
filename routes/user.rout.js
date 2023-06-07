@@ -5,7 +5,7 @@ import {
  messages,
 } from "../controllers/chat.controller.js";
 
-//import {addcontactusmsg, contactusmsg , getAllMessages }from '../controllers/contactus.controller.js';
+import {addContactUsMsg}from '../controllers/contactus.controller.js';
 
 import {
   signup,
@@ -63,18 +63,7 @@ router.get('/propirty/:id',viewproperty);
 router.get('/:id',profilewishlist);
 router.get('/edituser/:id',getuser);
 
-// /////////////////////////
+router.post('/contact',addContactUsMsg);
 
-// app.post('/contact', async (req, res, next) => {
-//   const { cname, cmail, cphone, cloc,cmes } = req.body;
-//   try {
-//     await sendMail(cname, cmail, cphone, cloc,cmes);
-//   }
-//   catch (error) {
-//     res.send("Message Could not be Sent");
-//   }
-//   res.send("Message Succssfully Sent!");
-// });
-// ////////////////////
 
 export default router;
