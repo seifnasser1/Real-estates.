@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import User from '../models/user.model.js';
-import { addprop ,deleteprop,viewprop } from "../controllers/propirty.controller.js";
+import { addprop ,deleteprop,viewprop ,getprop,edit} from "../controllers/propirty.controller.js";
 import Message from '../models/message.model.js';
 import { getalluser, getallusers, makeAdmin } from "../controllers/user.controller.js";
 import{
@@ -21,6 +21,7 @@ const router = Router();
 
 router.get('/', getalluser);
 router.get('/delprop/:id',deleteprop);
+router.get('/editprop/:id',getprop)
 router.get('/deleteuser/:id', (req, res, next) => {
   console.log(req.params.id)
   User.findByIdAndDelete(req.params.id)
@@ -70,13 +71,11 @@ router.get('/getSingleUserChat/:id',getsingleuserchat);
 router.post('/sendMsgFromAdmin/:id', sendMsgFromAdmin);
 
 router.get('/chats',chats);
-router.get('/register', (req, res) => {
-  res.redirect('/register');
-});
 router.get('/Top',(req,res)=>{
   res.render('pages/TopProperties', { user: (req.session.user === undefined ? "" : req.session.user) });
 })
 router.post('/addpropirty', addprop);
+router.post('/editproperty/:id',edit)
 router.get('/prop',viewprop);
 router.get('/viewusers', getallusers);
 

@@ -11,7 +11,7 @@ import { messages } from './chat.controller.js';
 
 const deleteprop=async (req,res,next)=>{
   const now=await Propirty.findOne({"_id":req.params.id})
-  const bee='./public/images/'+now.Image;
+  const bee='./public/img/'+now.Image;
   Propirty.findByIdAndDelete(req.params.id)
     .then(result => {
       fs.unlink(bee, (err) => {
@@ -255,7 +255,62 @@ const viewprop= async (req,res,next)=>{
     res.render('pages/adminUnits',{properties:result,user: (req.session.user === undefined ? "" : req.session.user)})
   })
 }
+const getprop= async (req,res,next)=>{
+  const query={"_id":req.params.id};
+  Propirty.findOne(query).then(result=>{
+res.render('pages/editpropirty',{prop:result,user: (req.session.user === undefined ? "" : req.session.user)})
+  })
+};
+const edit=async (req,res,next)=>{
+  const current = await Propirty.findOne({"_id":req.params.id});
+  let curimg=current.Image;
+  const bee='./public/img/'+current.Image;
+  let imgFile;
+  let uploadPath;
+  console.log(req.files)
+  if (req.files !== null){
+  if ( Object.keys(req.files).length !== 0) {
+    fs.unlink(bee, (err) => {
+      if (err) {
+        throw err;
+      }
+    });
+    imgFile = req.files.img;
 
+    uploadPath = './public/img/' + req.body.name + '.jpg';
+    // Use the mv() method to place the file somewhere on your server
+    imgFile.mv(uploadPath, function (err) {
+      if (err)
+        return res.status(500).send(err);
+      });
+      curimg=req.body.name +".jpg";
+  }
+}
+Propirty.findByIdAndUpdate(req.params.id,{
+      name: req.body.name,
+      mobilenumber: req.body.mobile_number,
+      mobilenumber2: req.body.other_number,
+      servicetype: req.body.servise,
+      unittype: req.body.type,
+      district: req.body.district,
+      garages: req.body.garage,
+      area: req.body.area,
+      value: req.body.vale,
+      unumber: req.body.u_nom,
+      bathrooms: req.body.u_path,
+      bedrooms: req.body.u_bed,
+      furniture: req.body.f_type,
+      details: req.body.details,
+      Image: curimg,
+        })
+      .then(result => {
+        console.log('unit edited succesfully');
+        res.redirect('/admin/prop');
+      })
+      .catch(err => {
+        console.log(err);
+      });
+};
 export {
   addprop,
   addwishlist,
@@ -264,4 +319,6 @@ export {
   profilewishlist,
   viewprop,
   deleteprop,
+  getprop,
+  edit,
 };
