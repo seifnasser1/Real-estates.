@@ -14,19 +14,19 @@
             <input type="file" name="img" id="file">
            <label class="photo" for="file"><img class="pen" src="/img/pencil.png"></label>
            <div class="input">
-           <input type="text" name="first" placeholder="First Name">
+           <input type="text" name="first" value="<%=profile.firstname%>" placeholder="First Name">
         </div>
            <div class="input">
-           <input type="text" name="last" placeholder="Last Name">
+           <input type="text" name="last" value="<%=profile.lastname%>" placeholder="Last Name">
         </div>
            <div class="input">
-           <input type="text" name="username" placeholder="username">
+           <input type="text" name="username" value="<%=profile.username%>" placeholder="username">
         </div>
            <div class="input">
-           <input type="email" name="email" placeholder="Email">
+           <input type="email" name="email" value="<%=profile.email%>" placeholder="Email">
         </div>
         <div class="input">
-           <input type="date" name="date" placeholder="Date of birth">
+           <input type="date" name="date" value="<%=profile.birthdate%>" placeholder="Date of birth">
         </div>
     <div>
         <label>Gender</label><br>
