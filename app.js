@@ -50,4 +50,5 @@ app.use(function (err, req, res, next) {
 app.use((req, res) => {
   res.status(404).render('pages/404',{ user: (req.session.user === undefined ? "" : req.session.user)});
 });
+
 export default app;

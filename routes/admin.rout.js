@@ -10,15 +10,6 @@ import{
 }from "../controllers/chat.controller.js"
 const router = Router();
 
-// router.use((req, res, next) => {
-//   if (req.session.user !== undefined && req.session.user.Type === 'admin') {
-//       next();
-//   }
-//   else {
-//       res.render('err', { err: 'You are not an Admin',user: (req.session.user === undefined ? "" : req.session.user) })
-//   }
-// });
-
 router.get('/', getalluser);
 router.get('/delprop/:id',deleteprop);
 router.get('/deleteuser/:id', (req, res, next) => {
@@ -79,5 +70,9 @@ router.get('/Top',(req,res)=>{
 router.post('/addpropirty', addprop);
 router.get('/prop',viewprop);
 router.get('/viewusers', getallusers);
+
+
+router.get('/viewusers', getallusers);
+
 
 export default router;
