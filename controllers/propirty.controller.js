@@ -105,7 +105,7 @@ const displayPropertiesDescending = async (req, res, next) => {
   try {
     const propirty = await Propirty.find().sort({ value: -1 });
 
-    res.render('propirty-list', { properties });
+    res.render('pages/TopProperties', { Propirty:propirty ,user: (req.session.user === undefined ? "" : req.session.user)});
   } catch (err) {
     console.log(err);
     res.status(500).send('Server Error');

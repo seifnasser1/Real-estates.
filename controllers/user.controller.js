@@ -188,7 +188,6 @@ res.render('pages/edituser',{errors: [],profile:result,user: (req.session.user =
       });
 }
 const edit=async (req, res, next) => {
-  console.log("xxx");
   try{
     const userr = await User.findOne({ "_id": req.params.id });
     let vall=userr.photo;
@@ -210,7 +209,6 @@ const edit=async (req, res, next) => {
     } else {
       let imgFile;
   let uploadPath;
-  console.log(req.files)
   if (req.files !== null){
   if ( Object.keys(req.files).length !== 0) {
     imgFile = req.files.img;
@@ -230,10 +228,11 @@ const edit=async (req, res, next) => {
       lastname:req.body.last,
       email:req.body.email,
       birthdate:req.body.date,
-      gender:req.body.gender.value,
+      gender:req.body.gender,
       photo:vall,
      }).then(result => {
-      if(req.session.user=='admin')
+      console.log(req.session.user.type);
+      if(req.session.user.type=="admin")
       {
         res.redirect('/admin/viewusers')
       }else{
