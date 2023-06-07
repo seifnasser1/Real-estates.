@@ -268,7 +268,7 @@ const addwishlist = async (req, res, next) => {
   }
 };
 const viewprop= async (req,res,next)=>{
-  Propirty.find().then(result=>{
+  Propirty.findOne().then(result=>{
     res.render('pages/adminUnits',{properties:result,user: (req.session.user === undefined ? "" : req.session.user)})
   })
 }
