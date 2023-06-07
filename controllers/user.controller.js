@@ -211,7 +211,8 @@ const edit=async (req, res, next) => {
       let imgFile;
   let uploadPath;
   console.log(req.files)
-  if (req.files || Object.keys(req.files).length !== 0) {
+  if (req.files !== null){
+  if ( Object.keys(req.files).length !== 0) {
     imgFile = req.files.img;
 
     uploadPath = './public/img/' + req.body.username + '.jpg';
@@ -222,6 +223,7 @@ const edit=async (req, res, next) => {
       });
       vall=req.body.username +".jpg";
   }
+}
     User.findByIdAndUpdate(req.params.id, { 
       username: req.body.username,
       firstname:req.body.first,

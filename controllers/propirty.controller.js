@@ -233,7 +233,6 @@ const addwishlist = async (req, res, next) => {
     username: req.session.user.id,
     property: req.body.Propirty,
   });
-  var found;
   if (exsistingwishlist) {
     wishlist.findByIdAndDelete(exsistingwishlist._id);
     res.redirect("/", {
