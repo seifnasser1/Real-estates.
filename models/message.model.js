@@ -8,6 +8,7 @@ const message = new mongoose.Schema(
   },
 
   { timestamps: true }
+  //createdat,updatedat prop. of type date in mongoose
 )
 
 const Message = mongoose.model("Message", message);
