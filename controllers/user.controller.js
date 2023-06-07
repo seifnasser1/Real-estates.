@@ -110,7 +110,7 @@ const login = async (req, res, next) => {
   // }
   const existinguser = await User.findOne({ username: req.body.logusername });
   if(existinguser){
-    const hashePassword =await bcrypt.hash(req.body.logpassword, saltRounds);
+    const hashePassword =await bcrypt.compare(req.body.logpassword, existinguser.password);
     console.log(existinguser.password)
     console.log(hashePassword)
     if(hashePassword){
