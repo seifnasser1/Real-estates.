@@ -41,48 +41,47 @@
         <div class="list1">
           <table>
             <div class="container">
+              <% Propirty.sort((a, b)=> b.value - a.value); %>
+              <% for(var i=0; i<Propirty.length; i++) { %>
               <div class="house">
                 <a href="#" class="imm">
                   <div class="fade"></div>
-                  <img src="/img/madinty.jpg" alt="can't load image">
+                  <img src="/img/<%=Propirty[i].Image%>" alt="can't load image">
                   <center>
                     <h2 class="price">
-                      Villa
+                      <%=Propirty[i].servicetype%>
                     </h2>
                     <div class="forsalebar"></div>
                 </a>
                 <div class="title">
                   <h3><i class="fa fa-map-marker icon"></i>
-                    Maadi
+                    <%=Propirty[i].district%>
                   </h3>
                   <p class="p">
-                    19000000 EGP
-                    </i>
+                    <%=Propirty[i].value%> EGP
                   </p>
                   </center>
                   <tr>
                     <td class="Center">
                       <i class="fa fa-bed"></i>
-                      5 Bedrooms
+                      <%=Propirty[i].bedrooms%> Bedrooms
                     </td>
                     <td class="Center">
                       <i class="fa fa-tint"></i>
-                      4 Baths
+                      <%=Propirty[i].bathrooms%> Baths
                     </td>
                     <td class="Center">
                       <i class="fa fa-expand"></i>
-                      350 m
-                      <sup>2</sup>
+                      <%=Propirty[i].area%> m<sup>2</sup>
                     </td>
                   </tr>
                 </div>
               </div>
+              <% } %>
             </div>
           </table>
         </div>
       </div>
-      </tbody>
-      </table>
     </div>
   </div>
   </div>

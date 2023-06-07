@@ -26,8 +26,6 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 // Middleware
-////monaddd   .////m
-
 app.use(fileUpload());
 app.use(logger("dev"));
 app.use(express.json());
@@ -53,28 +51,3 @@ app.use((req, res) => {
   res.status(404).render('pages/404',{ user: (req.session.user === undefined ? "" : req.session.user)});
 });
 export default app;
-
-//const MongoClient = require('mongodb').MongoClient;
-
-// Replace <username>, <password>, and <clustername> with your own credentials
-// const uri = `mongodb+srv://<username>:<password>@<clustername>.mongodb.net/test?retryWrites=true&w=majority`;
-
-// const client = new MongoClient(uri, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-//   serverSelectionTimeoutMS: 5000 // Increase the timeout value (in milliseconds)
-// });
-
-// async function connect() {
-//   try {
-//     await client.connect();
-//     console.log('Connected to MongoDB!');
-//   } catch (err) {
-//     console.error(err);
-//   }
-// }
-
-// module.exports = { 
-//   connect: connect,
-//   client: client
-// }; 

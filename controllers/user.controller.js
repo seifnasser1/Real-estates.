@@ -110,9 +110,7 @@ const login = async (req, res, next) => {
   // }
   const existinguser = await User.findOne({ username: req.body.logusername });
   if(existinguser){
-    const hashePassword =await bcrypt.hash(req.body.logpassword, saltRounds);
-    console.log(existinguser.password)
-    console.log(hashePassword)
+    const hashePassword =await bcrypt.compare(req.body.logpassword, existinguser.password);
     if(hashePassword){
       req.session.user=existinguser;
       if(req.session.user.type=='admin'){
@@ -190,7 +188,6 @@ res.render('pages/edituser',{errors: [],profile:result,user: (req.session.user =
       });
 }
 const edit=async (req, res, next) => {
-  console.log("xxx");
   try{
     const userr = await User.findOne({ "_id": req.params.id });
     let vall=userr.photo;
@@ -212,8 +209,8 @@ const edit=async (req, res, next) => {
     } else {
       let imgFile;
   let uploadPath;
-  console.log(req.files)
-  if (req.files || Object.keys(req.files).length !== 0) {
+  if (req.files !== null){
+  if ( Object.keys(req.files).length !== 0) {
     imgFile = req.files.img;
 
     uploadPath = './public/img/' + req.body.username + '.jpg';
@@ -224,16 +221,18 @@ const edit=async (req, res, next) => {
       });
       vall=req.body.username +".jpg";
   }
+}
     User.findByIdAndUpdate(req.params.id, { 
       username: req.body.username,
       firstname:req.body.first,
       lastname:req.body.last,
       email:req.body.email,
       birthdate:req.body.date,
-      gender:req.body.gender.value,
+      gender:req.body.gender,
       photo:vall,
      }).then(result => {
-      if(req.session.user=='admin')
+      console.log(req.session.user.type);
+      if(req.session.user.type=="admin")
       {
         res.redirect('/admin/viewusers')
       }else{
