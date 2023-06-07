@@ -100,6 +100,18 @@ const viewproperty= async (req, res,next) => {
       console.log(err);
     });
 };
+
+const displayPropertiesDescending = async (req, res, next) => {
+  try {
+    const propirty = await Propirty.find().sort({ value: -1 });
+
+    res.render('propirty-list', { properties });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('Server Error');
+  }
+}; 
+
 const addprop = async (req, res, next) => {
   let imgFile;
   let uploadPath;
@@ -257,6 +269,7 @@ const viewprop= async (req,res,next)=>{
 }
 
 export {
+  displayPropertiesDescending,
   addprop,
   addwishlist,
   navsearch,
