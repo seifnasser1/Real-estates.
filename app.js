@@ -40,7 +40,7 @@ app.use('/', indexRouter);
 app.use('/user', userrouter);
 app.use('/admin', adminrouter);
 
-// Error Handling
+// Error Handling handles error in code
 app.use(function (err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -48,7 +48,7 @@ app.use(function (err, req, res, next) {
   res.render('pages/error');
 });
 
-// 404 page
+// 404 page if ml2ash el page 
 app.use((req, res) => {
   res.status(404).render('pages/404',{ user: (req.session.user === undefined ? "" : req.session.user)});
 });
