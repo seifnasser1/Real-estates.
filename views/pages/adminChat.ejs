@@ -6,6 +6,68 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 </head>
 <%- include("../partials/localization") %>
+<<<<<<< HEAD
+<header class="header">
+	<div class="logo">
+	  <a href="#">The Company</a>
+	  <div class="search_box">
+		<input type="text" placeholder="Search">
+		<i class="fa-sharp fa-solid fa-magnifying-glass"></i>
+	  </div>
+	</div>
+
+	<div class="header-icons">
+	  <div class="account">
+		<!-- <img src="./mostafa.jpg" alt=" image "> -->
+		<h4>Admin</h4>
+	  </div>
+	</div>
+  </header>
+  <div class="container">
+<%- include("../partials/adminnavbar") %>
+	<main class="content">
+
+		<div class="container p-0">
+
+			<h1 class="h3 mb-3">Messages</h1>
+
+			<div class="card">
+				<div class="row g-0">
+					<div class="col-12 col-lg-5 col-xl-3 border-right">
+
+						<% for(var i=0;i<Users.length;i++) { %>
+						<a href="/admin/getSingleUserChat/<%= Users[i]._id%>" class="list-group-item list-group-item-action border-0">
+
+							<div class="d-flex align-items-start">
+								<!-- > -->
+								<div class="flex-grow-1 ml-3">
+
+									<%= Users[i].username%>
+
+								</div>
+							</div>
+						</a>
+						<% } %>
+						<hr class="d-block d-lg-none mt-1 mb-0">
+					</div>
+					<div class="col-12 col-lg-7 col-xl-9">
+						<div class="py-2 px-4 border-bottom d-none d-lg-block">
+							<div class="d-flex align-items-center py-1">
+								<div class="position-relative">
+
+								</div>
+								<div class="flex-grow-1 pl-3">
+
+								</div>
+
+							</div>
+						</div>
+
+
+
+					</div>
+				</div>
+=======
 	<header class="header">
 		<div class="logo">
 			<a href="#">The Company</a>
@@ -13,6 +75,7 @@
 				<title>Chats</title>
 				<input type="text" placeholder="Search">
 				<i class="fa-sharp fa-solid fa-magnifying-glass"></i>
+>>>>>>> dad296055b84dec4b8244767792f203cbd611035
 			</div>
 		</div>
 

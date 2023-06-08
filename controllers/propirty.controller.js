@@ -66,7 +66,7 @@ const viewproperty= async (req, res,next) => {
   var query = { "_id": req.params.id };
   var value;
 
-  const exsistingwishlist = await wishlist.findOne({"userid":req.session.user._id,"propertyid":req.params.id});
+  const exsistingwishlist = await wishlist.findOne({"userid":req.session.user._id,"propertyid":req.params.id}); 
  
   if(exsistingwishlist==null){
     value=1;
@@ -101,6 +101,8 @@ const viewproperty= async (req, res,next) => {
     });
 };
 
+
+
 const displayPropertiesDescending = async (req, res, next) => {
   try {
     const propirty = await Propirty.find().sort({ value: -1 });
@@ -115,24 +117,23 @@ const displayPropertiesDescending = async (req, res, next) => {
 const addprop = async (req, res, next) => {
   let imgFile;
   let uploadPath;
-  console.log(req.files)
+  console.log(req.files);
   if (!req.files || Object.keys(req.files).length === 0) {
-    return res.status(400).send('No files were uploaded.');
+    return res.status(400).send("No files were uploaded.");
   }
   imgFile = req.files.img;
 
-  uploadPath = './public/img/' + req.body.name + '.jpg';
+  uploadPath = "./public/img/" + req.body.name + ".jpg";
   // Use the mv() method to place the file somewhere on your server
   imgFile.mv(uploadPath, function (err) {
-    if (err)
-      return res.status(500).send(err);
+    if (err) return res.status(500).send(err);
 
-    console.log(req.session.user.id);
+    console.log(req.body);
     const propirty = new Propirty({
       name: req.body.name,
       mobilenumber: req.body.mobile_number,
       mobilenumber2: req.body.other_number,
-      email: req.session.user.email,
+      email: req.body.name,
       servicetype: req.body.servise,
       unittype: req.body.type,
       district: req.body.district,
@@ -144,19 +145,19 @@ const addprop = async (req, res, next) => {
       bedrooms: req.body.u_bed,
       furniture: req.body.f_type,
       details: req.body.details,
-      Image: req.body.name + '.jpg',
-      adminid:req.session.user._id,
-        });
-    propirty.save()
-      .then(result => {
-        console.log('unit added succesfully');
-        res.redirect('/admin');
+      Image: req.body.name + ".jpg",
+      adminid: req.session.user?.id || "465498w2",
+    });
+    propirty
+      .save()
+      .then((result) => {
+        console.log("unit added succesfully");
+        res.redirect("/admin");
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   });
-
 };
 const Search = async (req, res, next) => {
   console.log(req.body);
@@ -170,18 +171,8 @@ const Search = async (req, res, next) => {
   if (Area) query.area = Area;
   if (Price) {
     const price = parseInt(Price);
-    if (price === 1)
     query.value = {
-      $gte: 1000000,
-    };
-  else if (price === 2)
-    query.value = {
-      $gte: 500000,
-      $lt: 1000000,
-    };
-  else
-    query.value = {
-      $lt: 500000,
+      $lte: price === 1 ? 100000000 : price === 2 ? 1000000 : 500000,
     };
   }
   if (Bedrooms) {
@@ -202,11 +193,15 @@ const Search = async (req, res, next) => {
 
   Propirty.find(query)
     .then((result) => {
-      console.log(result);
-      res.render("pages/All", {
-        propirty: result,
-        user: req.session.user === undefined ? "" : req.session.user,
-      });
+      let k=result.length%6;
+      if(k>0){
+      var c=(parseInt(result.length/6))+1;
+      }else{
+        var c=(parseInt(result.length/6));
+      }
+      var c=(parseInt(result.length/6))+(result.length%6);
+    var h=0;
+    res.render('pages/All', { Propirty: result,count:c,currentValue:h,  user: (req.session.user === undefined ? "" : req.session.user)});
     })
     .catch((err) => console.log(err));
 };
@@ -231,7 +226,12 @@ const navsearch = async (req, res, next) => {
   };
   Propirty.find(query)
     .then((result) => {
-      console.log("HELLo");
+      let k=result.length%6;
+    if(k>0){
+    var c=(parseInt(result.length/6))+1;
+    }else{
+      var c=(parseInt(result.length/6));
+    }
       res.render("pages/All", {
         propirty: result,
         user: req.session.user === undefined ? "" : req.session.user,
@@ -242,28 +242,31 @@ const navsearch = async (req, res, next) => {
 
 const addwishlist = async (req, res, next) => {
   const exsistingwishlist = await wishlist.findOne({
-    username: req.session.user.id,
-    property: req.body.Propirty,
+    userid: req.session.user._id,
+    propertyid: req.params.id,
   });
+  var found;
   if (exsistingwishlist) {
-    wishlist.findByIdAndDelete(exsistingwishlist._id);
-    res.redirect("/", {
-      user: req.session.user === undefined ? "" : req.session.user,
-    });
+    wishlist.findByIdAndDelete(exsistingwishlist._id).then(result=>{
+      res.redirect("/");
+    }).catch((err) => console.log(err));
+    
   } else {
     const wish = new wishlist({
-      username: req.session.user.id,
-      property: req.body.Propirty,
+      userid: req.session.user._id,
+      propertyid: req.params.id,
     });
     console.log(wish);
-    wish.save().then((result) => {
-      res.redirect("/", { user: req.session.user === undefined ? "" : req.session.user });
+    wish
+      .save()
+      .then((result) => {
+        res.redirect("/");
       })
       .catch((err) => console.log(err));
   }
-}
+};
 const viewprop= async (req,res,next)=>{
-  Propirty.find().then(result=>{
+  Propirty.findOne().then(result=>{
     res.render('pages/adminUnits',{properties:result,user: (req.session.user === undefined ? "" : req.session.user)})
   })
 }
@@ -334,4 +337,5 @@ export {
   deleteprop,
   getprop,
   edit,
+  Search,
 };

@@ -24,8 +24,7 @@
 
             <div class="bodyz">
                 <div id="chatBody">
-                    console.log(Messages[j].createdAt);%>
-                    console.log(amessages[k].createdAt);%>
+                    
                     <% for(var i=0;i<Messages.length;i++) { %>
 
                             <%if(Messages[i].type=="user"){%>
@@ -47,7 +46,7 @@
                  <container>
                     <input  class="inputz" type="text" name="content" id="chatInput">
                     <button type="submit">
-                        <img class="sendicon" src="img/download.png" alt="send icon" onclick="sendMsg('admin')">
+                        <img class="sendicon" src="/img/download.png" alt="send icon" onclick="sendMsg('admin')">
                     </button>
                 </container>
                 </form>

@@ -187,6 +187,8 @@ res.render('pages/edituser',{errors: [],profile:result,user: (req.session.user =
           console.log(err);
       });
 }
+
+
 const edit=async (req, res, next) => {
   try{
     const userr = await User.findOne({ "_id": req.params.id });

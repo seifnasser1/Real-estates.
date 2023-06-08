@@ -6,7 +6,7 @@ import {
  messages,
 } from "../controllers/chat.controller.js";
 
-//import {addcontactusmsg, contactusmsg , getAllMessages }from '../controllers/contactus.controller.js';
+import {addContactUsMsg}from '../controllers/contactus.controller.js';
 
 import {
   signup,
@@ -22,6 +22,7 @@ import {
   addwishlist,
   navsearch,
   viewproperty,
+  Search,
   profilewishlist,
 } from "../controllers/propirty.controller.js";
 const router = Router();
@@ -34,7 +35,12 @@ router.get('/propirty', (req, res) => {
   Propirty.find()
 
   .then(result => {
-    var c=(parseInt(result.length/6))+(result.length%6);
+    let k=result.length%6;
+    if(k>0){
+    var c=(parseInt(result.length/6))+1;
+    }else{
+      var c=(parseInt(result.length/6));
+    }
     var h=0;
     res.render('pages/All', { Propirty: result,count:c,currentValue:h,  user: (req.session.user === undefined ? "" : req.session.user)});
   })
@@ -49,7 +55,8 @@ router.get('/logout',(req,res,next)=>{
   console.log(req.session.user);
   req.session.destroy();
   res.redirect('/');
-})
+});
+router.get('/homesearch',Search);
 router.post('/signup-action', validation, signup);
 router.post('/edit/:id',validation,edit);
 router.post('/login-action', login);
@@ -63,19 +70,7 @@ router.get('/getMessages',messages);
 router.get('/propirty/:id',viewproperty);
 router.get('/:id',profilewishlist);
 router.get('/edituser/:id',getuser);
+router.post('/contact',addContactUsMsg);
 
-// /////////////////////////
-
-// app.post('/contact', async (req, res, next) => {
-//   const { cname, cmail, cphone, cloc,cmes } = req.body;
-//   try {
-//     await sendMail(cname, cmail, cphone, cloc,cmes);
-//   }
-//   catch (error) {
-//     res.send("Message Could not be Sent");
-//   }
-//   res.send("Message Succssfully Sent!");
-// });
-// ////////////////////
 
 export default router;
