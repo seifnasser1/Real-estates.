@@ -69,10 +69,10 @@ const profilewishlist= (req, res,next) => {
 const getTopSalesProperties = async (req, res) => {
   const Property = require('/models/propirty.model');
   try {
-    // Fetch properties from the database
+    
     const properties = await Property.find().sort({ value: -1 }).limit(5);
 
-    res.render('admin-dashboard', { properties }); // Pass the properties to the template
+    res.render('admin-dashboard', { properties });
   } catch (error) {
     console.log(error);
     res.status(500).send('Server Error');
