@@ -25,7 +25,7 @@
         <% var start = currentValue * 6 %>
         <div class="container">
             <% if (Propirty.length > 0) { %>
-                <% for (var i = start; i < Math.min(start + 6, Propirty.length); i++) { %>
+                <% for (var i = start; i < Propirty.length; i++) { %>
                     <div class="house">
                         <a href="/user/propirty/<%=Propirty[i].id%>" class="imm">
                             <div class="fade"></div>
