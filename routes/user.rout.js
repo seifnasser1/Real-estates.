@@ -14,7 +14,7 @@ import {
   //logvalidation,
   login,
   checkUN,
-  //checkEmail,
+  checkEmail,
   getuser,
   edit,
 } from "../controllers/user.controller.js";
@@ -26,6 +26,8 @@ import {
   profilewishlist,
 } from "../controllers/propirty.controller.js";
 const router = Router();
+//provides the express-session middleware
+//parse incoming reqs in json format
 router.use(bodyParser.json());
 
 router.get('/register', (req, res) => {
@@ -64,7 +66,7 @@ router.post('/send-message/:id',sendMes);
 router.post('/addtowishlist/:id',addwishlist);
 router.get('/search',navsearch);
 router.post('/checkUN',checkUN);
-//router.post('/checkEmail', checkEmail);
+router.post('/checkEmail', checkEmail);
 //router.get('/propirty/:id',messages,viewproperty);
 router.get('/getMessages',messages);
 router.get('/propirty/:id',viewproperty);
