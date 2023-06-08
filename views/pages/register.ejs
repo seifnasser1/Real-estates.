@@ -22,24 +22,23 @@
                     data: JSON.stringify({ username: data }),
                     success: function (response) {
                         $('#unresult').html('username is ' + response);
-        
+
                         if (response == 'taken') {
                             $('#unresult').css("color", "red");
                         }
-                        else if (response=='available')
-                        {
+                        else if (response == 'available') {
                             $('#unresult').css("color", "green");
                         }
                     },
-                    error:function(err){
-        
+                    error: function (err) {
+
                     }
                 });
             });
         });
     </script>
     <script src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
-   <!--<script scr="https://ajax.googleaois.com/ajax/libs/jquery/3.6.4/jquery.min.js"> </script> -->
+    <!--<script scr="https://ajax.googleaois.com/ajax/libs/jquery/3.6.4/jquery.min.js"> </script> -->
     <script>
         function validate() {
             if (document.getElementById('unresult').innerHTML.includes('taken'))
@@ -52,91 +51,93 @@
 
 <body>
     <%- include("../partials/localization") %>
-    <div class="nav">
-    </div>
-    <div class="container">
-        <input type="checkbox" id="flip" class="m2">
-        <div class="cover">
-            <div class="front">
-                <img src="/img/13.jpg" alt="">
-            </div>
+        <div class="nav">
         </div>
-        <form action="/user/login-action" method="post">
-            <div class="form-content">
-                <div class="login-form">
-                    <div class="title"> Login </div>
-                    <div class="input-boxes">
-                        <div class="input-box">
-                            <i class="fas fa-envelope"></i>
-                            <input type="text" name="logusername" placeholder="Enter your username"required>
-                        </div>
-                        <div class="input-box">
-                            <i class="fas fa-lock"></i>
-                            <input type="password" name="logpassword" placeholder="Enter your password" required>
-                        </div>
-                        <div class="button input-box">
-                            <input type="submit" value="Submit">
-                        </div>
-                        <br>
-                        <br>
-                        <div class="text"> Don't have an account?
-                            <br>
-                            <br>
-                            <label for="flip"> Sign up now </label>
-                        </div>
-                    </div>
+        <div class="container">
+            <input type="checkbox" id="flip" class="m2">
+            <div class="cover">
+                <div class="front">
+                    <img src="/img/13.jpg" alt="">
                 </div>
-                <br>
-        </form>
-        <form action="/user/signup-action" method="post" onsubmit="return validate()">
-            <div class="signup-form">
-                <div class="title">Sign Up</div>
-                <div class="input-boxes">
-                    <% if (errors && errors.length> 0) { %>
-                        <div class="error-box">
-                            <% for (let i=0; i < errors.length; i++) { %>
-                                <p>
-                                    <%= errors[i].msg %>
-                                </p>
-                                <% } %>
-                        </div>
-                        <% } %>
-                            <div class="input-box">
-                                <i class="fas fa-user"></i>
-                                <input type="text" name="username" id="username" placeholder="Enter your username" required>
-                                <span id="unresult"></span>
-                            </div>
-                            <div class="input-box">
-                                <i class="fas fa-lock"></i>
-                                <input type="password" name="password" placeholder="Enter your password" required>
-                            </div>
-                            <div class="input-box">
-                                <i class="fas fa-lock"></i>
-                                <input type="password" name="confirmPassword" placeholder="Enter your confirm password" required>
-                            </div>
+            </div>
+            <form action="/user/login-action" method="post">
+                <div class="form-content">
+                    <div class="login-form">
+                        <div class="title"> Login </div>
+                        <div class="input-boxes">
                             <div class="input-box">
                                 <i class="fas fa-envelope"></i>
-                                <input type="email" name="email" id="email" placeholder="Enter your email" required>
-                              <!--<span id="emailresult"></span>-->
-                                <input type="hidden" name="type" value="client">
-                            </div> 
+                                <input type="text" name="logusername" placeholder="Enter your username" required>
+                            </div>
+                            <div class="input-box">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" name="logpassword" placeholder="Enter your password" required>
+                            </div>
                             <div class="button input-box">
                                 <input type="submit" value="Submit">
                             </div>
                             <br>
                             <br>
-                            <div class="text"> Have already account?
+                            <div class="text"> Don't have an account?
                                 <br>
                                 <br>
-                                <label for="flip">Login Now </label>
+                                <label for="flip"> Sign up now </label>
                             </div>
+                        </div>
+                    </div>
+                    <br>
+            </form>
+            <form action="/user/signup-action" method="post" onsubmit="return validate()">
+                <div class="signup-form">
+                    <div class="title">Sign Up</div>
+                    <div class="input-boxes">
+                        <% if (errors && errors.length> 0) { %>
+                            <div class="error-box">
+                                <% for (let i=0; i < errors.length; i++) { %>
+                                    <p>
+                                        <%= errors[i].msg %>
+                                    </p>
+                                    <% } %>
+                            </div>
+                            <% } %>
+                                <div class="input-box">
+                                    <i class="fas fa-user"></i>
+                                    <input type="text" name="username" id="username" placeholder="Enter your username"
+                                        required>
+                                    <span id="unresult"></span>
+                                </div>
+                                <div class="input-box">
+                                    <i class="fas fa-lock"></i>
+                                    <input type="password" name="password" placeholder="Enter your password" required>
+                                </div>
+                                <div class="input-box">
+                                    <i class="fas fa-lock"></i>
+                                    <input type="password" name="confirmPassword"
+                                        placeholder="Enter your confirm password" required>
+                                </div>
+                                <div class="input-box">
+                                    <i class="fas fa-envelope"></i>
+                                    <input type="email" name="email" id="email" placeholder="Enter your email" required>
+                                    <!--<span id="emailresult"></span>-->
+                                    <input type="hidden" name="type" value="client">
+                                </div>
+                                <div class="button input-box">
+                                    <input type="submit" value="Submit">
+                                </div>
+                                <br>
+                                <br>
+                                <div class="text"> Have already account?
+                                    <br>
+                                    <br>
+                                    <label for="flip">Login Now </label>
+                                </div>
+                    </div>
                 </div>
-            </div>
-        </form>
-    </div>
+            </form>
+        </div>
 
 
-    </div>
+        </div>
 
 </body>
 
