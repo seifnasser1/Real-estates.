@@ -3,11 +3,28 @@ import __dirname from '../app.js'
 import wishlist from '../models/wishlist.model.js';
 import User from '../models/user.model.js';
 import Message from '../models/message.model.js';
+import { body, validationResult } from "express-validator";
 import fs from 'fs';
 import path from 'path';
 import fileUpload from "express-fileupload";
 import { login } from './user.controller.js';
 import { messages } from './chat.controller.js';
+
+const validation = [
+  body("name").notEmpty().withMessage("name is required"),
+  body("mobile_number").notEmpty().withMessage("mobile number is required"),
+  body("u_bed").notEmpty().withMessage("bedroom is required"),
+  body("servise").notEmpty().withMessage("servise type is required"),
+  body("type").notEmpty().withMessage("unit type is required"),
+  body("district").notEmpty().withMessage("location is required"),
+  body("f_type").notEmpty().withMessage("furniture is required"),
+  body("garage").notEmpty().withMessage("number of garages is required"),
+  body("area").notEmpty().withMessage("unit area is required"),
+  body("vale").notEmpty().withMessage("Username is required"),
+  body("u_nom").notEmpty().withMessage("Username is required"),
+  body("u_path").notEmpty().withMessage("Username is required"),
+  body("img").notEmpty().withMessage("Username is required"),
+];
 
 const deleteprop=async (req,res,next)=>{
   const now=await Propirty.findOne({"_id":req.params.id})
@@ -52,10 +69,10 @@ const profilewishlist= (req, res,next) => {
 const getTopSalesProperties = async (req, res) => {
   const Property = require('/models/propirty.model');
   try {
-    // Fetch properties from the database
+    
     const properties = await Property.find().sort({ value: -1 }).limit(5);
 
-    res.render('admin-dashboard', { properties }); // Pass the properties to the template
+    res.render('admin-dashboard', { properties });
   } catch (error) {
     console.log(error);
     res.status(500).send('Server Error');
@@ -115,6 +132,14 @@ const displayPropertiesDescending = async (req, res, next) => {
 }; 
 
 const addprop = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    res.render("pages/addpropirty", {
+      title: "Signup page - Validation Failed",
+      errors: errors.array(),
+    });
+    return;
+  }
   let imgFile;
   let uploadPath;
   console.log(req.files);
@@ -139,7 +164,7 @@ const addprop = async (req, res, next) => {
       district: req.body.district,
       garages: req.body.garage,
       area: req.body.area,
-      value: req.body.vale,
+      value: req.body.value,
       unumber: req.body.u_nom,
       bathrooms: req.body.u_path,
       bedrooms: req.body.u_bed,
@@ -193,8 +218,12 @@ const Search = async (req, res, next) => {
 
   Propirty.find(query)
     .then((result) => {
-      console.log(result);
-      var c=(parseInt(result.length/6))+(result.length%6);
+      let k=result.length%6;
+      if(k>0){
+      var c=(parseInt(result.length/6))+1;
+      }else{
+        var c=(parseInt(result.length/6));
+      }
     var h=0;
     res.render('pages/All', { Propirty: result,count:c,currentValue:h,  user: (req.session.user === undefined ? "" : req.session.user)});
     })
@@ -221,9 +250,12 @@ const navsearch = async (req, res, next) => {
   };
   Propirty.find(query)
     .then((result) => {
-      console.log("HELLo");
-      console.log(result);
-      var c=(parseInt(result.length/6))+(result.length%6);
+      let k=result.length%6;
+    if(k>0){
+    var c=(parseInt(result.length/6))+1;
+    }else{
+      var c=(parseInt(result.length/6));
+    }
     var h=0;
     res.render('pages/All', { Propirty: result,count:c,currentValue:h,  user: (req.session.user === undefined ? "" : req.session.user)});
     })
@@ -232,43 +264,49 @@ const navsearch = async (req, res, next) => {
 
 const addwishlist = async (req, res, next) => {
   const exsistingwishlist = await wishlist.findOne({
-    username: req.session.user.id,
-    property: req.body.Propirty,
+    userid: req.session.user._id,
+    propertyid: req.params.id,
   });
   var found;
   if (exsistingwishlist) {
-    wishlist.findByIdAndDelete(exsistingwishlist._id);
-    res.redirect("/", {
-      user: req.session.user === undefined ? "" : req.session.user,
-    });
+    wishlist.findByIdAndDelete(exsistingwishlist._id).then(result=>{
+      res.redirect("/");
+    }).catch((err) => console.log(err));
+    
   } else {
     const wish = new wishlist({
-      username: req.session.user.id,
-      property: req.body.Propirty,
+      userid: req.session.user._id,
+      propertyid: req.params.id,
     });
     console.log(wish);
     wish
       .save()
       .then((result) => {
-        res.redirect("/", {
-          user: req.session.user === undefined ? "" : req.session.user,
-        });
+        res.redirect("/");
       })
       .catch((err) => console.log(err));
   }
 };
 const viewprop= async (req,res,next)=>{
-  Propirty.findOne().then(result=>{
+  Propirty.find().then(result=>{
     res.render('pages/adminUnits',{properties:result,user: (req.session.user === undefined ? "" : req.session.user)})
   })
 }
 const getprop= async (req,res,next)=>{
   const query={"_id":req.params.id};
   Propirty.findOne(query).then(result=>{
-res.render('pages/editpropirty',{prop:result,user: (req.session.user === undefined ? "" : req.session.user)})
+res.render('pages/editpropirty',{prop:result,errors:[],user: (req.session.user === undefined ? "" : req.session.user)})
   })
 };
 const edit=async (req,res,next)=>{
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const query={"_id":req.params.id};
+    Propirty.findOne(query).then(result=>{
+    res.render("pages/editpropirty", {prop:result,errors: errors.array(),user: (req.session.user === undefined ? "" : req.session.user)});
+  })
+    return;
+  }
   const current = await Propirty.findOne({"_id":req.params.id});
   let curimg=current.Image;
   const bee='./public/img/'+current.Image;
@@ -302,7 +340,7 @@ Propirty.findByIdAndUpdate(req.params.id,{
       district: req.body.district,
       garages: req.body.garage,
       area: req.body.area,
-      value: req.body.vale,
+      value: req.body.value,
       unumber: req.body.u_nom,
       bathrooms: req.body.u_path,
       bedrooms: req.body.u_bed,

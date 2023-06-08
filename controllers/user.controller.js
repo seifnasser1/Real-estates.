@@ -100,14 +100,7 @@ const signup = async (req, res) => {
 
 // ];
 const login = async (req, res, next) => {
-  // const errors = validationResult(req);
-  // if (!errors.isEmpty()) {
-  //   res.render("pages/register", {
-  //     title: "Signup page - Validation Failed",
-  //     errors: errors.array(),
-  //   });
-  //   return;
-  // }
+ 
   const existinguser = await User.findOne({ username: req.body.logusername });
   if(existinguser){
     const hashePassword =await bcrypt.compare(req.body.logpassword, existinguser.password);
@@ -154,32 +147,31 @@ const checkUN = async (req, res) => {
   User.find(query)
       .then(result => {
           if (result.length > 0) {
-              res.send('taken');
+              res.send(' taken');
           }
           else {
-              res.send('available');
+              res.send(' available');
           }
       })
       .catch(err => {
           console.log(err);
       });
 };
-const checkEmail = async (req, res) => {
-  var query = { email: req.body.email };
-  User.find(query)
-      .then(result => {
-          if (result.length > 0) {
-              res.send('taken');
-          }
-          else {
-              res.send('available');
-          }
-      })
-      .catch(err => {
-          console.log(err);
-      });
-};
-
+// const checkEmail = async (req, res) => {
+//   var query = { email: req.body.email };
+//   User.find(query)
+//       .then(result => {
+//           if (result.length > 0) {
+//               res.send('taken');
+//           }
+//           else {
+//               res.send('available');
+//           }
+//       })
+//       .catch(err => {
+//           console.log(err);
+//       });
+// };
 const getuser=async (req, res, next) => {
   const query={"_id":req.params.id};
   User.findOne(query).then(result=>{
@@ -259,7 +251,7 @@ export {
   getalluser,
   getallusers,
   checkUN,
-  checkEmail,
+  //checkEmail,
   getuser,
   edit,
 };

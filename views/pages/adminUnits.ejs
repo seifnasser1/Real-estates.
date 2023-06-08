@@ -54,30 +54,30 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                        <% if (properties.length> 0){%>
-                                            <%count=1;%>
-                                                <%properties.forEach(prop=>{%>
-                                                    <tr>
-                                                        <td>
-                                                            <%=count%>
-                                                        </td>
-                                                        <td>
-                                                            <%=prop.name%>
-                                                        </td>
-                                                        <td>
-                                                            <%=prop.district%>
-                                                        </td>
-                                                        <td>
-                                                            <%=prop.value%>
-                                                        </td>
-                                                        <td><a href="/admin/editprop/<%=prop.id%>">Edit</a></td>
-                                                        <td><a href="/admin/delprop/<%=prop.id%>">Delete</a></td>
-                                                    </tr>
-                                                    <%count++;%>
-                                                        <%});%>
-                                                            <%}else{%>
-                                                                <p>there are no properties to show</p>
-                                                                <%}%>
+                                    <% if (properties.length> 0){%>
+                                        <%count=1;%>
+                                            <%properties.forEach(prop=>{%>
+                                                <tr>
+                                                    <td>
+                                                        <%=count%>
+                                                    </td>
+                                                    <td>
+                                                        <%=prop.name%>
+                                                    </td>
+                                                    <td>
+                                                        <%=prop.district%>
+                                                    </td>
+                                                    <td>
+                                                        <%=prop.value%>
+                                                    </td>
+                                                    <td><a href="/admin/editprop/<%=prop.id%>">Edit</a></td>
+                                                    <td><a href="/admin/delprop/<%=prop.id%>">Delete</a></td>
+                                                </tr>
+                                                <%count++;%>
+                                                    <%});%>
+                                                        <%}else{%>
+                                                            <p>there are no properties to show</p>
+                                                            <%}%>
                                 </tbody>
                             </table>
                         </div>
