@@ -1,7 +1,7 @@
 import User from '../models/user.model.js';
 import Propirty from '../models/propirty.model.js';
 import { body, validationResult } from "express-validator";
-import bcrypt from "bcrypt"; //importing bcrypt package 
+import bcrypt from "bcrypt"; 
 
 
 const saltRounds = 10;
@@ -32,7 +32,7 @@ export const makeAdmin = async (req, res) => {
     res.send('An error occurred');
   }
 };
-//array called validation
+
 const validation = [
   body("username").notEmpty().withMessage("Username is required"),
   body("email").isEmail().withMessage("Invalid email"),
@@ -66,7 +66,7 @@ const signup = async (req, res) => {
 
     if (existingemail) {
       console.log("Email already exists");
-      res.send("mail already exists");
+      res.send("Email already exists");
     }else if(existingUser){
       console.log("username already exists");
       res.send("username already exists");
@@ -100,19 +100,10 @@ const signup = async (req, res) => {
 
 // ];
 const login = async (req, res, next) => {
-  // const errors = validationResult(req);
-  // if (!errors.isEmpty()) {
-  //   res.render("pages/register", {
-  //     title: "Signup page - Validation Failed",
-  //     errors: errors.array(),
-  //   });
-  //   return;
-  // }
+ 
   const existinguser = await User.findOne({ username: req.body.logusername });
   if(existinguser){
-    const hashePassword =await bcrypt.hash(req.body.logpassword, saltRounds);
-    console.log(existinguser.password)
-    console.log(hashePassword)
+    const hashePassword =await bcrypt.compare(req.body.logpassword, existinguser.password);
     if(hashePassword){
       req.session.user=existinguser;
       if(req.session.user.type=='admin'){
@@ -134,7 +125,6 @@ const login = async (req, res, next) => {
 const getalluser = async (req, res, next) => {
   const properties = await Propirty.find().sort({ value: -1 }).limit(5);
   User.find().then(result => {
-    console.log(result);
     res.render('pages/adminHeader', { Users: result,Propirty :properties,user: (req.session.user === undefined ? "" : req.session.user) });
   }).catch(err => {
     console.log(err);
@@ -152,36 +142,107 @@ const getallusers = async (req, res, next) => {
 
 }
 //ajax
-const checkUN = (req, res) => {
+const checkUN = async (req, res) => {
   var query = { username: req.body.username };
   User.find(query)
       .then(result => {
           if (result.length > 0) {
-              res.send('taken');
+              res.send(' taken');
           }
           else {
-              res.send('available');
+              res.send(' available');
           }
       })
       .catch(err => {
           console.log(err);
       });
 };
-const checkEmail = (req, res) => {
-  var query = { email: req.body.email };
-  User.find(query)
-      .then(result => {
-          if (result.length > 0) {
-              res.send('taken');
-          }
-          else {
-              res.send('available');
-          }
-      })
-      .catch(err => {
+// const checkEmail = async (req, res) => {
+//   var query = { email: req.body.email };
+//   User.find(query)
+//       .then(result => {
+//           if (result.length > 0) {
+//               res.send('taken');
+//           }
+//           else {
+//               res.send('available');
+//           }
+//       })
+//       .catch(err => {
+//           console.log(err);
+//       });
+// };
+const getuser=async (req, res, next) => {
+  const query={"_id":req.params.id};
+  User.findOne(query).then(result=>{
+res.render('pages/edituser',{errors: [],profile:result,user: (req.session.user === undefined ? "" : req.session.user)});
+  }) .catch(err => {
           console.log(err);
       });
-};
+}
+
+
+const edit=async (req, res, next) => {
+  try{
+    const userr = await User.findOne({ "_id": req.params.id });
+    let vall=userr.photo;
+    let existingemail,existingUser;
+    if(userr.email!==req.body.email)
+    {
+      existingemail = await User.findOne({ email: req.body.email });
+    }
+    if(userr.username!==req.body.username)
+    {
+      existingUser = await User.findOne({ username: req.body.username });
+    }
+    if (existingemail) {
+      console.log("Email already exists");
+      res.send("Email already exists");
+    }else if(existingUser){
+      console.log("username already exists");
+      res.send("username already exists");
+    } else {
+      let imgFile;
+  let uploadPath;
+  if (req.files !== null){
+  if ( Object.keys(req.files).length !== 0) {
+    imgFile = req.files.img;
+
+    uploadPath = './public/img/' + req.body.username + '.jpg';
+    // Use the mv() method to place the file somewhere on your server
+    imgFile.mv(uploadPath, function (err) {
+      if (err)
+        return res.status(500).send(err);
+      });
+      vall=req.body.username +".jpg";
+  }
+}
+    User.findByIdAndUpdate(req.params.id, { 
+      username: req.body.username,
+      firstname:req.body.first,
+      lastname:req.body.last,
+      email:req.body.email,
+      birthdate:req.body.date,
+      gender:req.body.gender,
+      photo:vall,
+     }).then(result => {
+      console.log(req.session.user.type);
+      if(req.session.user.type=="admin")
+      {
+        res.redirect('/admin/viewusers')
+      }else{
+      res.redirect('/')
+      }
+  })
+  .catch(err => {
+      console.log(err);
+  });
+    }
+  } catch (error) {
+    console.log(error);
+    res.send("An error occurred");
+  }
+}
 export {
   signup,
   validation,
@@ -190,6 +251,7 @@ export {
   getalluser,
   getallusers,
   checkUN,
-  checkEmail
-
+  //checkEmail,
+  getuser,
+  edit,
 };

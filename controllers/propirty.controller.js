@@ -3,11 +3,16 @@ import __dirname from '../app.js'
 import wishlist from '../models/wishlist.model.js';
 import User from '../models/user.model.js';
 import Message from '../models/message.model.js';
+import { body, validationResult } from "express-validator";
 import fs from 'fs';
 import path from 'path';
 import fileUpload from "express-fileupload";
 import { login } from './user.controller.js';
 import { messages } from './chat.controller.js';
+
+const validation = [
+  
+];
 
 const deleteprop=async (req,res,next)=>{
   const now=await Propirty.findOne({"_id":req.params.id})
