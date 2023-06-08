@@ -194,10 +194,9 @@ const Search = async (req, res, next) => {
   Propirty.find(query)
     .then((result) => {
       console.log(result);
-      res.render("pages/All", {
-        propirty: result,
-        user: req.session.user === undefined ? "" : req.session.user,
-      });
+      var c=(parseInt(result.length/6))+(result.length%6);
+    var h=0;
+    res.render('pages/All', { Propirty: result,count:c,currentValue:h,  user: (req.session.user === undefined ? "" : req.session.user)});
     })
     .catch((err) => console.log(err));
 };
@@ -330,4 +329,5 @@ export {
   deleteprop,
   getprop,
   edit,
+  Search,
 };

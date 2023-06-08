@@ -22,6 +22,7 @@ import {
   addwishlist,
   navsearch,
   viewproperty,
+  Search,
   profilewishlist,
 } from "../controllers/propirty.controller.js";
 const router = Router();
@@ -55,7 +56,7 @@ router.post('/edit/:id',validation,edit);
 router.post('/login-action', login);
 router.post('/send-message/:id',sendMes);
 router.post('/addtowishlist/:id',addwishlist);
-router.get('/search',navsearch);
+router.get('/search',Search);
 router.post('/checkUN',checkUN);
 router.post('/checkEmail', checkEmail);
 //router.get('/propirty/:id',messages,viewproperty);
