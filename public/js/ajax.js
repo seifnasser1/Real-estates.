@@ -27,9 +27,9 @@ $(document).ready(function () {
 });
 
 
-// //$(document).ready(function () {
-//    // $("#email").on('keyup', function (e) {
-//        // e.preventDefault();
+// $(document).ready(function () {
+//     $("#email").on('keyup', function (e) {
+//        e.preventDefault();
 //         var data = $('#email').val();
 //         $.ajax({
 //             url: '/user/checkEmail',
