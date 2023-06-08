@@ -32,6 +32,7 @@ message.save()  //insert in database
 });
    };
 
+   ///useful for displaying history of messages between user and admin.
  const messages= async (req,res,next)=>{
   const query={"_id":req.params.id}
   Propirty.findOne(query).then(res=>{
