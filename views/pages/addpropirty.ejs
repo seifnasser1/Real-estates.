@@ -27,13 +27,22 @@
                 <br>
             </div>
             <form id="form" method="post" action="/admin/addpropirty" enctype="multipart/form-data">
+                <% if (errors && errors.length> 0) { %>
+                    <div class="error-box">
+                        <% for (let i=0; i < errors.length; i++) { %>
+                            <p>
+                                <%= errors[i].msg %>
+                            </p>
+                            <% } %>
+                    </div>
+                    <% } %>
                 <table>
                     <tr>
                         <td>
                             <div class="input-control">
                                 <label for="name">Name&nbsp;</label>
                                 <br>
-                                <input class="inn" id="name" type="text" name="name">
+                                <input class="inn" id="name" type="text" name="name" required>
                                 <div class="error"></div>
                             </div>
                         </td>
@@ -41,7 +50,7 @@
                             <div class="input-control">
                                 <label for="mobile-number">Mobile Number &nbsp;</label>
                                 <br>
-                                <input class="inn" id="mo-number" type="number" name="mobile_number">
+                                <input class="inn" id="mobile_number" type="number" name="mobile_number" required>
                                 <div class="error"></div>
                             </div>
                         </td>
@@ -54,7 +63,7 @@
                             <div class="input-control">
                                 <label for="u_bed">Bedrooms Number &nbsp;</label>
                                 <br>
-                                <input class="inn" type="number" id="bedrooms" name="u_bed">
+                                <input class="inn" type="number" id="u_bed" name="u_bed" required>
                                 <div class="error"></div>
                             </div>
                         </td>
@@ -64,7 +73,7 @@
                             <div class="input-control">
                                 <label for="servise">Service Type &nbsp;</label>
                                 <br>
-                                <select class="inn" name="servise">
+                                <select class="inn" name="servise" required>
                                     <option value="">NONE</option>
                                     <option value="Rent">Rent</option>
                                     <option value="Sell">Sell</option>
@@ -76,7 +85,7 @@
                             <div class="input-control">
                                 <label for="type">Unit Type &nbsp;</label>
                                 <br>
-                                <select class="inn" name="type">
+                                <select class="inn" name="type" required>
                                     <option value="">NONE</option>
                                     <option value="Appartment">Appartment</option>
                                     <option value="Villa">Villa</option>
@@ -89,7 +98,7 @@
                             <div class="input-control">
                                 <label for="district">District &nbsp;</label>
                                 <br>
-                                <select class="inn" name="district">
+                                <select class="inn" name="district" required>
                                     <option value="">NONE</option>
                                     <option value="Maadi">Maadi</option>
                                     <option value="6th-of-october">6th-of-october</option>
@@ -105,7 +114,7 @@
                         <td>
                             <label for="f_type">Furniture Type &nbsp;</label>
                             <br>
-                            <select class="inn" name="f_type">
+                            <select class="inn" name="f_type" required>
                                 <option value="">NONE</option>
                                 <option value="Modern">Modern</option>
                                 <option value="traditional">traditional</option>
@@ -118,7 +127,7 @@
                             <div class="input-control">
                                 <label for="garage">Number of Garages &nbsp;</label>
                                 <br>
-                                <input class="inn" type="number" id="garage" name="garage">
+                                <input class="inn" type="number" id="garage" name="garage" required>
                                 <div class="error"></div>
                             </div>
                         </td>
@@ -126,7 +135,7 @@
                             <div class="input-control">
                                 <label for="area">Area &nbsp;</label>
                                 <br>
-                                <input class="inn" type="number" id="area" name="area">
+                                <input class="inn" type="number" id="area" name="area" required>
                                 <div class="error"></div>
                             </div>
                         </td>
@@ -134,7 +143,7 @@
                             <div class="input-control">
                                 <label for="value">Unit Value &nbsp;</label>
                                 <br>
-                                <input class="inn" id="u_value" type="number" name="vale">
+                                <input class="inn" id="value" type="number" name="value" required>
                                 <div class="error"></div>
                             </div>
                         </td>
@@ -142,7 +151,7 @@
                             <div class="input-control">
                                 <label for="u_nom">Unit Number &nbsp;</label>
                                 <br>
-                                <input class="inn" id="u_number" type="number" name="u_nom">
+                                <input class="inn" id="u_nom" type="number" name="u_nom" required>
                                 <div class="error"></div>
                             </div>
                         </td>
@@ -152,7 +161,7 @@
                             <div class="input-control">
                                 <label for="u_path">Bathrooms Number &nbsp;</label>
                                 <br>
-                                <input class="inn" type="number" id="pathrooms" name="u_path">
+                                <input class="inn" type="number" id="u_path" name="u_path" required>
                                 <div class="error"></div>
                             </div>
                         </td>
@@ -160,7 +169,7 @@
                             <div class="input-control">
                                 <label for="img">Appartment image &nbsp;</label>
                                 <br>
-                                <input class="inn" type="file" id="img" name="img">
+                                <input class="inn" type="file" id="img" name="img" required>
                                 <div class="error"></div>
                             </div>
                         </td>

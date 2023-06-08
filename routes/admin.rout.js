@@ -35,7 +35,7 @@ router.get('/deleteuser/:id', (req, res, next) => {
 
 router.get('/adding', function (req, res, next) {
   console.log('index.js: GET /');
-  res.render('pages/addpropirty', { user: (req.session.user === undefined ? "" : req.session.user) });
+  res.render('pages/addpropirty', {errors:[], user: (req.session.user === undefined ? "" : req.session.user) });
 });
 
 router.get('/viewusers', function (req, res, next) {

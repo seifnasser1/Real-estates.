@@ -9,7 +9,15 @@
 body {
     background-color: gray;
 }
-
+.error-box {
+    width: 380px;
+    padding: 5px;
+    border-radius: 8px;
+    border: solid 5px;
+    background-color: #F15A59;
+    border-color: red;
+    color: white;
+}
 .container1 {
     margin: 20px;
     background-color: white;

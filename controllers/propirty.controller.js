@@ -11,7 +11,19 @@ import { login } from './user.controller.js';
 import { messages } from './chat.controller.js';
 
 const validation = [
-  
+  body("name").notEmpty().withMessage("name is required"),
+  body("mobile_number").notEmpty().withMessage("mobile number is required"),
+  body("u_bed").notEmpty().withMessage("bedroom is required"),
+  body("servise").notEmpty().withMessage("servise type is required"),
+  body("type").notEmpty().withMessage("unit type is required"),
+  body("district").notEmpty().withMessage("location is required"),
+  body("f_type").notEmpty().withMessage("furniture is required"),
+  body("garage").notEmpty().withMessage("number of garages is required"),
+  body("area").notEmpty().withMessage("unit area is required"),
+  body("vale").notEmpty().withMessage("Username is required"),
+  body("u_nom").notEmpty().withMessage("Username is required"),
+  body("u_path").notEmpty().withMessage("Username is required"),
+  body("img").notEmpty().withMessage("Username is required"),
 ];
 
 const deleteprop=async (req,res,next)=>{
@@ -120,6 +132,14 @@ const displayPropertiesDescending = async (req, res, next) => {
 }; 
 
 const addprop = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    res.render("pages/addpropirty", {
+      title: "Signup page - Validation Failed",
+      errors: errors.array(),
+    });
+    return;
+  }
   let imgFile;
   let uploadPath;
   console.log(req.files);
@@ -144,7 +164,7 @@ const addprop = async (req, res, next) => {
       district: req.body.district,
       garages: req.body.garage,
       area: req.body.area,
-      value: req.body.vale,
+      value: req.body.value,
       unumber: req.body.u_nom,
       bathrooms: req.body.u_path,
       bedrooms: req.body.u_bed,
@@ -268,17 +288,25 @@ const addwishlist = async (req, res, next) => {
   }
 };
 const viewprop= async (req,res,next)=>{
-  Propirty.findOne().then(result=>{
+  Propirty.find().then(result=>{
     res.render('pages/adminUnits',{properties:result,user: (req.session.user === undefined ? "" : req.session.user)})
   })
 }
 const getprop= async (req,res,next)=>{
   const query={"_id":req.params.id};
   Propirty.findOne(query).then(result=>{
-res.render('pages/editpropirty',{prop:result,user: (req.session.user === undefined ? "" : req.session.user)})
+res.render('pages/editpropirty',{prop:result,errors:[],user: (req.session.user === undefined ? "" : req.session.user)})
   })
 };
 const edit=async (req,res,next)=>{
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const query={"_id":req.params.id};
+    Propirty.findOne(query).then(result=>{
+    res.render("pages/editpropirty", {prop:result,errors: errors.array(),user: (req.session.user === undefined ? "" : req.session.user)});
+  })
+    return;
+  }
   const current = await Propirty.findOne({"_id":req.params.id});
   let curimg=current.Image;
   const bee='./public/img/'+current.Image;
@@ -312,7 +340,7 @@ Propirty.findByIdAndUpdate(req.params.id,{
       district: req.body.district,
       garages: req.body.garage,
       area: req.body.area,
-      value: req.body.vale,
+      value: req.body.value,
       unumber: req.body.u_nom,
       bathrooms: req.body.u_path,
       bedrooms: req.body.u_bed,
