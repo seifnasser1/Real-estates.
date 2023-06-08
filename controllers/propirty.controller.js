@@ -82,7 +82,14 @@ const getTopSalesProperties = async (req, res) => {
 const viewproperty= async (req, res,next) => {
   var query = { "_id": req.params.id };
   var value;
+if(req.session.user===undefined)
+{
+  Propirty.findOne(query).then(result=>{
+    res.render('pages/villa', { Propirty: result,Messages:[],v:2 ,user: (req.session.user === undefined ? "" : req.session.user)});
 
+  })
+}
+else{
   const exsistingwishlist = await wishlist.findOne({"userid":req.session.user._id,"propertyid":req.params.id}); 
  
   if(exsistingwishlist==null){
@@ -116,6 +123,7 @@ const viewproperty= async (req, res,next) => {
     .catch(err => {
       console.log(err);
     });
+  }
 };
 
 
@@ -263,6 +271,10 @@ const navsearch = async (req, res, next) => {
 };
 
 const addwishlist = async (req, res, next) => {
+  if(req.session.user===undefined)
+  {
+    res.redirect("/");
+  }else{
   const exsistingwishlist = await wishlist.findOne({
     userid: req.session.user._id,
     propertyid: req.params.id,
@@ -286,6 +298,7 @@ const addwishlist = async (req, res, next) => {
       })
       .catch((err) => console.log(err));
   }
+}
 };
 const viewprop= async (req,res,next)=>{
   Propirty.find().then(result=>{
