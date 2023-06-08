@@ -100,14 +100,7 @@ const signup = async (req, res) => {
 
 // ];
 const login = async (req, res, next) => {
-  // const errors = validationResult(req);
-  // if (!errors.isEmpty()) {
-  //   res.render("pages/register", {
-  //     title: "Signup page - Validation Failed",
-  //     errors: errors.array(),
-  //   });
-  //   return;
-  // }
+ 
   const existinguser = await User.findOne({ username: req.body.logusername });
   if(existinguser){
     const hashePassword =await bcrypt.compare(req.body.logpassword, existinguser.password);
