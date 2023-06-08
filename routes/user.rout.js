@@ -35,7 +35,12 @@ router.get('/propirty', (req, res) => {
   Propirty.find()
 
   .then(result => {
-    var c=(parseInt(result.length/6))+(result.length%6);
+    let k=result.length%6;
+    if(k>0){
+    var c=(parseInt(result.length/6))+1;
+    }else{
+      var c=(parseInt(result.length/6));
+    }
     var h=0;
     res.render('pages/All', { Propirty: result,count:c,currentValue:h,  user: (req.session.user === undefined ? "" : req.session.user)});
   })

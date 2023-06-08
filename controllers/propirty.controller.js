@@ -193,7 +193,12 @@ const Search = async (req, res, next) => {
 
   Propirty.find(query)
     .then((result) => {
-      console.log(result);
+      let k=result.length%6;
+      if(k>0){
+      var c=(parseInt(result.length/6))+1;
+      }else{
+        var c=(parseInt(result.length/6));
+      }
       var c=(parseInt(result.length/6))+(result.length%6);
     var h=0;
     res.render('pages/All', { Propirty: result,count:c,currentValue:h,  user: (req.session.user === undefined ? "" : req.session.user)});
@@ -221,7 +226,12 @@ const navsearch = async (req, res, next) => {
   };
   Propirty.find(query)
     .then((result) => {
-      console.log("HELLo");
+      let k=result.length%6;
+    if(k>0){
+    var c=(parseInt(result.length/6))+1;
+    }else{
+      var c=(parseInt(result.length/6));
+    }
       res.render("pages/All", {
         propirty: result,
         user: req.session.user === undefined ? "" : req.session.user,
@@ -232,27 +242,25 @@ const navsearch = async (req, res, next) => {
 
 const addwishlist = async (req, res, next) => {
   const exsistingwishlist = await wishlist.findOne({
-    username: req.session.user.id,
-    property: req.body.Propirty,
+    userid: req.session.user._id,
+    propertyid: req.params.id,
   });
   var found;
   if (exsistingwishlist) {
-    wishlist.findByIdAndDelete(exsistingwishlist._id);
-    res.redirect("/", {
-      user: req.session.user === undefined ? "" : req.session.user,
-    });
+    wishlist.findByIdAndDelete(exsistingwishlist._id).then(result=>{
+      res.redirect("/");
+    }).catch((err) => console.log(err));
+    
   } else {
     const wish = new wishlist({
-      username: req.session.user.id,
-      property: req.body.Propirty,
+      userid: req.session.user._id,
+      propertyid: req.params.id,
     });
     console.log(wish);
     wish
       .save()
       .then((result) => {
-        res.redirect("/", {
-          user: req.session.user === undefined ? "" : req.session.user,
-        });
+        res.redirect("/");
       })
       .catch((err) => console.log(err));
   }
