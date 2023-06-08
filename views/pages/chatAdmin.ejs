@@ -1,5 +1,4 @@
-<!------------------------------------------------
--->
+
 <!DOCTYPE html>
 <html>
 
@@ -7,15 +6,14 @@
     <title>Chat</title>
     <link rel="stylesheet" href="/CSS/chat.css">
     <script defer src="/js/chat.js"></script>
-    <!-- <input type="hidden" name="_csrf" value="  %= csrfToken %>"> -->
 
 </head>
 
 <body>
-    <!-- Button that triggers the chat box -->
-    <!-- <button href="user/getMessages/" class="chat-circle" onclick="openForm()">Chat</button> -->
 
-    <!-- Chat box element (hidden by default) -->
+
+
+    <!-- specific user Chat box  (hidden by default) -->
     <div class="chat" id="myForm" style="display:block;">
         <div class="containerz">
             <div class="headerz">
@@ -24,7 +22,7 @@
 
             <div class="bodyz">
                 <div id="chatBody">
-                    
+
                     <% for(var i=0;i<Messages.length;i++) { %>
 
                             <%if(Messages[i].type=="user"){%>
@@ -50,7 +48,7 @@
                     </button>
                 </container>
                 </form>
-           
+
             </div>
         </div>
     </div>
