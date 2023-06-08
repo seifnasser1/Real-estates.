@@ -66,7 +66,7 @@ const viewproperty= async (req, res,next) => {
   var query = { "_id": req.params.id };
   var value;
 
-  const exsistingwishlist = await wishlist.findOne({"userid":req.session.user._id,"propertyid":req.params.id});
+  const exsistingwishlist = await wishlist.findOne({"userid":req.session.user._id,"propertyid":req.params.id}); 
  
   if(exsistingwishlist==null){
     value=1;
@@ -101,6 +101,8 @@ const viewproperty= async (req, res,next) => {
     });
 };
 
+
+
 const displayPropertiesDescending = async (req, res, next) => {
   try {
     const propirty = await Propirty.find().sort({ value: -1 });
@@ -115,24 +117,23 @@ const displayPropertiesDescending = async (req, res, next) => {
 const addprop = async (req, res, next) => {
   let imgFile;
   let uploadPath;
-  console.log(req.files)
+  console.log(req.files);
   if (!req.files || Object.keys(req.files).length === 0) {
-    return res.status(400).send('No files were uploaded.');
+    return res.status(400).send("No files were uploaded.");
   }
   imgFile = req.files.img;
 
-  uploadPath = './public/img/' + req.body.name + '.jpg';
+  uploadPath = "./public/img/" + req.body.name + ".jpg";
   // Use the mv() method to place the file somewhere on your server
   imgFile.mv(uploadPath, function (err) {
-    if (err)
-      return res.status(500).send(err);
+    if (err) return res.status(500).send(err);
 
-    console.log(req.session.user.id);
+    console.log(req.body);
     const propirty = new Propirty({
       name: req.body.name,
       mobilenumber: req.body.mobile_number,
       mobilenumber2: req.body.other_number,
-      email: req.session.user.email,
+      email: req.body.name,
       servicetype: req.body.servise,
       unittype: req.body.type,
       district: req.body.district,
@@ -144,19 +145,19 @@ const addprop = async (req, res, next) => {
       bedrooms: req.body.u_bed,
       furniture: req.body.f_type,
       details: req.body.details,
-      Image: req.body.name + '.jpg',
-      adminid:req.session.user._id,
-        });
-    propirty.save()
-      .then(result => {
-        console.log('unit added succesfully');
-        res.redirect('/admin');
+      Image: req.body.name + ".jpg",
+      adminid: req.session.user?.id || "465498w2",
+    });
+    propirty
+      .save()
+      .then((result) => {
+        console.log("unit added succesfully");
+        res.redirect("/admin");
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   });
-
 };
 const Search = async (req, res, next) => {
   console.log(req.body);
@@ -170,18 +171,8 @@ const Search = async (req, res, next) => {
   if (Area) query.area = Area;
   if (Price) {
     const price = parseInt(Price);
-    if (price === 1)
     query.value = {
-      $gte: 1000000,
-    };
-  else if (price === 2)
-    query.value = {
-      $gte: 500000,
-      $lt: 1000000,
-    };
-  else
-    query.value = {
-      $lt: 500000,
+      $lte: price === 1 ? 100000000 : price === 2 ? 1000000 : 500000,
     };
   }
   if (Bedrooms) {
